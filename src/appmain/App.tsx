@@ -4,9 +4,14 @@ import Login from "../login/Login";
 import "./App.css";
 
 export const loginContext = createContext<any>({});
+export const userContext = createContext<any>({});
 
 function App() {
   const [loginState, setLoginState] = useState<any>(false);
+  const [userState, setUserState] = useState<any>({
+    username: "",
+    password: "",
+  });
 
   function checkLoginStatus() {
     if (loginState === true) {
@@ -17,9 +22,11 @@ function App() {
   }
 
   return (
-    <loginContext.Provider value={{ loginState, setLoginState }}>
-      <div className="App">{checkLoginStatus()}</div>
-    </loginContext.Provider>
+    <userContext.Provider value={{ userState, setUserState }}>
+      <loginContext.Provider value={{ loginState, setLoginState }}>
+        <div className="App">{checkLoginStatus()}</div>
+      </loginContext.Provider>
+    </userContext.Provider>
   );
 }
 

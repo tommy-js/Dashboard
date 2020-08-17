@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
 import InputField from "./InputField";
 import ButtonField from "./ButtonField";
-import { loginContext } from "../appmain/App";
+import { loginContext, userContext } from "../appmain/App";
 
 const LoginFields: React.FC = () => {
   const { loginState, setLoginState } = useContext(loginContext);
+  const { userState, setUserState } = useContext(userContext);
   const [fields, setFields] = useState({
     username: "",
     password: "",
@@ -37,7 +38,10 @@ const LoginFields: React.FC = () => {
 
   function tryLogin() {
     // ONLY FOR TESTING
-    setLoginState(true);
+    if (fields.username && fields.password && fields.employeeId) {
+      setLoginState(true);
+      setUserState({ username: fields.username, password: fields.password });
+    }
   }
 
   return (
