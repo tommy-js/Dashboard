@@ -6,7 +6,10 @@ import DashboardData from "./DashboardData";
 interface Props {
   render: boolean;
   data: any;
-  returnEdit: () => void;
+  id: number;
+  editData: { username: string; accountStatus: string };
+  returnEdit: (id: number) => void;
+  exitForm: () => void;
 }
 
 const DataRenderer: React.FC<Props> = (props) => {
@@ -15,7 +18,11 @@ const DataRenderer: React.FC<Props> = (props) => {
       console.log("user edit");
       return (
         <div>
-          <DashboardEdit />
+          <DashboardEdit
+            editData={props.editData}
+            id={props.id}
+            exitForm={props.exitForm}
+          />
         </div>
       );
     } else {

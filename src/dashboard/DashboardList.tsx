@@ -3,7 +3,7 @@ import DashboardElement from "./DashboardElement";
 
 interface Props {
   data: any;
-  returnEditPage: () => void;
+  returnEditPage: (id: number) => void;
 }
 
 const DashboardUserList: React.FC<Props> = (props) => {

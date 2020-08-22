@@ -64,7 +64,7 @@ const LoginFields: React.FC = () => {
         label="employee id"
         passUp={passUpEmployeeId}
       />
-      <ButtonField text="Sign In" submitForm={tryLogin} />
+      <ButtonField id={0} text="Sign In" submitForm={tryLogin} />
     </div>
   );
 };

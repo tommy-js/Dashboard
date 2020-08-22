@@ -20,7 +20,7 @@ const SearchBar: React.FC<Props> = (props) => {
         passUp={searchParams}
         placeholder={props.placeholder}
       />
-      <ButtonField text="Search" submitForm={submitQuery} />
+      <ButtonField id={0} text="Search" submitForm={submitQuery} />
     </div>
   );
 };

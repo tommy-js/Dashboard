@@ -2,12 +2,13 @@ import React, { useState } from "react";
 
 interface Props {
   text: string;
-  submitForm: () => void;
+  id: number;
+  submitForm: (id: number) => void;
 }
 
 const ButtonField: React.FC<Props> = (props) => {
   return (
-    <button id="button" onClick={() => props.submitForm()}>
+    <button id="button" onClick={(id) => props.submitForm(props.id)}>
       {props.text}
     </button>
   );

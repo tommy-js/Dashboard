@@ -8,16 +8,22 @@ import DataRenderer from "./DataRenderer";
 const DashboardContainer: React.FC = () => {
   const [userEdit, setUserEdit] = useState(false);
   const [bandEdit, setBandEdit] = useState(false);
+  const [editData, setEditData] = useState({
+    username: "",
+    accountStatus: "",
+    id: 0,
+  });
+  const [id, setId] = useState(0);
 
   const testUserData = [
-    { text: "Tommy", id: 0 },
-    { text: "John", id: 1 },
-    { text: "James", id: 3 },
-    { text: "Aaron", id: 4 },
-    { text: "Tim", id: 5 },
-    { text: "Nora", id: 6 },
-    { text: "CJ", id: 7 },
-    { text: "EW", id: 8 },
+    { text: "Tommy", accountStatus: "active", id: 0 },
+    { text: "John", accountStatus: "disabled", id: 1 },
+    { text: "James", accountStatus: "suspended", id: 3 },
+    { text: "Aaron", accountStatus: "suspended", id: 4 },
+    { text: "Tim", accountStatus: "active", id: 5 },
+    { text: "Nora", accountStatus: "disabled", id: 6 },
+    { text: "CJ", accountStatus: "active", id: 7 },
+    { text: "EW", accountStatus: "active", id: 8 },
   ];
 
   const testGroupData = [
@@ -25,13 +31,35 @@ const DashboardContainer: React.FC = () => {
     { text: "Grateful Dead", id: 1 },
   ];
 
-  function returnUserEdit() {
+  function returnUserEdit(id: number) {
+    console.log(id);
+    let val = testUserData.find((el) => el.id === id);
+    if (val) {
+      let index = testUserData.indexOf(val);
+      let obj = testUserData[index];
+      setEditData({
+        username: obj.text,
+        accountStatus: obj.accountStatus,
+        id: obj.id,
+      });
+    }
+    setId(id);
     setUserEdit(true);
     console.log("passed user");
   }
 
-  function returnBandEdit() {
+  function returnBandEdit(id: number) {
+    console.log(id);
+    setId(id);
     setBandEdit(true);
+  }
+
+  function exitFormUsers() {
+    setUserEdit(false);
+  }
+
+  function exitFormGroup() {
+    setBandEdit(false);
   }
 
   return (
@@ -41,6 +69,9 @@ const DashboardContainer: React.FC = () => {
           data={testUserData}
           render={userEdit}
           returnEdit={returnUserEdit}
+          exitForm={exitFormUsers}
+          id={id}
+          editData={editData}
         />
       </Route>
       <Route path="/bands">
@@ -48,6 +79,9 @@ const DashboardContainer: React.FC = () => {
           data={testGroupData}
           render={bandEdit}
           returnEdit={returnBandEdit}
+          exitForm={exitFormGroup}
+          id={id}
+          editData={editData}
         />
       </Route>
     </div>

@@ -8,7 +8,7 @@ import ButtonField from "../login/ButtonField";
 interface Props {
   text: string;
   id: number;
-  returnEditPage: () => void;
+  returnEditPage: (id: number) => void;
 }
 
 const DashboardElement: React.FC<Props> = (props) => {
@@ -31,7 +31,11 @@ const DashboardElement: React.FC<Props> = (props) => {
       <ElementOptions action={actionElement} />
       <DeleteElement deleteElement={deleteElement} />
       <ElementCheckbox check={check} triggerCheck={triggerCheck} />
-      <ButtonField text="Edit" submitForm={props.returnEditPage} />
+      <ButtonField
+        text="Edit"
+        id={props.id}
+        submitForm={props.returnEditPage}
+      />
     </div>
   );
 };
