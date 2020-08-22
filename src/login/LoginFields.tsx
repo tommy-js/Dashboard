@@ -38,18 +38,33 @@ const LoginFields: React.FC = () => {
 
   function tryLogin() {
     // ONLY FOR TESTING
-    if (fields.username && fields.password && fields.employeeId) {
-      setLoginState(true);
-      setUserState({ username: fields.username, password: fields.password });
-    }
+    // if (fields.username && fields.password && fields.employeeId) {
+    setLoginState(true);
+    setUserState({ username: fields.username, password: fields.password });
+    // }
   }
 
   return (
     <div>
-      <InputField type="text" label="username" passUp={passUpUsername} />
-      <InputField type="text" label="password" passUp={passUpPassword} />
-      <InputField type="text" label="employee id" passUp={passUpEmployeeId} />
-      <ButtonField text="Sign In" tryLogin={tryLogin} />
+      <InputField
+        display="block"
+        type="text"
+        label="username"
+        passUp={passUpUsername}
+      />
+      <InputField
+        display="block"
+        type="text"
+        label="password"
+        passUp={passUpPassword}
+      />
+      <InputField
+        display="block"
+        type="text"
+        label="employee id"
+        passUp={passUpEmployeeId}
+      />
+      <ButtonField text="Sign In" submitForm={tryLogin} />
     </div>
   );
 };

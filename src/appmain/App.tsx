@@ -1,7 +1,9 @@
 import React, { useState, createContext } from "react";
 import Homepage from "../homepage/Homepage";
 import Login from "../login/Login";
-import "./App.css";
+import SettingsPage from "../settings/SettingsPage";
+import "./app.scss";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export const loginContext = createContext<any>({});
 export const userContext = createContext<any>({});
@@ -15,16 +17,29 @@ function App() {
 
   function checkLoginStatus() {
     if (loginState === true) {
-      return <Homepage />;
+      return (
+        <Route path="/">
+          <Homepage />
+        </Route>
+      );
     } else {
-      return <Login />;
+      return (
+        <Route path="/">
+          <Login />
+        </Route>
+      );
     }
   }
 
   return (
     <userContext.Provider value={{ userState, setUserState }}>
       <loginContext.Provider value={{ loginState, setLoginState }}>
-        <div className="App">{checkLoginStatus()}</div>
+        <Router>
+          <Route exact path="/settings">
+            <SettingsPage />
+          </Route>
+          <div className="App">{checkLoginStatus()}</div>
+        </Router>
       </loginContext.Provider>
     </userContext.Provider>
   );

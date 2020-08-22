@@ -2,11 +2,15 @@ import React, { useState } from "react";
 
 interface Props {
   text: string;
-  tryLogin: () => void;
+  submitForm: () => void;
 }
 
 const ButtonField: React.FC<Props> = (props) => {
-  return <button onClick={props.tryLogin}>{props.text}</button>;
+  return (
+    <button id="button" onClick={() => props.submitForm()}>
+      {props.text}
+    </button>
+  );
 };
 
 export default ButtonField;

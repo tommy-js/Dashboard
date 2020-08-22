@@ -4,6 +4,8 @@ interface Props {
   type: string;
   label: string;
   passUp: (input: string) => void;
+  display: string;
+  placeholder?: string;
 }
 
 const InputField: React.FC<Props> = (props) => {
@@ -14,9 +16,10 @@ const InputField: React.FC<Props> = (props) => {
   }
 
   return (
-    <div>
+    <div style={{ display: props.display }}>
       <label>{props.label}</label>
       <input
+        placeholder={props.placeholder}
         type={props.type}
         onChange={(e) => returnString(e.target.value)}
         value={inputVal}
