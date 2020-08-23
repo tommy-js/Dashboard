@@ -9,16 +9,24 @@ const createUserMutation = gql`
     $money: Float!
     $darkmode: Boolean!
     $invisible: Boolean!
+    $profileImage: Int!
     $allowCommentsOnTrades: Boolean!
+    $timestamp: ID!
+    $notificationId: ID!
+    $notification: String!
   ) {
     createUser(
       userId: $userId
       username: $username
       password: $password
+      profileImage: $profileImage
       money: $money
       darkmode: $darkmode
       invisible: $invisible
       allowCommentsOnTrades: $allowCommentsOnTrades
+      timestamp: $timestamp
+      notificationId: $notificationId
+      notification: $notification
     ) {
       userId
       username

@@ -9,7 +9,7 @@ const userSchema = new Schema({
   darkmode: Boolean,
   invisible: Boolean,
   allowCommentsOnTrades: Boolean,
-  profileImage: String,
+  profileImage: Number,
   followed: [{ userId: Number, username: String }],
   followers: [
     { followerId: Number, followerName: String, blocked: Boolean, id: Number },
@@ -82,6 +82,13 @@ const userSchema = new Schema({
       text: String,
       likes: Number,
       dislikes: Number,
+    },
+  ],
+  notifications: [
+    {
+      content: String,
+      timestamp: Number,
+      id: Number,
     },
   ],
 });

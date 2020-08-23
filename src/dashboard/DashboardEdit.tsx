@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ButtonField from "../login/ButtonField";
 import DropdownElement from "./DropdownElement";
 import NotificationBlock from "./NotificationBlock";
@@ -63,7 +63,12 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
 };
 
 export const StockDashboardEdit: React.FC<Stock> = (props) => {
+  const [text, setText] = useState(props.editData.description);
   function validateAndSubmit(id: number) {}
+
+  function modTextarea(input: string) {
+    setText(input);
+  }
 
   return (
     <div>
@@ -71,7 +76,10 @@ export const StockDashboardEdit: React.FC<Stock> = (props) => {
       <h2>
         {props.editData.title} #{props.editData.ticker}
       </h2>
-      <TextareaBlock description={props.editData.description} />
+      <TextareaBlock
+        description={props.editData.description}
+        returnString={modTextarea}
+      />
       <ButtonField id={0} text="Submit" submitForm={validateAndSubmit} />
     </div>
   );

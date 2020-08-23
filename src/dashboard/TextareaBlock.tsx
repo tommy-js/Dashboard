@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface Props {
   description: string;
+  returnString: (input: string) => void;
 }
 
 const TextareaBlock: React.FC<Props> = (props) => {
-  const [val, setVal] = useState(props.description);
-
-  return <textarea value={val} onChange={(e) => setVal(e.target.value)} />;
+  return (
+    <textarea
+      value={props.description}
+      onChange={(e) => props.returnString(e.target.value)}
+    />
+  );
 };
 
 export default TextareaBlock;

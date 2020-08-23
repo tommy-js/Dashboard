@@ -20,6 +20,7 @@ const Share = require("../models/share");
 const Reference = require("../models/referencetrade");
 const Settings = require("../models/settings");
 const Watchlist = require("../models/watchlist");
+const Notifications = require("../models/notification");
 
 const UserQuery = new GraphQLObjectType({
   name: "User",
@@ -27,7 +28,7 @@ const UserQuery = new GraphQLObjectType({
     userId: { type: GraphQLID },
     username: { type: GraphQLString },
     password: { type: GraphQLString },
-    profileImage: { type: GraphQLString },
+    profileImage: { type: GraphQLInt },
     money: { type: GraphQLFloat },
     darkmode: { type: GraphQLBoolean },
     invisible: { type: GraphQLBoolean },
@@ -40,6 +41,16 @@ const UserQuery = new GraphQLObjectType({
     referenceTrades: { type: new GraphQLList(ReferenceTradeQuery) },
     comments: { type: new GraphQLList(CommentQuery) },
     watchlist: { type: new GraphQLList(WatchlistQuery) },
+    notifications: { type: new GraphQLList(NotificationQuery) },
+  }),
+});
+
+const NotificationQuery = new GraphQLObjectType({
+  name: "Notifications",
+  fields: () => ({
+    content: { type: GraphQLString },
+    timestamp: { type: GraphQLID },
+    id: { type: GraphQLID },
   }),
 });
 
@@ -172,7 +183,10 @@ const Mutation = new GraphQLObjectType({
         darkmode: { type: GraphQLBoolean },
         invisible: { type: GraphQLBoolean },
         allowCommentsOnTrades: { type: GraphQLBoolean },
-        profileImage: { type: GraphQLID },
+        profileImage: { type: GraphQLInt },
+        notification: { type: GraphQLString },
+        timestamp: { type: GraphQLID },
+        notificationId: { type: GraphQLID },
       },
       resolve(parent, args) {
         let user = new User({
@@ -184,6 +198,13 @@ const Mutation = new GraphQLObjectType({
           invisible: false,
           allowCommentsOnTrades: true,
           profileImage: 0,
+          notifications: [
+            {
+              content: args.notification,
+              timestamp: args.timestamp,
+              id: args.notificationId,
+            },
+          ],
         });
         return user.save();
       },

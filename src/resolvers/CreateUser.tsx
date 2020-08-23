@@ -6,25 +6,32 @@ import { graphql } from "react-apollo";
 interface Props {
   createUserMutation: (variables: object) => void;
   username: string;
-  userId: number;
   password: string;
   money: number;
   darkmode: boolean;
   invisible: boolean;
   allowCommentsOnTrades: boolean;
+  notification: string;
 }
 
 const CreateUser: React.FC<Props> = (props) => {
   function createUser() {
+    let randomUserID = Math.floor(Math.random() * 100000000);
+    let randomNotificationId = Math.floor(Math.random() * 10000000);
+    let currentTime = new Date().getTime();
     props.createUserMutation({
       variables: {
-        userId: props.userId,
+        userId: randomUserID,
         username: props.username,
         password: props.password,
         money: props.money,
+        profileImage: 0,
         darkmode: props.darkmode,
         invisible: props.invisible,
         allowCommentsOnTrades: props.allowCommentsOnTrades,
+        notifications: props.notification,
+        notificationId: randomNotificationId,
+        timestamp: currentTime,
       },
     });
   }
