@@ -10,21 +10,24 @@ const LoginFields: React.FC = () => {
     username: "",
     password: "",
     employeeId: "",
+    privileges: "General",
   });
 
   function passUpUsername(input: string) {
     setFields({
-      username: fields.username,
-      password: input,
+      username: input,
+      password: fields.password,
       employeeId: fields.employeeId,
+      privileges: fields.privileges,
     });
   }
 
   function passUpPassword(input: string) {
     setFields({
-      username: input,
-      password: fields.password,
+      username: fields.username,
+      password: input,
       employeeId: fields.employeeId,
+      privileges: fields.privileges,
     });
   }
 
@@ -33,6 +36,7 @@ const LoginFields: React.FC = () => {
       username: fields.username,
       password: fields.password,
       employeeId: input,
+      privileges: fields.privileges,
     });
   }
 
@@ -40,7 +44,11 @@ const LoginFields: React.FC = () => {
     // ONLY FOR TESTING
     // if (fields.username && fields.password && fields.employeeId) {
     setLoginState(true);
-    setUserState({ username: fields.username, password: fields.password });
+    setUserState({
+      username: fields.username,
+      password: fields.password,
+      privileges: fields.privileges,
+    });
     // }
   }
 

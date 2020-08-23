@@ -1,9 +1,22 @@
 import React from "react";
+import HeadLineInput from "../dashboard/HeadLineInput";
+import PrivilegesPage from "./PrivilegesPage";
+import NavBar from "../navigation/NavBar";
 
-const SettingsPage: React.FC = () => {
+interface Props {
+  userState: { username: string; password: string; privileges: string };
+}
+
+const SettingsPage: React.FC<Props> = (props) => {
   return (
     <div>
-      <h1>Welcome to your settings!</h1>
+      <NavBar />
+      <h1>{props.userState.username}</h1>
+      <HeadLineInput
+        text="Change Password: "
+        inputVal={props.userState.password}
+      />
+      <PrivilegesPage privileges={props.userState.privileges} />
     </div>
   );
 };

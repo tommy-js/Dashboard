@@ -94,3 +94,50 @@ body {
 #dashboard_element {
   @include testing;
 }
+
+#privileges_page {
+  @include testing;
+  // height: 200px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+#highlight_container {
+  position: relative;
+  display: block;
+  width: 150px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid grey;
+  box-shadow: 1px 1px grey;
+  color: black;
+  text-decoration: none;
+}
+
+#leave_container_information_highlight {
+  width: 200px;
+  height: 100px;
+  @include testing;
+}
+
+#highlight_hover {
+  display: block;
+}
+
+#highlight_hover_transition {
+  transition: 0.3s;
+}
+
+.nav_link {
+  font-size: 18px;
+  margin-left: 15px;
+  margin-right: 15px;
+  color: black;
+}
+
+.nav_link_active {
+  color: orange;
+}

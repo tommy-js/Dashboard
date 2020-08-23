@@ -18,7 +18,12 @@ const NavButton: React.FC<Props> = (props) => {
   }
 
   return (
-    <NavLink onClick={() => checklog()} to={props.path}>
+    <NavLink
+      activeClassName="nav_link_active"
+      className="nav_link"
+      onClick={() => checklog()}
+      to={props.path}
+    >
       {props.text}
     </NavLink>
   );

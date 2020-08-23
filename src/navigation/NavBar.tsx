@@ -3,6 +3,7 @@ import NavButton from "./NavButton";
 
 const NavBar: React.FC = () => {
   const navLinks = [
+    { text: "home", loggedIn: true, path: "/home" },
     { text: "settings", loggedIn: true, path: "/settings" },
     { text: "logout", loggedIn: false, path: "/" },
   ];

@@ -3,7 +3,10 @@ import Homepage from "../homepage/Homepage";
 import Login from "../login/Login";
 import SettingsPage from "../settings/SettingsPage";
 import "./app.scss";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+
+export const browserHist = createBrowserHistory();
 
 export const loginContext = createContext<any>({});
 export const userContext = createContext<any>({});
@@ -13,18 +16,21 @@ function App() {
   const [userState, setUserState] = useState<any>({
     username: "",
     password: "",
+    employeeId: "",
+    privileges: "",
   });
 
   function checkLoginStatus() {
     if (loginState === true) {
+      browserHist.push("/home");
       return (
-        <Route path="/">
+        <Route exact path="/home">
           <Homepage />
         </Route>
       );
     } else {
       return (
-        <Route path="/">
+        <Route exact path="/">
           <Login />
         </Route>
       );
@@ -34,9 +40,9 @@ function App() {
   return (
     <userContext.Provider value={{ userState, setUserState }}>
       <loginContext.Provider value={{ loginState, setLoginState }}>
-        <Router>
+        <Router history={browserHist}>
           <Route exact path="/settings">
-            <SettingsPage />
+            <SettingsPage userState={userState} />
           </Route>
           <div className="App">{checkLoginStatus()}</div>
         </Router>
