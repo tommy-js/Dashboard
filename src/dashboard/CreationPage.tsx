@@ -1,6 +1,7 @@
 import React from "react";
 import HeadLineInput from "./HeadLineInput";
 import ButtonField from "../login/ButtonField";
+import CreateUser from "../resolvers/CreateUser";
 
 interface User {
   username: string;
@@ -17,6 +18,7 @@ export const UserCreationPage: React.FC<User> = (props) => {
     <div>
       <ButtonField text="Exit" id={0} submitForm={props.exitUserCreation} />
       <HeadLineInput text="Create User " inputVal={props.username} />
+      <CreateUser username={props.username} />
     </div>
   );
 };
