@@ -17,6 +17,7 @@ const DashboardContainer: React.FC = () => {
   const [editStockData, setEditStockData] = useState({
     title: "",
     ticker: "",
+    description: "",
     id: 0,
   });
   const [id, setId] = useState(0);
@@ -81,8 +82,18 @@ const DashboardContainer: React.FC = () => {
   ];
 
   const testStockData = [
-    { text: "Apple", ticker: "AAPL", id: 0 },
-    { text: "Tesla", ticker: "TSLA", id: 1 },
+    {
+      text: "Apple",
+      ticker: "AAPL",
+      description: "Built by Apple in California",
+      id: 0,
+    },
+    {
+      text: "Tesla",
+      ticker: "TSLA",
+      description: "Tesla roadster is the next big thing...",
+      id: 1,
+    },
   ];
 
   function returnUserEdit(id: number) {
@@ -113,6 +124,7 @@ const DashboardContainer: React.FC = () => {
       setEditStockData({
         title: obj.text,
         ticker: obj.ticker,
+        description: obj.description,
         id: obj.id,
       });
     }

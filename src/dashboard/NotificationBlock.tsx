@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 
-const NotificationBlock: React.FC = () => {
-  const [val, setVal] = useState("");
+interface Props {
+  placeholder: string;
+}
 
-  return <textarea placeholder="Notify user" value={val} />;
+const NotificationBlock: React.FC<Props> = (props) => {
+  const [val, setVal] = useState(props.placeholder);
+
+  return (
+    <textarea
+      placeholder={props.placeholder}
+      onChange={(e) => setVal(e.target.value)}
+    />
+  );
 };
 
 export default NotificationBlock;

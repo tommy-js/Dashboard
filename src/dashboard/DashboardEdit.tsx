@@ -2,12 +2,14 @@ import React from "react";
 import ButtonField from "../login/ButtonField";
 import DropdownElement from "./DropdownElement";
 import NotificationBlock from "./NotificationBlock";
+import TextareaBlock from "./TextareaBlock";
 
 interface Stock {
   id: number;
   editData: {
     title: string;
     ticker: string;
+    description: string;
     id: number;
   };
   exitForm: () => void;
@@ -54,16 +56,23 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
         status={props.editData.accountStatus}
       />
       <p>Member since {props.editData.time}</p>
-      <NotificationBlock />
+      <NotificationBlock placeholder="Notify user..." />
       <ButtonField id={props.id} text="Submit" submitForm={validateAndSubmit} />
     </div>
   );
 };
 
 export const StockDashboardEdit: React.FC<Stock> = (props) => {
+  function validateAndSubmit(id: number) {}
+
   return (
     <div>
-      <h1>Hello stocks</h1>
+      <ButtonField id={props.id} text="Exit" submitForm={props.exitForm} />
+      <h2>
+        {props.editData.title} #{props.editData.ticker}
+      </h2>
+      <TextareaBlock description={props.editData.description} />
+      <ButtonField id={0} text="Submit" submitForm={validateAndSubmit} />
     </div>
   );
 };
