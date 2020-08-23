@@ -2,6 +2,7 @@ import React, { useState, createContext } from "react";
 import Homepage from "../homepage/Homepage";
 import Login from "../login/Login";
 import SettingsPage from "../settings/SettingsPage";
+import PrivilegesPage from "../privileges/PrivilegesPage";
 import "./app.scss";
 import { Router, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
@@ -24,7 +25,7 @@ function App() {
     if (loginState === true) {
       browserHist.push("/home");
       return (
-        <Route exact path="/home">
+        <Route path="/home">
           <Homepage />
         </Route>
       );
@@ -43,6 +44,9 @@ function App() {
         <Router history={browserHist}>
           <Route exact path="/settings">
             <SettingsPage userState={userState} />
+          </Route>
+          <Route exact path="/privileges">
+            <PrivilegesPage />
           </Route>
           <div className="App">{checkLoginStatus()}</div>
         </Router>

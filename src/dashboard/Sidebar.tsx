@@ -9,8 +9,8 @@ interface Nav {
 
 const Sidebar: React.FC = () => {
   const navigationButtons = [
-    { text: "Bands", path: "/bands", id: 0 },
-    { text: "Users", path: "/users", id: 1 },
+    { text: "Stocks", path: "/home/stocks", id: 0 },
+    { text: "Users", path: "/home/users", id: 1 },
   ];
   return (
     <div id="sidebar">

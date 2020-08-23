@@ -142,7 +142,7 @@ const DashboardContainer: React.FC = () => {
 
   return (
     <div id="dashboard_container">
-      <Route path="/users">
+      <Route path="/home/users">
         <UserDataRenderer
           data={testUserData}
           render={userEdit}
@@ -152,7 +152,7 @@ const DashboardContainer: React.FC = () => {
           editData={editUserData}
         />
       </Route>
-      <Route path="/bands">
+      <Route path="/home/stocks">
         <StockDataRenderer
           data={testStockData}
           render={stockEdit}
