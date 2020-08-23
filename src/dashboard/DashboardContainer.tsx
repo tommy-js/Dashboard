@@ -2,33 +2,87 @@ import React, { useState } from "react";
 import { Route } from "react-router-dom";
 import DashboardData from "./DashboardData";
 import DashboardTopMenu from "./DashboardTopMenu";
-import DashboardEdit from "./DashboardEdit";
-import DataRenderer from "./DataRenderer";
+import { UserDataRenderer, StockDataRenderer } from "./DataRenderer";
 
 const DashboardContainer: React.FC = () => {
   const [userEdit, setUserEdit] = useState(false);
-  const [bandEdit, setBandEdit] = useState(false);
-  const [editData, setEditData] = useState({
+  const [stockEdit, setStockEdit] = useState(false);
+  const [editUserData, setEditUserData] = useState({
     username: "",
     accountStatus: "",
+    membership: "",
+    time: 0,
+    id: 0,
+  });
+  const [editStockData, setEditStockData] = useState({
+    title: "",
+    ticker: "",
     id: 0,
   });
   const [id, setId] = useState(0);
 
   const testUserData = [
-    { text: "Tommy", accountStatus: "active", id: 0 },
-    { text: "John", accountStatus: "disabled", id: 1 },
-    { text: "James", accountStatus: "suspended", id: 3 },
-    { text: "Aaron", accountStatus: "suspended", id: 4 },
-    { text: "Tim", accountStatus: "active", id: 5 },
-    { text: "Nora", accountStatus: "disabled", id: 6 },
-    { text: "CJ", accountStatus: "active", id: 7 },
-    { text: "EW", accountStatus: "active", id: 8 },
+    {
+      text: "Tommy",
+      accountStatus: "active",
+      membership: "Basic",
+      time: 1310303,
+      id: 0,
+    },
+    {
+      text: "John",
+      accountStatus: "disabled",
+      membership: "Free",
+      time: 53523532,
+      id: 1,
+    },
+    {
+      text: "James",
+      accountStatus: "suspended",
+      membership: "Premium",
+      time: 5324324324,
+      id: 3,
+    },
+    {
+      text: "Aaron",
+      accountStatus: "suspended",
+      membership: "Free",
+      time: 323231,
+      id: 4,
+    },
+    {
+      text: "Tim",
+      accountStatus: "active",
+      membership: "Free",
+      time: 656575,
+      id: 5,
+    },
+    {
+      text: "Nora",
+      accountStatus: "disabled",
+      membership: "Free",
+      time: 335352,
+      id: 6,
+    },
+    {
+      text: "CJ",
+      accountStatus: "active",
+      membership: "Basic",
+      time: 3434567,
+      id: 7,
+    },
+    {
+      text: "EW",
+      accountStatus: "active",
+      membership: "Premium",
+      time: 45466677,
+      id: 8,
+    },
   ];
 
-  const testGroupData = [
-    { text: "Led Zepellin", id: 0 },
-    { text: "Grateful Dead", id: 1 },
+  const testStockData = [
+    { text: "Apple", ticker: "AAPL", id: 0 },
+    { text: "Tesla", ticker: "TSLA", id: 1 },
   ];
 
   function returnUserEdit(id: number) {
@@ -37,9 +91,11 @@ const DashboardContainer: React.FC = () => {
     if (val) {
       let index = testUserData.indexOf(val);
       let obj = testUserData[index];
-      setEditData({
+      setEditUserData({
         username: obj.text,
         accountStatus: obj.accountStatus,
+        membership: obj.membership,
+        time: obj.time,
         id: obj.id,
       });
     }
@@ -48,40 +104,50 @@ const DashboardContainer: React.FC = () => {
     console.log("passed user");
   }
 
-  function returnBandEdit(id: number) {
+  function returnStockEdit(id: number) {
     console.log(id);
+    let val = testStockData.find((el) => el.id === id);
+    if (val) {
+      let index = testStockData.indexOf(val);
+      let obj = testStockData[index];
+      setEditStockData({
+        title: obj.text,
+        ticker: obj.ticker,
+        id: obj.id,
+      });
+    }
     setId(id);
-    setBandEdit(true);
+    setStockEdit(true);
   }
 
   function exitFormUsers() {
     setUserEdit(false);
   }
 
-  function exitFormGroup() {
-    setBandEdit(false);
+  function exitFormStock() {
+    setStockEdit(false);
   }
 
   return (
     <div id="dashboard_container">
       <Route path="/users">
-        <DataRenderer
+        <UserDataRenderer
           data={testUserData}
           render={userEdit}
           returnEdit={returnUserEdit}
           exitForm={exitFormUsers}
           id={id}
-          editData={editData}
+          editData={editUserData}
         />
       </Route>
       <Route path="/bands">
-        <DataRenderer
-          data={testGroupData}
-          render={bandEdit}
-          returnEdit={returnBandEdit}
-          exitForm={exitFormGroup}
+        <StockDataRenderer
+          data={testStockData}
+          render={stockEdit}
+          returnEdit={returnStockEdit}
+          exitForm={exitFormStock}
           id={id}
-          editData={editData}
+          editData={editStockData}
         />
       </Route>
     </div>

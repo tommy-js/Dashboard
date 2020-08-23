@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 interface Props {
   text: string;
   status: string;
+  options: { text: string; id: number }[];
 }
 
 const DropdownElement: React.FC<Props> = (props) => {
@@ -17,14 +18,14 @@ const DropdownElement: React.FC<Props> = (props) => {
     <div>
       <label>{props.text}</label>
       <select value={val} onChange={(e) => changeEl(e.target)}>
-        <option id="1" value="active">
-          Active
+        <option id="1" value={props.options[0].text}>
+          {props.options[0].text}
         </option>
-        <option id="2" value="suspended">
-          Suspended
+        <option id="2" value={props.options[1].text}>
+          {props.options[1].text}
         </option>
-        <option id="3" value="disabled">
-          Disabled
+        <option id="3" value={props.options[2].text}>
+          {props.options[2].text}
         </option>
       </select>
     </div>

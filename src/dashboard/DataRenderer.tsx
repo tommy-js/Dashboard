@@ -1,24 +1,42 @@
 import React from "react";
-import DashboardEdit from "./DashboardEdit";
+import { UserDashboardEdit, StockDashboardEdit } from "./DashboardEdit";
 import DashboardTopMenu from "./DashboardTopMenu";
 import DashboardData from "./DashboardData";
 
-interface Props {
+interface Stock {
   render: boolean;
   data: any;
+  editData: {
+    title: string;
+    ticker: string;
+    id: number;
+  };
   id: number;
-  editData: { username: string; accountStatus: string };
   returnEdit: (id: number) => void;
   exitForm: () => void;
 }
 
-const DataRenderer: React.FC<Props> = (props) => {
+interface User {
+  render: boolean;
+  data: any;
+  id: number;
+  editData: {
+    username: string;
+    accountStatus: string;
+    membership: string;
+    time: number;
+  };
+  returnEdit: (id: number) => void;
+  exitForm: () => void;
+}
+
+export const UserDataRenderer: React.FC<User> = (props) => {
   function pageEdit() {
     if (props.render === true) {
       console.log("user edit");
       return (
         <div>
-          <DashboardEdit
+          <UserDashboardEdit
             editData={props.editData}
             id={props.id}
             exitForm={props.exitForm}
@@ -37,4 +55,27 @@ const DataRenderer: React.FC<Props> = (props) => {
   return <div>{pageEdit()}</div>;
 };
 
-export default DataRenderer;
+export const StockDataRenderer: React.FC<Stock> = (props) => {
+  function pageEdit() {
+    if (props.render === true) {
+      console.log("user edit");
+      return (
+        <div>
+          <StockDashboardEdit
+            editData={props.editData}
+            id={props.id}
+            exitForm={props.exitForm}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <DashboardTopMenu placeholder="Username" />
+          <DashboardData returnEditPage={props.returnEdit} data={props.data} />
+        </div>
+      );
+    }
+  }
+  return <div>{pageEdit()}</div>;
+};
