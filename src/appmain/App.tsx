@@ -4,7 +4,7 @@ import Login from "../login/Login";
 import SettingsPage from "../settings/SettingsPage";
 import PrivilegesPage from "../privileges/PrivilegesPage";
 import "./app.scss";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
@@ -29,18 +29,7 @@ function App() {
 
   function checkLoginStatus() {
     if (loginState === true) {
-      browserHist.push("/home");
-      return (
-        <Route path="/home">
-          <Homepage />
-        </Route>
-      );
-    } else {
-      return (
-        <Route exact path="/">
-          <Login />
-        </Route>
-      );
+      return <Redirect to="/home" />;
     }
   }
 
@@ -49,6 +38,12 @@ function App() {
       <userContext.Provider value={{ userState, setUserState }}>
         <loginContext.Provider value={{ loginState, setLoginState }}>
           <Router history={browserHist}>
+            <Route path="/home">
+              <Homepage />
+            </Route>
+            <Route exact path="/">
+              <Login />
+            </Route>
             <Route exact path="/settings">
               <SettingsPage userState={userState} />
             </Route>

@@ -15,7 +15,11 @@ const MoneyInput: React.FC<Props> = (props) => {
   return (
     <div>
       <label>{props.label}</label>
-      <input value={props.val} onChange={(e) => convertMoney(e.target.value)} />
+      <input
+        type="number"
+        value={props.val}
+        onChange={(e) => convertMoney(e.target.value)}
+      />
     </div>
   );
 };

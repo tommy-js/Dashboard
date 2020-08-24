@@ -29,6 +29,9 @@ const UserQuery = new GraphQLObjectType({
     username: { type: GraphQLString },
     password: { type: GraphQLString },
     profileImage: { type: GraphQLInt },
+    membership: { type: GraphQLString },
+    time: { type: GraphQLInt },
+    accountStatus: { type: GraphQLString },
     money: { type: GraphQLFloat },
     darkmode: { type: GraphQLBoolean },
     invisible: { type: GraphQLBoolean },
@@ -149,6 +152,12 @@ const ShareQuery = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
   fields: {
+    users: {
+      type: new GraphQLList(UserQuery),
+      resolve(parent) {
+        return User.find({});
+      },
+    },
     user: {
       type: UserQuery,
       args: {

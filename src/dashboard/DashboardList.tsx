@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardElement from "./DashboardElement";
+import { DashboardUserElement } from "./DashboardElement";
 
 interface Props {
   data: any;
@@ -10,9 +10,10 @@ const DashboardUserList: React.FC<Props> = (props) => {
   return (
     <div>
       {props.data.map((el: any) => (
-        <DashboardElement
-          text={el.text}
-          id={el.id}
+        <DashboardUserElement
+          username={el.username}
+          userId={el.userId}
+          money={el.money}
           returnEditPage={props.returnEditPage}
         />
       ))}

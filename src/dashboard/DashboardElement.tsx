@@ -4,14 +4,16 @@ import DeleteElement from "./DeleteElement";
 import ElementOptions from "./ElementOptions";
 import ElementCheckbox from "./ElementCheckbox";
 import ButtonField from "../login/ButtonField";
+import StringDisplay from "./StringDisplay";
 
-interface Props {
-  text: string;
-  id: number;
+interface User {
+  username: string;
+  userId: number;
+  money: number;
   returnEditPage: (id: number) => void;
 }
 
-const DashboardElement: React.FC<Props> = (props) => {
+export const DashboardUserElement: React.FC<User> = (props) => {
   const [check, setCheck] = useState(false);
 
   function triggerCheck(check: boolean) {
@@ -27,17 +29,16 @@ const DashboardElement: React.FC<Props> = (props) => {
 
   return (
     <div id="dashboard_element">
-      <ElementTitle text={props.text} />
+      <ElementTitle text={props.username} />
+      <StringDisplay label="Money" insert={props.money} />
       <ElementOptions action={actionElement} />
       <DeleteElement deleteElement={deleteElement} />
       <ElementCheckbox check={check} triggerCheck={triggerCheck} />
       <ButtonField
         text="Edit"
-        id={props.id}
+        id={props.userId}
         submitForm={props.returnEditPage}
       />
     </div>
   );
 };
-
-export default DashboardElement;

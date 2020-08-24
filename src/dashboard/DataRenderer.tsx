@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { UserDashboardEdit, StockDashboardEdit } from "./DashboardEdit";
 import { UserCreationPage, StockCreationPage } from "./CreationPage";
 import DashboardTopMenu from "./DashboardTopMenu";
 import DashboardData from "./DashboardData";
+import { loginContext, browserHist } from "../appmain/App";
 
 interface Stock {
   render: boolean;
@@ -27,12 +28,14 @@ interface User {
     accountStatus: string;
     membership: string;
     time: number;
+    money: number;
   };
   returnEdit: (id: number) => void;
   exitForm: () => void;
 }
 
 export const UserDataRenderer: React.FC<User> = (props) => {
+  const { loginState, setLoginState } = useContext(loginContext);
   const [userCreation, setUserCreation] = useState(false);
   const [creationParam, setCreationParam] = useState("");
 

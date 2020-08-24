@@ -1,6 +1,17 @@
 import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
 
+const usersQuery = gql`
+  {
+    users {
+      username
+      password
+      money
+      userId
+    }
+  }
+`;
+
 const createUserMutation = gql`
   mutation(
     $userId: ID!
@@ -36,4 +47,4 @@ const createUserMutation = gql`
   }
 `;
 
-export { createUserMutation };
+export { usersQuery, createUserMutation };

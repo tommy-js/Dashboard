@@ -3,6 +3,8 @@ import ButtonField from "../login/ButtonField";
 import DropdownElement from "./DropdownElement";
 import NotificationBlock from "./NotificationBlock";
 import TextareaBlock from "./TextareaBlock";
+import StringDisplay from "./StringDisplay";
+import MoneyInput from "./MoneyInput";
 
 interface Stock {
   id: number;
@@ -21,12 +23,14 @@ interface User {
     username: string;
     accountStatus: string;
     membership: string;
+    money: number;
     time: number;
   };
   exitForm: () => void;
 }
 
 export const UserDashboardEdit: React.FC<User> = (props) => {
+  const [money, setMoney] = useState(props.editData.money);
   const membership = [
     { text: "Free", id: 0 },
     { text: "Basic", id: 1 },
@@ -40,6 +44,10 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
   ];
 
   function validateAndSubmit(id: number) {}
+
+  function modMoney(val: number) {
+    setMoney(val);
+  }
 
   return (
     <div>
@@ -55,7 +63,8 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
         options={accountStatus}
         status={props.editData.accountStatus}
       />
-      <p>Member since {props.editData.time}</p>
+      <StringDisplay label="Member since" insert={props.editData.time} />
+      <MoneyInput label="Money: " val={money} modMoney={modMoney} />
       <NotificationBlock placeholder="Notify user..." />
       <ButtonField id={props.id} text="Submit" submitForm={validateAndSubmit} />
     </div>

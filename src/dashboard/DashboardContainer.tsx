@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import DashboardData from "./DashboardData";
 import DashboardTopMenu from "./DashboardTopMenu";
 import { UserDataRenderer, StockDataRenderer } from "./DataRenderer";
+import { usersQuery } from "../queries/queries.js";
+import { flowRight as compose } from "lodash";
+import { graphql, useQuery } from "react-apollo";
 
 const DashboardContainer: React.FC = () => {
+  const { loading, data } = useQuery(usersQuery);
+  const [loadedImage, setLoadedImage] = useState(false);
+  const [renderData, setRenderData] = useState([
+    {
+      userId: 0,
+      money: 0,
+      username: "",
+      accountStatus: "",
+      membership: "",
+      time: 0,
+    },
+  ]);
   const [userEdit, setUserEdit] = useState(false);
   const [stockEdit, setStockEdit] = useState(false);
   const [editUserData, setEditUserData] = useState({
@@ -13,6 +28,7 @@ const DashboardContainer: React.FC = () => {
     membership: "",
     time: 0,
     id: 0,
+    money: 0,
   });
   const [editStockData, setEditStockData] = useState({
     title: "",
@@ -22,64 +38,72 @@ const DashboardContainer: React.FC = () => {
   });
   const [id, setId] = useState(0);
 
-  const testUserData = [
-    {
-      text: "Tommy",
-      accountStatus: "active",
-      membership: "Basic",
-      time: 1310303,
-      id: 0,
-    },
-    {
-      text: "John",
-      accountStatus: "disabled",
-      membership: "Free",
-      time: 53523532,
-      id: 1,
-    },
-    {
-      text: "James",
-      accountStatus: "suspended",
-      membership: "Premium",
-      time: 5324324324,
-      id: 3,
-    },
-    {
-      text: "Aaron",
-      accountStatus: "suspended",
-      membership: "Free",
-      time: 323231,
-      id: 4,
-    },
-    {
-      text: "Tim",
-      accountStatus: "active",
-      membership: "Free",
-      time: 656575,
-      id: 5,
-    },
-    {
-      text: "Nora",
-      accountStatus: "disabled",
-      membership: "Free",
-      time: 335352,
-      id: 6,
-    },
-    {
-      text: "CJ",
-      accountStatus: "active",
-      membership: "Basic",
-      time: 3434567,
-      id: 7,
-    },
-    {
-      text: "EW",
-      accountStatus: "active",
-      membership: "Premium",
-      time: 45466677,
-      id: 8,
-    },
-  ];
+  // const testUserData = [
+  //   {
+  //     text: "Tommy",
+  //     accountStatus: "active",
+  //     membership: "Basic",
+  //     time: 1310303,
+  //     id: 0,
+  //   },
+  //   {
+  //     text: "John",
+  //     accountStatus: "disabled",
+  //     membership: "Free",
+  //     time: 53523532,
+  //     id: 1,
+  //   },
+  //   {
+  //     text: "James",
+  //     accountStatus: "suspended",
+  //     membership: "Premium",
+  //     time: 5324324324,
+  //     id: 3,
+  //   },
+  //   {
+  //     text: "Aaron",
+  //     accountStatus: "suspended",
+  //     membership: "Free",
+  //     time: 323231,
+  //     id: 4,
+  //   },
+  //   {
+  //     text: "Tim",
+  //     accountStatus: "active",
+  //     membership: "Free",
+  //     time: 656575,
+  //     id: 5,
+  //   },
+  //   {
+  //     text: "Nora",
+  //     accountStatus: "disabled",
+  //     membership: "Free",
+  //     time: 335352,
+  //     id: 6,
+  //   },
+  //   {
+  //     text: "CJ",
+  //     accountStatus: "active",
+  //     membership: "Basic",
+  //     time: 3434567,
+  //     id: 7,
+  //   },
+  //   {
+  //     text: "EW",
+  //     accountStatus: "active",
+  //     membership: "Premium",
+  //     time: 45466677,
+  //     id: 8,
+  //   },
+  // ];
+
+  useEffect(() => {
+    if (data) {
+      setLoadedImage(true);
+      setRenderData(data.users);
+      console.log(data.users);
+    }
+  }, [data]);
 
   const testStockData = [
     {
@@ -97,18 +121,20 @@ const DashboardContainer: React.FC = () => {
   ];
 
   function returnUserEdit(id: number) {
-    console.log(id);
-    let val = testUserData.find((el) => el.id === id);
-    if (val) {
-      let index = testUserData.indexOf(val);
-      let obj = testUserData[index];
-      setEditUserData({
-        username: obj.text,
-        accountStatus: obj.accountStatus,
-        membership: obj.membership,
-        time: obj.time,
-        id: obj.id,
-      });
+    if (data) {
+      let val = renderData.find((el) => el.userId === id);
+      if (val) {
+        let index = renderData.indexOf(val);
+        let obj = renderData[index];
+        setEditUserData({
+          username: obj.username,
+          accountStatus: obj.accountStatus,
+          membership: obj.membership,
+          time: obj.time,
+          id: obj.userId,
+          money: obj.money,
+        });
+      }
     }
     setId(id);
     setUserEdit(true);
@@ -116,7 +142,6 @@ const DashboardContainer: React.FC = () => {
   }
 
   function returnStockEdit(id: number) {
-    console.log(id);
     let val = testStockData.find((el) => el.id === id);
     if (val) {
       let index = testStockData.indexOf(val);
@@ -140,18 +165,32 @@ const DashboardContainer: React.FC = () => {
     setStockEdit(false);
   }
 
+  function renderUsers() {
+    if (loadedImage) {
+      return (
+        <Route path="/home/users">
+          <UserDataRenderer
+            data={renderData}
+            render={userEdit}
+            returnEdit={returnUserEdit}
+            exitForm={exitFormUsers}
+            id={id}
+            editData={editUserData}
+          />
+        </Route>
+      );
+    } else {
+      return (
+        <div>
+          <h1>Loading...</h1>
+        </div>
+      );
+    }
+  }
+
   return (
     <div id="dashboard_container">
-      <Route path="/home/users">
-        <UserDataRenderer
-          data={testUserData}
-          render={userEdit}
-          returnEdit={returnUserEdit}
-          exitForm={exitFormUsers}
-          id={id}
-          editData={editUserData}
-        />
-      </Route>
+      {renderUsers()}
       <Route path="/home/stocks">
         <StockDataRenderer
           data={testStockData}
