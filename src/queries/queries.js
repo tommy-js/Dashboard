@@ -7,6 +7,8 @@ const usersQuery = gql`
       username
       password
       money
+      membership
+      accountStatus
       userId
     }
   }
@@ -18,6 +20,8 @@ const createUserMutation = gql`
     $username: String!
     $password: String!
     $money: Float!
+    $membership: String!
+    $accountStatus: String!
     $darkmode: Boolean!
     $invisible: Boolean!
     $profileImage: Int!
@@ -32,6 +36,8 @@ const createUserMutation = gql`
       password: $password
       profileImage: $profileImage
       money: $money
+      membership: $membership
+      accountStatus: $accountStatus
       darkmode: $darkmode
       invisible: $invisible
       allowCommentsOnTrades: $allowCommentsOnTrades
@@ -47,4 +53,46 @@ const createUserMutation = gql`
   }
 `;
 
-export { usersQuery, createUserMutation };
+const updateUserMutation = gql`
+  mutation(
+    $userId: ID!
+    $membership: String!
+    $accountStatus: String!
+    $money: Int!
+  ) {
+    updateUser(
+      userId: $userId
+      membership: $membership
+      accountStatus: $accountStatus
+      money: $money
+    ) {
+      userId
+      membership
+      accountStatus
+      money
+    }
+  }
+`;
+
+const updateUserNotificationMutation = gql`
+  mutation($userId: ID!, $content: String!, $timestamp: ID!, $id: ID!) {
+    updateUserNotification(
+      userId: $userId
+      content: $content
+      timestamp: $timestamp
+      id: $id
+    ) {
+      userId
+      content
+      timestamp
+      id
+    }
+  }
+`;
+
+export {
+  usersQuery,
+  createUserMutation,
+  updateUserMutation,
+  updateUserNotificationMutation,
+};

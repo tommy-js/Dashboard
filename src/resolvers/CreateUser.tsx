@@ -8,6 +8,8 @@ interface Props {
   username: string;
   password: string;
   money: number;
+  membership: string;
+  accountStatus: string;
   darkmode: boolean;
   invisible: boolean;
   allowCommentsOnTrades: boolean;
@@ -25,6 +27,8 @@ const CreateUser: React.FC<Props> = (props) => {
         username: props.username,
         password: props.password,
         money: props.money,
+        membership: props.membership,
+        accountStatus: props.accountStatus,
         profileImage: 0,
         darkmode: props.darkmode,
         invisible: props.invisible,

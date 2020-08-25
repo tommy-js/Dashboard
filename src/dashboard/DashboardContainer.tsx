@@ -27,7 +27,7 @@ const DashboardContainer: React.FC = () => {
     accountStatus: "",
     membership: "",
     time: 0,
-    id: 0,
+    userId: 0,
     money: 0,
   });
   const [editStockData, setEditStockData] = useState({
@@ -131,7 +131,7 @@ const DashboardContainer: React.FC = () => {
           accountStatus: obj.accountStatus,
           membership: obj.membership,
           time: obj.time,
-          id: obj.userId,
+          userId: obj.userId,
           money: obj.money,
         });
       }

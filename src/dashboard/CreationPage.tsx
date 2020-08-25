@@ -93,6 +93,8 @@ export const UserCreationPage: React.FC<User> = (props) => {
         username={props.username}
         password={password}
         money={money}
+        membership="Free"
+        accountStatus="Active"
         darkmode={settings.darkmode}
         invisible={settings.invisible}
         allowCommentsOnTrades={settings.allowCommentsOnTrades}

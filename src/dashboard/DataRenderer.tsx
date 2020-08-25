@@ -29,6 +29,7 @@ interface User {
     membership: string;
     time: number;
     money: number;
+    userId: number;
   };
   returnEdit: (id: number) => void;
   exitForm: () => void;

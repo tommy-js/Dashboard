@@ -5,6 +5,7 @@ import NotificationBlock from "./NotificationBlock";
 import TextareaBlock from "./TextareaBlock";
 import StringDisplay from "./StringDisplay";
 import MoneyInput from "./MoneyInput";
+import ValidateEdit from "./ValidateEdit";
 
 interface Stock {
   id: number;
@@ -25,12 +26,14 @@ interface User {
     membership: string;
     money: number;
     time: number;
+    userId: number;
   };
   exitForm: () => void;
 }
 
 export const UserDashboardEdit: React.FC<User> = (props) => {
   const [money, setMoney] = useState(props.editData.money);
+  const [notificationVal, setNotificationVal] = useState("");
   const membership = [
     { text: "Free", id: 0 },
     { text: "Basic", id: 1 },
@@ -49,6 +52,10 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
     setMoney(val);
   }
 
+  function updateNotification(input: string) {
+    setNotificationVal(input);
+  }
+
   return (
     <div>
       <ButtonField id={props.id} text="Exit" submitForm={props.exitForm} />
@@ -65,8 +72,18 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
       />
       <StringDisplay label="Member since" insert={props.editData.time} />
       <MoneyInput label="Money: " val={money} modMoney={modMoney} />
-      <NotificationBlock placeholder="Notify user..." />
-      <ButtonField id={props.id} text="Submit" submitForm={validateAndSubmit} />
+      <NotificationBlock
+        placeholder="Notify user..."
+        val={notificationVal}
+        updateNotification={updateNotification}
+      />
+      <ValidateEdit
+        userId={props.editData.userId}
+        content={notificationVal}
+        money={money}
+        accountStatus={props.editData.accountStatus}
+        membership={props.editData.membership}
+      />
     </div>
   );
 };

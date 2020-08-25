@@ -1,24 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import HeadLineInput from "../dashboard/HeadLineInput";
 import PrivilegesPage from "./PrivilegesPage";
 import NavBar from "../navigation/NavBar";
+import { loginContext } from "../appmain/App";
+import { Redirect } from "react-router-dom";
 
 interface Props {
   userState: { username: string; password: string; privileges: string };
 }
 
 const SettingsPage: React.FC<Props> = (props) => {
-  return (
-    <div>
-      <NavBar />
-      <h1>{props.userState.username}</h1>
-      <HeadLineInput
-        text="Change Password: "
-        inputVal={props.userState.password}
-      />
-      <PrivilegesPage privileges={props.userState.privileges} />
-    </div>
-  );
+  const { loginState, setLoginState } = useContext(loginContext);
+
+  function checkLoginStatus() {
+    if (loginState === true) {
+      return (
+        <div>
+          <NavBar />
+          <h1>{props.userState.username}</h1>
+          <HeadLineInput
+            text="Change Password: "
+            inputVal={props.userState.password}
+          />
+          <PrivilegesPage privileges={props.userState.privileges} />
+        </div>
+      );
+    } else {
+      return <Redirect to="/" />;
+    }
+  }
+
+  return <div>{checkLoginStatus()}</div>;
 };
 
 export default SettingsPage;

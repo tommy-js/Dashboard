@@ -189,6 +189,8 @@ const Mutation = new GraphQLObjectType({
         username: { type: GraphQLString },
         password: { type: GraphQLString },
         money: { type: GraphQLFloat },
+        membership: { type: GraphQLString },
+        accountStatus: { type: GraphQLString },
         darkmode: { type: GraphQLBoolean },
         invisible: { type: GraphQLBoolean },
         allowCommentsOnTrades: { type: GraphQLBoolean },
@@ -203,6 +205,8 @@ const Mutation = new GraphQLObjectType({
           username: args.username,
           password: args.password,
           money: args.money,
+          membership: args.membership,
+          accountStatus: args.accountStatus,
           darkmode: false,
           invisible: false,
           allowCommentsOnTrades: true,
@@ -216,6 +220,50 @@ const Mutation = new GraphQLObjectType({
           ],
         });
         return user.save();
+      },
+    },
+    updateUser: {
+      type: UserQuery,
+      args: {
+        userId: { type: GraphQLID },
+        membership: { type: GraphQLString },
+        accountStatus: { type: GraphQLString },
+        money: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return User.update(
+          { userId: args.userId },
+          {
+            $set: {
+              membership: args.membership,
+              accountStatus: args.accountStatus,
+              money: args.money,
+            },
+          }
+        );
+      },
+    },
+    updateUserNotification: {
+      type: UserQuery,
+      args: {
+        userId: { type: GraphQLID },
+        content: { type: GraphQLString },
+        timestamp: { type: GraphQLID },
+        id: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return User.update(
+          { userId: args.userId },
+          {
+            $push: {
+              notifications: {
+                content: args.content,
+                timestamp: args.timestamp,
+                id: args.id,
+              },
+            },
+          }
+        );
       },
     },
     updateMoney: {
