@@ -14,6 +14,27 @@ const usersQuery = gql`
   }
 `;
 
+const stockQuery = gql`
+  {
+    stocks {
+      stockId
+      ticker
+      name
+      about
+      creation
+      prediction
+      comments {
+        userId
+        username
+        timestamp
+        text
+        likes
+        dislikes
+      }
+    }
+  }
+`;
+
 const createUserMutation = gql`
   mutation(
     $userId: ID!
@@ -92,6 +113,7 @@ const updateUserNotificationMutation = gql`
 
 export {
   usersQuery,
+  stockQuery,
   createUserMutation,
   updateUserMutation,
   updateUserNotificationMutation,

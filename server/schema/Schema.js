@@ -158,6 +158,12 @@ const RootQuery = new GraphQLObjectType({
         return User.find({});
       },
     },
+    stocks: {
+      type: new GraphQLList(StockQuery),
+      resolve(parent) {
+        return Stock.find({});
+      },
+    },
     user: {
       type: UserQuery,
       args: {

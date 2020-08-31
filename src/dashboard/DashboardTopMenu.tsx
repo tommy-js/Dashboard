@@ -3,7 +3,8 @@ import SearchBar from "./SearchBar";
 import NewElement from "./NewElement";
 
 interface Props {
-  placeholder: string;
+  searchbarPlaceholder: string;
+  elementPlaceholder: string;
   type: string;
   createFunc: (val: string) => void;
 }
@@ -11,8 +12,12 @@ interface Props {
 const DashboardTopMenu: React.FC<Props> = (props) => {
   return (
     <div id="dashboard_top_menu">
-      <SearchBar placeholder={props.placeholder} />
-      <NewElement type={props.type} createFunc={props.createFunc} />
+      <SearchBar placeholder={props.searchbarPlaceholder} />
+      <NewElement
+        type={props.type}
+        placeholder={props.elementPlaceholder}
+        createFunc={props.createFunc}
+      />
     </div>
   );
 };
