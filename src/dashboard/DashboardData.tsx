@@ -12,9 +12,10 @@ interface Props {
 
 export const DashboardUserData: React.FC<Props> = (props) => {
   return (
-    <div id="dashboard_list">
+    <div className="dashboard_data">
       {props.data.map((el: any) => (
         <DashboardUserElement
+          key={el.userId}
           username={el.username}
           userId={el.userId}
           money={el.money}
@@ -27,9 +28,10 @@ export const DashboardUserData: React.FC<Props> = (props) => {
 
 export const DashboardStockData: React.FC<Props> = (props) => {
   return (
-    <div>
+    <div className="dashboard_data">
       {props.data.map((el: any) => (
         <DashboardStockElement
+          key={el.stockId}
           name={el.name}
           ticker={el.ticker}
           stockId={el.stockId}
@@ -41,9 +43,13 @@ export const DashboardStockData: React.FC<Props> = (props) => {
 
 export const DashboardCommentData: React.FC<Props> = (props) => {
   return (
-    <div>
+    <div className="dashboard_data">
       {props.data.map((el: any) => (
-        <DashboardCommentElement username={el.username} text={el.text} />
+        <DashboardCommentElement
+          key={el.commentId}
+          username={el.username}
+          text={el.text}
+        />
       ))}
     </div>
   );

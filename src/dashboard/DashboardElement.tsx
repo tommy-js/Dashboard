@@ -39,7 +39,7 @@ export const DashboardUserElement: React.FC<User> = (props) => {
   }
 
   return (
-    <div id="dashboard_element">
+    <div className="dashboard_element">
       <ElementTitle text={props.username} />
       <StringDisplay label="Money" insert={props.money} />
       <ElementOptions action={actionElement} />
@@ -64,7 +64,7 @@ export const DashboardStockElement: React.FC<Stock> = (props) => {
 
 export const DashboardCommentElement: React.FC<Comment> = (props) => {
   return (
-    <div>
+    <div className="dashboard_element">
       <ElementTitle text={props.text} />
     </div>
   );

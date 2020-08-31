@@ -92,8 +92,8 @@ body {
   display: inline-block;
 }
 
-#dashboard_element {
-  @include testing;
+.dashboard_element {
+  border: 1px solid blue;
 }
 
 a {
@@ -147,4 +147,9 @@ a {
   margin-top: 25px;
   margin-bottom: 25px;
   @include testing;
+}
+
+.dashboard_data {
+  position: relative;
+  top: 40px;
 }

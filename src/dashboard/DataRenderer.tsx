@@ -275,7 +275,7 @@ export const CommentDataRenderer: React.FC = () => {
 
   useEffect(() => {
     if (data) {
-      setCommentData(data.stocks);
+      setCommentData(data.comments);
       console.log(data);
     }
   }, [data]);
