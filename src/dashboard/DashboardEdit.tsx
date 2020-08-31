@@ -31,6 +31,20 @@ interface User {
   exitForm: () => void;
 }
 
+interface Comment {
+  id: number;
+  editData: {
+    userId: number;
+    commentId: number;
+    username: string;
+    timestamp: number;
+    text: string;
+    likes: number;
+    dislikes: number;
+  };
+  exitForm: () => void;
+}
+
 export const UserDashboardEdit: React.FC<User> = (props) => {
   const [money, setMoney] = useState(props.editData.money);
   const [notificationVal, setNotificationVal] = useState("");
@@ -107,6 +121,14 @@ export const StockDashboardEdit: React.FC<Stock> = (props) => {
         returnString={modTextarea}
       />
       <ButtonField id={0} text="Submit" submitForm={validateAndSubmit} />
+    </div>
+  );
+};
+
+export const CommentDashboardEdit: React.FC<Comment> = (props) => {
+  return (
+    <div>
+      <h3>Comment</h3>
     </div>
   );
 };

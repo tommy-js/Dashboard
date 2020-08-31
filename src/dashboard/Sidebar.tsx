@@ -11,6 +11,7 @@ const Sidebar: React.FC = () => {
   const navigationButtons = [
     { text: "Stocks", path: "/home/stocks", id: 0 },
     { text: "Users", path: "/home/users", id: 1 },
+    { text: "Comments", path: "/home/comments", id: 2 },
   ];
   return (
     <div id="sidebar">

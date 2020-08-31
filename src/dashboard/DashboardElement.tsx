@@ -19,6 +19,11 @@ interface Stock {
   stockId: number;
 }
 
+interface Comment {
+  username: string;
+  text: string;
+}
+
 export const DashboardUserElement: React.FC<User> = (props) => {
   const [check, setCheck] = useState(false);
 
@@ -53,6 +58,14 @@ export const DashboardStockElement: React.FC<Stock> = (props) => {
   return (
     <div>
       <ElementTitle text={`${props.name} #${props.ticker}`} />
+    </div>
+  );
+};
+
+export const DashboardCommentElement: React.FC<Comment> = (props) => {
+  return (
+    <div>
+      <ElementTitle text={props.text} />
     </div>
   );
 };

@@ -14,6 +14,20 @@ const usersQuery = gql`
   }
 `;
 
+const commentQuery = gql`
+  {
+    comments {
+      userId
+      commentId
+      username
+      timestamp
+      text
+      likes
+      dislikes
+    }
+  }
+`;
+
 const stockQuery = gql`
   {
     stocks {
@@ -121,11 +135,23 @@ const createStockMutation = gql`
   }
 `;
 
+const createCommentMutation = gql`
+  mutation($username: String!, $userId: ID!, $text: String!) {
+    createComment(username: $username, userId: $userId, text: $text) {
+      username
+      userId
+      text
+    }
+  }
+`;
+
 export {
   usersQuery,
   stockQuery,
+  commentQuery,
   createUserMutation,
   createStockMutation,
+  createCommentMutation,
   updateUserMutation,
   updateUserNotificationMutation,
 };

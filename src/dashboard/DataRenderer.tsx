@@ -1,12 +1,23 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserDashboardEdit, StockDashboardEdit } from "./DashboardEdit";
-import { UserCreationPage, StockCreationPage } from "./CreationPage";
+import {
+  UserDashboardEdit,
+  StockDashboardEdit,
+  CommentDashboardEdit,
+} from "./DashboardEdit";
+import {
+  UserCreationPage,
+  StockCreationPage,
+  CommentCreationPage,
+} from "./CreationPage";
 import DashboardTopMenu from "./DashboardTopMenu";
-import { DashboardStockData, DashboardUserData } from "./DashboardData";
-import { loginContext, browserHist } from "../appmain/App";
-import { usersQuery, stockQuery } from "../queries/queries.js";
-import { flowRight as compose } from "lodash";
-import { graphql, useQuery } from "react-apollo";
+import {
+  DashboardStockData,
+  DashboardUserData,
+  DashboardCommentData,
+} from "./DashboardData";
+import { loginContext } from "../appmain/App";
+import { usersQuery, stockQuery, commentQuery } from "../queries/queries.js";
+import { useQuery } from "react-apollo";
 
 export const UserDataRenderer: React.FC = () => {
   const { loading, data } = useQuery(usersQuery);
@@ -222,6 +233,136 @@ export const StockDataRenderer: React.FC = () => {
               />
             </div>
           );
+        } else {
+          return (
+            <div>
+              <h2>Loading...</h2>
+            </div>
+          );
+        }
+      }
+    }
+  }
+  return <div>{pageEdit()}</div>;
+};
+
+export const CommentDataRenderer: React.FC = () => {
+  const { loading, data } = useQuery(commentQuery);
+  const [commentCreation, setCommentCreation] = useState(false);
+  const [creationParam, setCreationParam] = useState("");
+  const [commentData, setCommentData] = useState([
+    {
+      userId: 0,
+      commentId: 0,
+      username: "",
+      timestamp: 0,
+      text: "",
+      likes: 0,
+      dislikes: 0,
+    },
+  ]);
+  const [editCommentData, setEditCommentData] = useState({
+    userId: 0,
+    commentId: 0,
+    username: "",
+    timestamp: 0,
+    text: "",
+    likes: 0,
+    dislikes: 0,
+  });
+  const [commentEdit, setCommentEdit] = useState(false);
+  const [id, setId] = useState(0);
+
+  useEffect(() => {
+    if (data) {
+      setCommentData(data.stocks);
+      console.log(data);
+    }
+  }, [data]);
+
+  function returnCommentEdit(id: number) {
+    let val = commentData.find((el) => el.commentId === id);
+    if (val) {
+      let index = commentData.indexOf(val);
+      let obj = commentData[index];
+      setEditCommentData({
+        userId: obj.userId,
+        commentId: obj.commentId,
+        username: obj.username,
+        timestamp: obj.timestamp,
+        text: obj.text,
+        likes: obj.likes,
+        dislikes: obj.dislikes,
+      });
+    }
+    setId(id);
+    setCommentEdit(true);
+  }
+
+  function exitFormComment() {
+    setCommentEdit(false);
+  }
+
+  function createComment(val: string) {
+    setCommentCreation(true);
+    setCreationParam(val);
+  }
+
+  function exitCommentCreation() {
+    setCommentCreation(false);
+  }
+
+  function pageEdit() {
+    if (commentCreation === true) {
+      return (
+        <div>
+          <CommentCreationPage
+            username={creationParam}
+            exitCommentCreation={exitCommentCreation}
+          />
+        </div>
+      );
+    } else if (commentCreation === false) {
+      if (commentEdit === true) {
+        console.log("user edit");
+        return (
+          <div>
+            <CommentDashboardEdit
+              editData={editCommentData}
+              id={id}
+              exitForm={exitFormComment}
+            />
+          </div>
+        );
+      } else {
+        if (data) {
+          if (commentData) {
+            return (
+              <div>
+                <DashboardTopMenu
+                  searchbarPlaceholder="User ID"
+                  type="Comment"
+                  elementPlaceholder="ID"
+                  createFunc={createComment}
+                />
+                <DashboardCommentData
+                  returnEditPage={returnCommentEdit}
+                  data={commentData}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <DashboardTopMenu
+                  searchbarPlaceholder="User ID"
+                  type="Comment"
+                  elementPlaceholder="ID"
+                  createFunc={createComment}
+                />
+              </div>
+            );
+          }
         } else {
           return (
             <div>

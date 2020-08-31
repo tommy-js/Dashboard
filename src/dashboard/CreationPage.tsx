@@ -3,6 +3,7 @@ import HeadLineInput from "./HeadLineInput";
 import ButtonField from "../login/ButtonField";
 import CreateUser from "../resolvers/CreateUser";
 import CreateStock from "../resolvers/CreateStock";
+import CreateComment from "../resolvers/CreateComment";
 import TextareaBlock from "../dashboard/TextareaBlock";
 import ElementCheckbox from "../dashboard/ElementCheckbox";
 import MoneyInput from "./MoneyInput";
@@ -16,6 +17,11 @@ interface User {
 interface Stock {
   title: string;
   exitStockCreation: () => void;
+}
+
+interface Comment {
+  username: string;
+  exitCommentCreation: () => void;
 }
 
 export const UserCreationPage: React.FC<User> = (props) => {
@@ -148,6 +154,45 @@ export const StockCreationPage: React.FC<Stock> = (props) => {
         modInput={modTicker}
       />
       <CreateStock name={stockTitle} ticker={stockTicker} stockId={stockId} />
+    </div>
+  );
+};
+
+export const CommentCreationPage: React.FC<Comment> = (props) => {
+  const [username, setUsername] = useState(props.username);
+  const [userId, setUserId] = useState(0);
+  const [text, setText] = useState("");
+
+  function modUsername(input: string) {
+    setUsername(input);
+  }
+
+  function modUserID(input: string) {
+    let intVal = parseInt(input);
+    setUserId(intVal);
+  }
+
+  function returnString(input: string) {
+    setText(input);
+  }
+
+  return (
+    <div>
+      <ButtonField text="Exit" id={0} submitForm={props.exitCommentCreation} />
+      <input
+        type="number"
+        placeholder="User ID"
+        min={0}
+        value={userId}
+        onChange={(e) => modUserID(e.target.value)}
+      />
+      <HeadLineInput
+        text="Username "
+        inputVal={username}
+        modInput={modUsername}
+      />
+      <TextareaBlock description={text} returnString={returnString} />
+      <CreateComment username={username} userId={userId} text={text} />
     </div>
   );
 };

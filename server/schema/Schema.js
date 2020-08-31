@@ -119,6 +119,7 @@ const CommentQuery = new GraphQLObjectType({
   name: "Comment",
   fields: () => ({
     userId: { type: GraphQLID },
+    commentId: { type: GraphQLID },
     username: { type: GraphQLString },
     timestamp: { type: GraphQLID },
     text: { type: GraphQLString },
@@ -162,6 +163,12 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(StockQuery),
       resolve(parent) {
         return Stock.find({});
+      },
+    },
+    comments: {
+      type: new GraphQLList(CommentQuery),
+      resolve(parent) {
+        return Comment.find({});
       },
     },
     user: {
@@ -242,6 +249,30 @@ const Mutation = new GraphQLObjectType({
           stockId: args.stockId,
         });
         return stock.save();
+      },
+    },
+    createComment: {
+      type: CommentQuery,
+      args: {
+        userId: { type: GraphQLID },
+        commentId: { type: GraphQLID },
+        username: { type: GraphQLString },
+        timestamp: { type: GraphQLID },
+        text: { type: GraphQLString },
+        likes: { type: GraphQLID },
+        dislikes: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        let comment = new Comment({
+          userId: args.userId,
+          commentId: args.commentId,
+          username: args.username,
+          timestamp: args.timestamp,
+          text: args.text,
+          likes: args.likes,
+          dislikes: args.dislikes,
+        });
+        return comment.save();
       },
     },
     updateUser: {

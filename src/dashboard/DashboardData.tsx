@@ -2,6 +2,7 @@ import React from "react";
 import {
   DashboardUserElement,
   DashboardStockElement,
+  DashboardCommentElement,
 } from "./DashboardElement";
 
 interface Props {
@@ -33,6 +34,16 @@ export const DashboardStockData: React.FC<Props> = (props) => {
           ticker={el.ticker}
           stockId={el.stockId}
         />
+      ))}
+    </div>
+  );
+};
+
+export const DashboardCommentData: React.FC<Props> = (props) => {
+  return (
+    <div>
+      {props.data.map((el: any) => (
+        <DashboardCommentElement username={el.username} text={el.text} />
       ))}
     </div>
   );
