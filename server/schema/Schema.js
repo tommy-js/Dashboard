@@ -228,6 +228,22 @@ const Mutation = new GraphQLObjectType({
         return user.save();
       },
     },
+    createStock: {
+      type: StockQuery,
+      args: {
+        name: { type: GraphQLString },
+        ticker: { type: GraphQLString },
+        stockId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        let stock = new Stock({
+          name: args.name,
+          ticker: args.ticker,
+          stockId: args.stockId,
+        });
+        return stock.save();
+      },
+    },
     updateUser: {
       type: UserQuery,
       args: {

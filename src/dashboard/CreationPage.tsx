@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeadLineInput from "./HeadLineInput";
 import ButtonField from "../login/ButtonField";
 import CreateUser from "../resolvers/CreateUser";
+import CreateStock from "../resolvers/CreateStock";
 import TextareaBlock from "../dashboard/TextareaBlock";
 import ElementCheckbox from "../dashboard/ElementCheckbox";
 import MoneyInput from "./MoneyInput";
@@ -19,6 +20,7 @@ interface Stock {
 
 export const UserCreationPage: React.FC<User> = (props) => {
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState(props.username);
   const [money, setMoney] = useState(1000);
   const [settings, setSettings] = useState({
     darkmode: false,
@@ -57,6 +59,10 @@ export const UserCreationPage: React.FC<User> = (props) => {
     });
   }
 
+  function modUsername(input: string) {
+    setUsername(input);
+  }
+
   function modMoney(input: number) {
     setMoney(input);
   }
@@ -68,7 +74,11 @@ export const UserCreationPage: React.FC<User> = (props) => {
   return (
     <div>
       <ButtonField text="Exit" id={0} submitForm={props.exitUserCreation} />
-      <HeadLineInput text="Create User " inputVal={props.username} />
+      <HeadLineInput
+        text="Create User "
+        inputVal={username}
+        modInput={modUsername}
+      />
 
       <label>Welcome Message: </label>
       <TextareaBlock
@@ -105,12 +115,39 @@ export const UserCreationPage: React.FC<User> = (props) => {
 };
 
 export const StockCreationPage: React.FC<Stock> = (props) => {
+  const [stockId, setStockId] = useState(0);
+  const [stockTitle, setStockTitle] = useState(props.title);
+  const [stockTicker, setStockTicker] = useState("");
+
+  useEffect(() => {
+    let randomVar = Math.floor(Math.random() * 10000000);
+    setStockId(randomVar);
+  }, []);
+
   function string(input: string) {}
+
+  function modTitle(input: string) {
+    setStockTitle(input);
+  }
+
+  function modTicker(input: string) {
+    setStockTicker(input);
+  }
 
   return (
     <div>
       <ButtonField text="Exit" id={0} submitForm={props.exitStockCreation} />
-      <HeadLineInput text="Create Stock " inputVal={props.title} />
+      <HeadLineInput
+        text="Create Stock "
+        inputVal={stockTitle}
+        modInput={modTitle}
+      />
+      <HeadLineInput
+        text="Ticker"
+        inputVal={stockTicker}
+        modInput={modTicker}
+      />
+      <CreateStock name={stockTitle} ticker={stockTicker} stockId={stockId} />
     </div>
   );
 };

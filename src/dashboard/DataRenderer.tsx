@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserDashboardEdit, StockDashboardEdit } from "./DashboardEdit";
 import { UserCreationPage, StockCreationPage } from "./CreationPage";
 import DashboardTopMenu from "./DashboardTopMenu";
-import DashboardData from "./DashboardData";
+import { DashboardStockData, DashboardUserData } from "./DashboardData";
 import { loginContext, browserHist } from "../appmain/App";
 import { usersQuery, stockQuery } from "../queries/queries.js";
 import { flowRight as compose } from "lodash";
@@ -108,7 +108,7 @@ export const UserDataRenderer: React.FC = () => {
                 elementPlaceholder="Username"
                 createFunc={createUser}
               />
-              <DashboardData
+              <DashboardUserData
                 returnEditPage={returnUserEdit}
                 data={renderData}
               />
@@ -211,12 +211,12 @@ export const StockDataRenderer: React.FC = () => {
           return (
             <div>
               <DashboardTopMenu
-                searchbarPlaceholder="Stock Ticker"
+                searchbarPlaceholder="Stock Title"
                 type="Stock"
-                elementPlaceholder="Ticker"
+                elementPlaceholder="Title"
                 createFunc={createStock}
               />
-              <DashboardData
+              <DashboardStockData
                 returnEditPage={returnStockEdit}
                 data={stockData}
               />

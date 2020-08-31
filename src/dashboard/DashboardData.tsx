@@ -1,17 +1,39 @@
 import React from "react";
-import DashboardList from "./DashboardList";
+import {
+  DashboardUserElement,
+  DashboardStockElement,
+} from "./DashboardElement";
 
 interface Props {
   data: any;
   returnEditPage: (id: number) => void;
 }
 
-const DashboardData: React.FC<Props> = (props) => {
+export const DashboardUserData: React.FC<Props> = (props) => {
   return (
     <div id="dashboard_list">
-      <DashboardList data={props.data} returnEditPage={props.returnEditPage} />
+      {props.data.map((el: any) => (
+        <DashboardUserElement
+          username={el.username}
+          userId={el.userId}
+          money={el.money}
+          returnEditPage={props.returnEditPage}
+        />
+      ))}
     </div>
   );
 };
 
-export default DashboardData;
+export const DashboardStockData: React.FC<Props> = (props) => {
+  return (
+    <div>
+      {props.data.map((el: any) => (
+        <DashboardStockElement
+          name={el.name}
+          ticker={el.ticker}
+          stockId={el.stockId}
+        />
+      ))}
+    </div>
+  );
+};

@@ -3,18 +3,17 @@ import React, { useState } from "react";
 interface Props {
   text: string;
   inputVal: string;
+  modInput: (input: string) => void;
 }
 
 const HeadLineInput: React.FC<Props> = (props) => {
-  const [inputVal, setInputVal] = useState(props.inputVal);
-
   return (
     <div>
       <label>{props.text}</label>
       <input
         type="text"
-        value={inputVal}
-        onChange={(e) => setInputVal(e.target.value)}
+        value={props.inputVal}
+        onChange={(e) => props.modInput(e.target.value)}
       />
     </div>
   );

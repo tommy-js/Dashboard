@@ -13,6 +13,12 @@ interface User {
   returnEditPage: (id: number) => void;
 }
 
+interface Stock {
+  name: string;
+  ticker: string;
+  stockId: number;
+}
+
 export const DashboardUserElement: React.FC<User> = (props) => {
   const [check, setCheck] = useState(false);
 
@@ -39,6 +45,14 @@ export const DashboardUserElement: React.FC<User> = (props) => {
         id={props.userId}
         submitForm={props.returnEditPage}
       />
+    </div>
+  );
+};
+
+export const DashboardStockElement: React.FC<Stock> = (props) => {
+  return (
+    <div>
+      <ElementTitle text={`${props.name} #${props.ticker}`} />
     </div>
   );
 };

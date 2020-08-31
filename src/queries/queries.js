@@ -111,10 +111,21 @@ const updateUserNotificationMutation = gql`
   }
 `;
 
+const createStockMutation = gql`
+  mutation($stockId: ID!, $name: String!, $ticker: String!) {
+    createStock(stockId: $stockId, name: $name, ticker: $ticker) {
+      stockId
+      name
+      ticker
+    }
+  }
+`;
+
 export {
   usersQuery,
   stockQuery,
   createUserMutation,
+  createStockMutation,
   updateUserMutation,
   updateUserNotificationMutation,
 };
