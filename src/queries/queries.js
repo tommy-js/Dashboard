@@ -143,9 +143,11 @@ const updateUserNotificationMutation = gql`
       id: $id
     ) {
       userId
-      content
-      timestamp
-      id
+      notifications {
+        content
+        timestamp
+        id
+      }
     }
   }
 `;

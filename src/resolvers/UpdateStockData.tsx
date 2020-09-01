@@ -7,6 +7,7 @@ interface Props {
   updateStockMutation: (variables: object) => void;
   stockId: number;
   about: string;
+  successfulResolve: () => void;
 }
 
 const UpdateStockData: React.FC<Props> = (props) => {
@@ -17,6 +18,7 @@ const UpdateStockData: React.FC<Props> = (props) => {
         about: props.about,
       },
     });
+    props.successfulResolve();
   }
 
   return <button onClick={() => submitChanges()}>Submit Changes</button>;

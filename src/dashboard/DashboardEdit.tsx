@@ -101,6 +101,7 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
         money={money}
         accountStatus={props.editData.accountStatus}
         membership={props.editData.membership}
+        successfulResolve={props.exitForm}
       />
     </div>
   );
@@ -121,7 +122,11 @@ export const StockDashboardEdit: React.FC<Stock> = (props) => {
         {props.editData.name} #{props.editData.ticker}
       </h2>
       <TextareaBlock description={text} returnString={modTextarea} />
-      <ValidStockEdit stockId={props.editData.stockId} about={text} />
+      <ValidStockEdit
+        stockId={props.editData.stockId}
+        about={text}
+        successfulResolve={props.exitForm}
+      />
     </div>
   );
 };
@@ -154,6 +159,7 @@ export const CommentDashboardEdit: React.FC<Comment> = (props) => {
         text={text}
         likes={likes}
         dislikes={dislikes}
+        successfulResolve={props.exitForm}
       />
     </div>
   );

@@ -9,6 +9,7 @@ interface Props {
   accountStatus: string;
   money: number;
   updateUserMutation: (variables: object) => void;
+  successfulResolve: () => void;
 }
 
 const UpdateUserData: React.FC<Props> = (props) => {
@@ -21,6 +22,7 @@ const UpdateUserData: React.FC<Props> = (props) => {
         money: props.money,
       },
     });
+    props.successfulResolve();
   }
 
   return <button onClick={() => submitUpdate()}>Update user</button>;

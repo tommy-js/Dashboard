@@ -9,6 +9,7 @@ interface Props {
   likes: number;
   dislikes: number;
   updateCommentMutation: (variables: object) => void;
+  successfulResolve: () => void;
 }
 
 const UpdateCommentData: React.FC<Props> = (props) => {
@@ -22,6 +23,7 @@ const UpdateCommentData: React.FC<Props> = (props) => {
         dislikes: props.dislikes,
       },
     });
+    props.successfulResolve();
   }
 
   return <button onClick={() => updateComment()}>Submit Changes</button>;

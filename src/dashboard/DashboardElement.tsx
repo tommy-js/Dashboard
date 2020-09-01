@@ -9,6 +9,7 @@ import SubHeader from "../privileges/SubHeader";
 import DeleteStock from "../resolvers/DeleteStock";
 import DeleteComment from "../resolvers/DeleteComment";
 import DeleteUser from "../resolvers/DeleteUser";
+import CommentInformation from "./CommentInformation";
 
 interface User {
   username: string;
@@ -28,6 +29,8 @@ interface Stock {
 interface Comment {
   username: string;
   text: string;
+  likes: number;
+  dislikes: number;
   commentId: number;
   returnEditPage: (id: number) => void;
 }
@@ -178,6 +181,7 @@ export const DashboardCommentElement: React.FC<Comment> = (props) => {
         return (
           <div>
             <ElementTitle text={props.text} />
+            <CommentInformation likes={props.likes} dislikes={props.dislikes} />
             <ButtonField
               text="Edit"
               id={props.commentId}

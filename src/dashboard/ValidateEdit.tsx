@@ -10,6 +10,7 @@ interface User {
   money: number;
   accountStatus: string;
   membership: string;
+  successfulResolve: () => void;
 }
 
 interface Comment {
@@ -17,11 +18,13 @@ interface Comment {
   text: string;
   likes: number;
   dislikes: number;
+  successfulResolve: () => void;
 }
 
 interface Stock {
   stockId: number;
   about: string;
+  successfulResolve: () => void;
 }
 
 export const ValidateUserEdit: React.FC<User> = (props) => {
@@ -33,6 +36,7 @@ export const ValidateUserEdit: React.FC<User> = (props) => {
         membership={props.membership}
         accountStatus={props.accountStatus}
         money={props.money}
+        successfulResolve={props.successfulResolve}
       />
     </div>
   );
@@ -41,7 +45,11 @@ export const ValidateUserEdit: React.FC<User> = (props) => {
 export const ValidStockEdit: React.FC<Stock> = (props) => {
   return (
     <div>
-      <UpdateStockData stockId={props.stockId} about={props.about} />
+      <UpdateStockData
+        stockId={props.stockId}
+        about={props.about}
+        successfulResolve={props.successfulResolve}
+      />
     </div>
   );
 };
@@ -54,6 +62,7 @@ export const ValidateCommentEdit: React.FC<Comment> = (props) => {
         text={props.text}
         likes={props.likes}
         dislikes={props.dislikes}
+        successfulResolve={props.successfulResolve}
       />
     </div>
   );

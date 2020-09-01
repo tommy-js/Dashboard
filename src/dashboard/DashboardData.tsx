@@ -50,6 +50,8 @@ export const DashboardCommentData: React.FC<Props> = (props) => {
         <DashboardCommentElement
           key={el.commentId}
           username={el.username}
+          likes={el.likes}
+          dislikes={el.dislikes}
           text={el.text}
           commentId={el.commentId}
           returnEditPage={props.returnEditPage}
