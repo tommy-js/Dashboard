@@ -135,8 +135,8 @@ const StockQuery = new GraphQLObjectType({
     ticker: { type: GraphQLString },
     name: { type: GraphQLString },
     about: { type: GraphQLString },
-    creation: { type: GraphQLString },
-    prediction: { type: GraphQLInt },
+    creation: { type: GraphQLInt },
+    prediction: { type: GraphQLFloat },
     comments: { type: new GraphQLList(CommentQuery) },
   }),
 });
@@ -238,15 +238,21 @@ const Mutation = new GraphQLObjectType({
     createStock: {
       type: StockQuery,
       args: {
-        name: { type: GraphQLString },
-        ticker: { type: GraphQLString },
         stockId: { type: GraphQLID },
+        ticker: { type: GraphQLString },
+        name: { type: GraphQLString },
+        about: { type: GraphQLString },
+        creation: { type: GraphQLInt },
+        prediction: { type: GraphQLFloat },
       },
       resolve(parent, args) {
         let stock = new Stock({
           name: args.name,
           ticker: args.ticker,
           stockId: args.stockId,
+          about: args.about,
+          creation: args.creation,
+          prediction: args.prediction,
         });
         return stock.save();
       },
@@ -291,6 +297,23 @@ const Mutation = new GraphQLObjectType({
               text: args.text,
               likes: args.likes,
               dislikes: args.dislikes,
+            },
+          }
+        );
+      },
+    },
+    updateStock: {
+      type: StockQuery,
+      args: {
+        stockId: { type: GraphQLID },
+        about: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Stock.update(
+          { stockId: args.stockId },
+          {
+            $set: {
+              about: args.about,
             },
           }
         );

@@ -2,6 +2,7 @@ import React from "react";
 import SubmitNotification from "../resolvers/SubmitNotification";
 import UpdateUserData from "../resolvers/UpdateUserData";
 import UpdateCommentData from "../resolvers/UpdateCommentData";
+import UpdateStockData from "../resolvers/UpdateStockData";
 
 interface User {
   userId: number;
@@ -18,6 +19,11 @@ interface Comment {
   dislikes: number;
 }
 
+interface Stock {
+  stockId: number;
+  description: string;
+}
+
 export const ValidateUserEdit: React.FC<User> = (props) => {
   return (
     <div>
@@ -27,6 +33,17 @@ export const ValidateUserEdit: React.FC<User> = (props) => {
         membership={props.membership}
         accountStatus={props.accountStatus}
         money={props.money}
+      />
+    </div>
+  );
+};
+
+export const ValidStockEdit: React.FC<Stock> = (props) => {
+  return (
+    <div>
+      <UpdateStockData
+        stockId={props.stockId}
+        description={props.description}
       />
     </div>
   );

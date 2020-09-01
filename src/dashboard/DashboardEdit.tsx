@@ -5,7 +5,11 @@ import NotificationBlock from "./NotificationBlock";
 import TextareaBlock from "./TextareaBlock";
 import StringDisplay from "./StringDisplay";
 import MoneyInput from "./MoneyInput";
-import { ValidateUserEdit, ValidateCommentEdit } from "./ValidateEdit";
+import {
+  ValidateUserEdit,
+  ValidStockEdit,
+  ValidateCommentEdit,
+} from "./ValidateEdit";
 
 interface Stock {
   id: number;
@@ -116,10 +120,8 @@ export const StockDashboardEdit: React.FC<Stock> = (props) => {
       <h2>
         {props.editData.title} #{props.editData.ticker}
       </h2>
-      <TextareaBlock
-        description={props.editData.description}
-        returnString={modTextarea}
-      />
+      <TextareaBlock description={text} returnString={modTextarea} />
+      <ValidStockEdit stockId={props.editData.id} description={text} />
     </div>
   );
 };

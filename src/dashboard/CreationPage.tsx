@@ -129,13 +129,16 @@ export const StockCreationPage: React.FC<Stock> = (props) => {
   const [stockId, setStockId] = useState(0);
   const [stockTitle, setStockTitle] = useState(props.title);
   const [stockTicker, setStockTicker] = useState("");
+  const [about, setAbout] = useState("");
 
   useEffect(() => {
     let randomVar = Math.floor(Math.random() * 10000000);
     setStockId(randomVar);
   }, []);
 
-  function string(input: string) {}
+  function modAbout(input: string) {
+    setAbout(input);
+  }
 
   function modTitle(input: string) {
     setStockTitle(input);
@@ -162,10 +165,12 @@ export const StockCreationPage: React.FC<Stock> = (props) => {
         inputVal={stockTicker}
         modInput={modTicker}
       />
+      <TextareaBlock description={about} returnString={modAbout} />
       <CreateStock
         name={stockTitle}
         ticker={stockTicker}
         stockId={stockId}
+        about={about}
         successfulReturn={successfulReturn}
       />
     </div>

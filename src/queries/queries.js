@@ -109,6 +109,15 @@ const updateUserMutation = gql`
   }
 `;
 
+const updateStockMutation = gql`
+  mutation($stockId: ID!, $about: String!) {
+    updateStock(stockId: $stockId, about: $about) {
+      stockId
+      about
+    }
+  }
+`;
+
 const updateCommentMutation = gql`
   mutation($commentId: ID!, $text: String!, $likes: Int!, $dislikes: Int!) {
     updateComment(
@@ -142,8 +151,22 @@ const updateUserNotificationMutation = gql`
 `;
 
 const createStockMutation = gql`
-  mutation($stockId: ID!, $name: String!, $ticker: String!) {
-    createStock(stockId: $stockId, name: $name, ticker: $ticker) {
+  mutation(
+    $stockId: ID!
+    $name: String!
+    $ticker: String!
+    $about: String!
+    $creation: Int!
+    $prediction: Float!
+  ) {
+    createStock(
+      stockId: $stockId
+      name: $name
+      ticker: $ticker
+      about: $about
+      creation: $creation
+      prediction: $prediction
+    ) {
       stockId
       name
       ticker
@@ -188,4 +211,5 @@ export {
   updateUserMutation,
   updateUserNotificationMutation,
   updateCommentMutation,
+  updateStockMutation,
 };
