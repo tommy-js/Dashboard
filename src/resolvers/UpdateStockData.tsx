@@ -6,7 +6,7 @@ import { updateStockMutation } from "../queries/queries.js";
 interface Props {
   updateStockMutation: (variables: object) => void;
   stockId: number;
-  description: string;
+  about: string;
 }
 
 const UpdateStockData: React.FC<Props> = (props) => {
@@ -14,7 +14,7 @@ const UpdateStockData: React.FC<Props> = (props) => {
     props.updateStockMutation({
       variables: {
         stockId: props.stockId,
-        description: props.description,
+        about: props.about,
       },
     });
   }

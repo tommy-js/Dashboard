@@ -21,7 +21,7 @@ interface Comment {
 
 interface Stock {
   stockId: number;
-  description: string;
+  about: string;
 }
 
 export const ValidateUserEdit: React.FC<User> = (props) => {
@@ -41,10 +41,7 @@ export const ValidateUserEdit: React.FC<User> = (props) => {
 export const ValidStockEdit: React.FC<Stock> = (props) => {
   return (
     <div>
-      <UpdateStockData
-        stockId={props.stockId}
-        description={props.description}
-      />
+      <UpdateStockData stockId={props.stockId} about={props.about} />
     </div>
   );
 };

@@ -14,10 +14,10 @@ import {
 interface Stock {
   id: number;
   editData: {
-    title: string;
+    name: string;
     ticker: string;
-    description: string;
-    id: number;
+    about: string;
+    stockId: number;
   };
   exitForm: () => void;
 }
@@ -107,7 +107,7 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
 };
 
 export const StockDashboardEdit: React.FC<Stock> = (props) => {
-  const [text, setText] = useState(props.editData.description);
+  const [text, setText] = useState(props.editData.about);
   function validateAndSubmit(id: number) {}
 
   function modTextarea(input: string) {
@@ -118,10 +118,10 @@ export const StockDashboardEdit: React.FC<Stock> = (props) => {
     <div>
       <ButtonField id={props.id} text="Exit" submitForm={props.exitForm} />
       <h2>
-        {props.editData.title} #{props.editData.ticker}
+        {props.editData.name} #{props.editData.ticker}
       </h2>
       <TextareaBlock description={text} returnString={modTextarea} />
-      <ValidStockEdit stockId={props.editData.id} description={text} />
+      <ValidStockEdit stockId={props.editData.stockId} about={text} />
     </div>
   );
 };

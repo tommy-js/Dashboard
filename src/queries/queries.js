@@ -201,6 +201,30 @@ const createCommentMutation = gql`
   }
 `;
 
+const deleteStockMutation = gql`
+  mutation($stockId: ID!) {
+    deleteStock(stockId: $stockId) {
+      stockId
+    }
+  }
+`;
+
+const deleteCommentMutation = gql`
+  mutation($commentId: ID!) {
+    deleteComment(commentId: $commentId) {
+      commentId
+    }
+  }
+`;
+
+const deleteUserMutation = gql`
+  mutation($userId: ID!) {
+    deleteUser(userId: $userId) {
+      userId
+    }
+  }
+`;
+
 export {
   usersQuery,
   stockQuery,
@@ -212,4 +236,7 @@ export {
   updateUserNotificationMutation,
   updateCommentMutation,
   updateStockMutation,
+  deleteStockMutation,
+  deleteCommentMutation,
+  deleteUserMutation,
 };

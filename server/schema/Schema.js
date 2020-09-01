@@ -390,6 +390,39 @@ const Mutation = new GraphQLObjectType({
         );
       },
     },
+    deleteStock: {
+      type: StockQuery,
+      args: {
+        stockId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return Stock.findOneAndDelete({
+          stockId: args.stockId,
+        });
+      },
+    },
+    deleteComment: {
+      type: CommentQuery,
+      args: {
+        commentId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return Comment.findOneAndDelete({
+          commentId: args.commentId,
+        });
+      },
+    },
+    deleteUser: {
+      type: UserQuery,
+      args: {
+        userId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return User.findOneAndDelete({
+          userId: args.userId,
+        });
+      },
+    },
   },
 });
 

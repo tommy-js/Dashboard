@@ -35,6 +35,7 @@ export const DashboardStockData: React.FC<Props> = (props) => {
           name={el.name}
           ticker={el.ticker}
           stockId={el.stockId}
+          about={el.about}
           returnEditPage={props.returnEditPage}
         />
       ))}

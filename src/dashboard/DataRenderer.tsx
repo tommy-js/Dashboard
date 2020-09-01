@@ -144,17 +144,17 @@ export const StockDataRenderer: React.FC = () => {
   const [creationParam, setCreationParam] = useState("");
   const [stockData, setStockData] = useState([
     {
-      title: "",
+      name: "",
       ticker: "",
-      description: "",
-      id: 0,
+      about: "",
+      stockId: 0,
     },
   ]);
   const [editStockData, setEditStockData] = useState({
-    title: "",
+    name: "",
     ticker: "",
-    description: "",
-    id: 0,
+    about: "",
+    stockId: 0,
   });
   const [stockEdit, setStockEdit] = useState(false);
   const [id, setId] = useState(0);
@@ -167,15 +167,15 @@ export const StockDataRenderer: React.FC = () => {
   }, [data]);
 
   function returnStockEdit(id: number) {
-    let val = stockData.find((el) => el.id === id);
+    let val = stockData.find((el) => el.stockId === id);
     if (val) {
       let index = stockData.indexOf(val);
       let obj = stockData[index];
       setEditStockData({
-        title: obj.title,
+        name: obj.name,
         ticker: obj.ticker,
-        description: obj.description,
-        id: obj.id,
+        about: obj.about,
+        stockId: obj.stockId,
       });
     }
     setId(id);
