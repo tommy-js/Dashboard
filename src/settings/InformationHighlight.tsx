@@ -17,7 +17,7 @@ const InformationHighlight: React.FC<Props> = (props) => {
       onMouseEnter={() => props.setHighlightToTrue()}
       onMouseLeave={() => props.setHighlightToFalse()}
     >
-      <div id="highlight_hover">X</div>
+      <div id="highlight_hover">*</div>
       <div id="highlight_hover_transition" style={{ opacity: props.opac }}>
         <Link to="/privileges">
           <HighlightContainer text={props.text} />

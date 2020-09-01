@@ -64,8 +64,6 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
     { text: "Disabled", id: 2 },
   ];
 
-  function validateAndSubmit(id: number) {}
-
   function modMoney(val: number) {
     setMoney(val);
   }
@@ -92,6 +90,8 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
       <MoneyInput label="Money: " val={money} modMoney={modMoney} />
       <NotificationBlock
         placeholder="Notify user..."
+        passInWidth="300px"
+        passInHeight="150px"
         val={notificationVal}
         updateNotification={updateNotification}
       />
@@ -121,7 +121,12 @@ export const StockDashboardEdit: React.FC<Stock> = (props) => {
       <h2>
         {props.editData.name} #{props.editData.ticker}
       </h2>
-      <TextareaBlock description={text} returnString={modTextarea} />
+      <TextareaBlock
+        passInWidth="300px"
+        passInHeight="200px"
+        description={text}
+        returnString={modTextarea}
+      />
       <ValidStockEdit
         stockId={props.editData.stockId}
         about={text}
@@ -151,7 +156,12 @@ export const CommentDashboardEdit: React.FC<Comment> = (props) => {
   return (
     <div>
       <ButtonField id={props.id} text="Exit" submitForm={props.exitForm} />
-      <TextareaBlock description={text} returnString={modTextarea} />
+      <TextareaBlock
+        passInWidth="200px"
+        passInHeight="350px"
+        description={text}
+        returnString={modTextarea}
+      />
       <MoneyInput label="Likes: " val={likes} modMoney={modLikes} />
       <MoneyInput label="Dislikes: " val={dislikes} modMoney={modDislikes} />
       <ValidateCommentEdit

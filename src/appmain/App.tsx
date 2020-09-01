@@ -29,7 +29,7 @@ function App() {
 
   function checkLoginStatus() {
     if (loginState === true) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/home/stocks" />;
     }
   }
 

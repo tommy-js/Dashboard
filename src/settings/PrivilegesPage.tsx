@@ -19,28 +19,34 @@ const PrivilegesPage: React.FC<Props> = (props) => {
   function checkPrivileges() {
     if (props.privileges === "General") {
       return (
-        <InformationHighlight
-          opac={opac}
-          setHighlightToTrue={setHighlightToTrue}
-          setHighlightToFalse={setHighlightToFalse}
-          text="You can create and delete users, create stocks, modify user privileges, and more..."
-        />
+        <div className="leave_container_inline">
+          <InformationHighlight
+            opac={opac}
+            setHighlightToTrue={setHighlightToTrue}
+            setHighlightToFalse={setHighlightToFalse}
+            text="You can create and delete users, create stocks, modify user privileges, and more..."
+          />
+        </div>
       );
     } else if (props.privileges === "Premium") {
       return (
-        <InformationHighlight
-          opac={opac}
-          setHighlightToTrue={setHighlightToTrue}
-          setHighlightToFalse={setHighlightToFalse}
-          text="You can create and delete any data type, modify employee IDs, add employees, and more..."
-        />
+        <div className="leave_container_inline">
+          <InformationHighlight
+            opac={opac}
+            setHighlightToTrue={setHighlightToTrue}
+            setHighlightToFalse={setHighlightToFalse}
+            text="You can create and delete any data type, modify employee IDs, add employees, and more..."
+          />
+        </div>
       );
     }
   }
 
   return (
     <div id="privileges_page">
-      <h2>Your Current Privileges: {props.privileges}</h2>
+      <h2 className="leave_container_inline">
+        Your Current Privileges: {props.privileges}
+      </h2>
       {checkPrivileges()}
     </div>
   );

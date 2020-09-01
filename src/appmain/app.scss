@@ -34,7 +34,6 @@ body {
 }
 
 #dashboard_container {
-  @include testing;
   position: relative;
   top: 40px;
   display: inline-block;
@@ -93,7 +92,7 @@ body {
 }
 
 .dashboard_element {
-  border: 1px solid blue;
+  border-bottom: 1px dashed grey;
 }
 
 a {
@@ -113,18 +112,27 @@ a {
   text-decoration: none;
 }
 
+.leave_container_inline {
+  vertical-align: top;
+  display: inline-block;
+}
+
 #leave_container_information_highlight {
   width: 200px;
-  height: 100px;
+  vertical-align: top;
+  display: inline-block;
   @include testing;
 }
 
 #highlight_hover {
-  display: block;
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px;
 }
 
 #highlight_hover_transition {
   transition: 0.3s;
+  display: inline-block;
 }
 
 .nav_link {
@@ -140,8 +148,7 @@ a {
 
 #privileges_page {
   position: relative;
-  width: 60%;
-  min-width: 500px;
+  width: 550px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
@@ -151,5 +158,10 @@ a {
 
 .dashboard_data {
   position: relative;
+  margin: 25px;
   top: 40px;
+}
+
+.textarea_block {
+  resize: none;
 }

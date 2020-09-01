@@ -92,6 +92,8 @@ export const UserCreationPage: React.FC<User> = (props) => {
 
       <label>Welcome Message: </label>
       <TextareaBlock
+        passInWidth="200px"
+        passInHeight="200px"
         description={notification}
         returnString={modNotification}
       />
@@ -165,7 +167,12 @@ export const StockCreationPage: React.FC<Stock> = (props) => {
         inputVal={stockTicker}
         modInput={modTicker}
       />
-      <TextareaBlock description={about} returnString={modAbout} />
+      <TextareaBlock
+        passInWidth="200px"
+        passInHeight="200px"
+        description={about}
+        returnString={modAbout}
+      />
       <CreateStock
         name={stockTitle}
         ticker={stockTicker}
@@ -214,7 +221,12 @@ export const CommentCreationPage: React.FC<Comment> = (props) => {
         inputVal={username}
         modInput={modUsername}
       />
-      <TextareaBlock description={text} returnString={returnString} />
+      <TextareaBlock
+        passInWidth="200px"
+        passInHeight="200px"
+        description={text}
+        returnString={returnString}
+      />
       <CreateComment
         username={username}
         userId={userId}
