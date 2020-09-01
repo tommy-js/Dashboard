@@ -136,11 +136,17 @@ const createStockMutation = gql`
 `;
 
 const createCommentMutation = gql`
-  mutation($username: String!, $userId: ID!, $text: String!) {
-    createComment(username: $username, userId: $userId, text: $text) {
+  mutation($username: String!, $userId: ID!, $text: String!, $commentId: ID!) {
+    createComment(
+      username: $username
+      userId: $userId
+      text: $text
+      commentId: $commentId
+    ) {
       username
       userId
       text
+      commentId
     }
   }
 `;

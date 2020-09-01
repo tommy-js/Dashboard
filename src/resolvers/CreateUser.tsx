@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createUserMutation } from "../queries/queries.js";
 import { flowRight as compose } from "lodash";
 import { graphql } from "react-apollo";
@@ -14,30 +14,36 @@ interface Props {
   invisible: boolean;
   allowCommentsOnTrades: boolean;
   notification: string;
+  successfulReturn: () => void;
 }
 
 const CreateUser: React.FC<Props> = (props) => {
+  const [validSubmission, setValidSubmission] = useState(true);
+
   function createUser() {
-    let randomUserID = Math.floor(Math.random() * 100000000);
-    let randomNotificationId = Math.floor(Math.random() * 10000000);
-    let currentTime = new Date().getTime();
-    props.createUserMutation({
-      variables: {
-        userId: randomUserID,
-        username: props.username,
-        password: props.password,
-        money: props.money,
-        membership: props.membership,
-        accountStatus: props.accountStatus,
-        profileImage: 0,
-        darkmode: props.darkmode,
-        invisible: props.invisible,
-        allowCommentsOnTrades: props.allowCommentsOnTrades,
-        notifications: props.notification,
-        notificationId: randomNotificationId,
-        timestamp: currentTime,
-      },
-    });
+    if (validSubmission === true) {
+      let randomUserID = Math.floor(Math.random() * 100000000);
+      let randomNotificationId = Math.floor(Math.random() * 10000000);
+      let currentTime = new Date().getTime();
+      props.createUserMutation({
+        variables: {
+          userId: randomUserID,
+          username: props.username,
+          password: props.password,
+          money: props.money,
+          membership: props.membership,
+          accountStatus: props.accountStatus,
+          profileImage: 0,
+          darkmode: props.darkmode,
+          invisible: props.invisible,
+          allowCommentsOnTrades: props.allowCommentsOnTrades,
+          notifications: props.notification,
+          notificationId: randomNotificationId,
+          timestamp: currentTime,
+        },
+      });
+      props.successfulReturn();
+    }
   }
 
   return (

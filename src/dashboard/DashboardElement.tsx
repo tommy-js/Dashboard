@@ -22,6 +22,7 @@ interface Stock {
 interface Comment {
   username: string;
   text: string;
+  commentId: number;
 }
 
 export const DashboardUserElement: React.FC<User> = (props) => {
@@ -39,7 +40,7 @@ export const DashboardUserElement: React.FC<User> = (props) => {
   }
 
   return (
-    <div className="dashboard_element">
+    <div className="dashboard_element" key={props.userId}>
       <ElementTitle text={props.username} />
       <StringDisplay label="Money" insert={props.money} />
       <ElementOptions action={actionElement} />
@@ -56,7 +57,7 @@ export const DashboardUserElement: React.FC<User> = (props) => {
 
 export const DashboardStockElement: React.FC<Stock> = (props) => {
   return (
-    <div>
+    <div className="dashboard_element" key={props.stockId}>
       <ElementTitle text={`${props.name} #${props.ticker}`} />
     </div>
   );
@@ -64,7 +65,7 @@ export const DashboardStockElement: React.FC<Stock> = (props) => {
 
 export const DashboardCommentElement: React.FC<Comment> = (props) => {
   return (
-    <div className="dashboard_element">
+    <div className="dashboard_element" key={props.commentId}>
       <ElementTitle text={props.text} />
     </div>
   );

@@ -77,6 +77,10 @@ export const UserCreationPage: React.FC<User> = (props) => {
     setPassword(input);
   }
 
+  function successfulReturn() {
+    props.exitUserCreation();
+  }
+
   return (
     <div>
       <ButtonField text="Exit" id={0} submitForm={props.exitUserCreation} />
@@ -115,6 +119,7 @@ export const UserCreationPage: React.FC<User> = (props) => {
         invisible={settings.invisible}
         allowCommentsOnTrades={settings.allowCommentsOnTrades}
         notification={notification}
+        successfulReturn={successfulReturn}
       />
     </div>
   );
@@ -140,6 +145,10 @@ export const StockCreationPage: React.FC<Stock> = (props) => {
     setStockTicker(input);
   }
 
+  function successfulReturn() {
+    props.exitStockCreation();
+  }
+
   return (
     <div>
       <ButtonField text="Exit" id={0} submitForm={props.exitStockCreation} />
@@ -153,7 +162,12 @@ export const StockCreationPage: React.FC<Stock> = (props) => {
         inputVal={stockTicker}
         modInput={modTicker}
       />
-      <CreateStock name={stockTitle} ticker={stockTicker} stockId={stockId} />
+      <CreateStock
+        name={stockTitle}
+        ticker={stockTicker}
+        stockId={stockId}
+        successfulReturn={successfulReturn}
+      />
     </div>
   );
 };
@@ -176,6 +190,10 @@ export const CommentCreationPage: React.FC<Comment> = (props) => {
     setText(input);
   }
 
+  function successfulReturn() {
+    props.exitCommentCreation();
+  }
+
   return (
     <div>
       <ButtonField text="Exit" id={0} submitForm={props.exitCommentCreation} />
@@ -192,7 +210,12 @@ export const CommentCreationPage: React.FC<Comment> = (props) => {
         modInput={modUsername}
       />
       <TextareaBlock description={text} returnString={returnString} />
-      <CreateComment username={username} userId={userId} text={text} />
+      <CreateComment
+        username={username}
+        userId={userId}
+        text={text}
+        successfulReturn={successfulReturn}
+      />
     </div>
   );
 };

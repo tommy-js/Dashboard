@@ -49,6 +49,7 @@ export const DashboardCommentData: React.FC<Props> = (props) => {
           key={el.commentId}
           username={el.username}
           text={el.text}
+          commentId={el.commentId}
         />
       ))}
     </div>
