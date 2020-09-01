@@ -16,6 +16,7 @@ const CreateComment: React.FC<Props> = (props) => {
 
   function createComment() {
     let randomVar = Math.floor(Math.random() * 100000);
+    let currentTime = Math.floor(Date.now() / 1000);
     if (validSubmission === true) {
       props.createCommentMutation({
         variables: {
@@ -23,6 +24,9 @@ const CreateComment: React.FC<Props> = (props) => {
           userId: props.userId,
           text: props.text,
           commentId: randomVar,
+          likes: 0,
+          dislikes: 0,
+          timestamp: currentTime,
         },
       });
       props.successfulReturn();

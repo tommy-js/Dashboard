@@ -17,12 +17,14 @@ interface Stock {
   name: string;
   ticker: string;
   stockId: number;
+  returnEditPage: (id: number) => void;
 }
 
 interface Comment {
   username: string;
   text: string;
   commentId: number;
+  returnEditPage: (id: number) => void;
 }
 
 export const DashboardUserElement: React.FC<User> = (props) => {
@@ -59,6 +61,11 @@ export const DashboardStockElement: React.FC<Stock> = (props) => {
   return (
     <div className="dashboard_element" key={props.stockId}>
       <ElementTitle text={`${props.name} #${props.ticker}`} />
+      <ButtonField
+        text="Edit"
+        id={props.stockId}
+        submitForm={props.returnEditPage}
+      />
     </div>
   );
 };
@@ -67,6 +74,11 @@ export const DashboardCommentElement: React.FC<Comment> = (props) => {
   return (
     <div className="dashboard_element" key={props.commentId}>
       <ElementTitle text={props.text} />
+      <ButtonField
+        text="Edit"
+        id={props.commentId}
+        submitForm={props.returnEditPage}
+      />
     </div>
   );
 };

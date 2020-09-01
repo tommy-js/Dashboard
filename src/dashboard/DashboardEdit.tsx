@@ -5,7 +5,7 @@ import NotificationBlock from "./NotificationBlock";
 import TextareaBlock from "./TextareaBlock";
 import StringDisplay from "./StringDisplay";
 import MoneyInput from "./MoneyInput";
-import ValidateEdit from "./ValidateEdit";
+import { ValidateUserEdit, ValidateCommentEdit } from "./ValidateEdit";
 
 interface Stock {
   id: number;
@@ -91,7 +91,7 @@ export const UserDashboardEdit: React.FC<User> = (props) => {
         val={notificationVal}
         updateNotification={updateNotification}
       />
-      <ValidateEdit
+      <ValidateUserEdit
         userId={props.editData.userId}
         content={notificationVal}
         money={money}
@@ -120,15 +120,39 @@ export const StockDashboardEdit: React.FC<Stock> = (props) => {
         description={props.editData.description}
         returnString={modTextarea}
       />
-      <ButtonField id={0} text="Submit" submitForm={validateAndSubmit} />
     </div>
   );
 };
 
 export const CommentDashboardEdit: React.FC<Comment> = (props) => {
+  const [text, setText] = useState(props.editData.text);
+  const [likes, setLikes] = useState(props.editData.likes);
+  const [dislikes, setDislikes] = useState(props.editData.dislikes);
+
+  function modLikes(input: number) {
+    setLikes(input);
+  }
+
+  function modDislikes(input: number) {
+    setDislikes(input);
+  }
+
+  function modTextarea(input: string) {
+    setText(input);
+  }
+
   return (
     <div>
-      <h3>Comment</h3>
+      <ButtonField id={props.id} text="Exit" submitForm={props.exitForm} />
+      <TextareaBlock description={text} returnString={modTextarea} />
+      <MoneyInput label="Likes: " val={likes} modMoney={modLikes} />
+      <MoneyInput label="Dislikes: " val={dislikes} modMoney={modDislikes} />
+      <ValidateCommentEdit
+        commentId={props.editData.commentId}
+        text={text}
+        likes={likes}
+        dislikes={dislikes}
+      />
     </div>
   );
 };
