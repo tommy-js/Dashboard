@@ -6,6 +6,7 @@ import { searchStockQuery } from "../queries/queries.js";
 interface Props {
   ticker: string;
   searchStockQuery: (variables: object) => void;
+  passUpData: (data: object[]) => void;
 }
 
 const QueryStockSearchBar: React.FC<Props> = (props) => {
@@ -16,6 +17,7 @@ const QueryStockSearchBar: React.FC<Props> = (props) => {
   useEffect(() => {
     if (data) {
       console.log(data);
+      props.passUpData(data.searchStocks);
     }
   }, [data]);
 

@@ -7,6 +7,7 @@ interface Stock {
   elementPlaceholder: string;
   type: string;
   createFunc: (val: string) => void;
+  passUpData: (data: object[]) => void;
 }
 
 interface User {
@@ -14,6 +15,7 @@ interface User {
   elementPlaceholder: string;
   type: string;
   createFunc: (val: string) => void;
+  passUpData: (data: object[]) => void;
 }
 
 interface Comment {
@@ -21,12 +23,20 @@ interface Comment {
   elementPlaceholder: string;
   type: string;
   createFunc: (val: string) => void;
+  passUpData: (data: object[]) => void;
 }
 
 export const DashboardStockTopMenu: React.FC<Stock> = (props) => {
+  function passUpData(data: object[]) {
+    props.passUpData(data);
+  }
+
   return (
     <div id="dashboard_top_menu">
-      <SearchBarStock placeholder={props.searchbarPlaceholder} />
+      <SearchBarStock
+        placeholder={props.searchbarPlaceholder}
+        passUpData={passUpData}
+      />
       <NewElement
         type={props.type}
         placeholder={props.elementPlaceholder}
@@ -37,9 +47,16 @@ export const DashboardStockTopMenu: React.FC<Stock> = (props) => {
 };
 
 export const DashboardUserTopMenu: React.FC<User> = (props) => {
+  function passUpData(data: object[]) {
+    props.passUpData(data);
+  }
+
   return (
     <div id="dashboard_top_menu">
-      <SearchBarUser placeholder={props.searchbarPlaceholder} />
+      <SearchBarUser
+        placeholder={props.searchbarPlaceholder}
+        passUpData={passUpData}
+      />
       <NewElement
         type={props.type}
         placeholder={props.elementPlaceholder}
@@ -50,9 +67,16 @@ export const DashboardUserTopMenu: React.FC<User> = (props) => {
 };
 
 export const DashboardCommentTopMenu: React.FC<Comment> = (props) => {
+  function passUpData(data: object[]) {
+    props.passUpData(data);
+  }
+
   return (
     <div id="dashboard_top_menu">
-      <SearchBarComment placeholder={props.searchbarPlaceholder} />
+      <SearchBarComment
+        placeholder={props.searchbarPlaceholder}
+        passUpData={passUpData}
+      />
       <NewElement
         type={props.type}
         placeholder={props.elementPlaceholder}

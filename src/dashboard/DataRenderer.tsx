@@ -58,6 +58,10 @@ export const UserDataRenderer: React.FC = () => {
     }
   }, [data]);
 
+  function passUpData(data: any) {
+    setRenderData(data);
+  }
+
   function returnUserEdit(id: number) {
     if (data) {
       let val = renderData.find((el) => el.userId === id);
@@ -122,6 +126,7 @@ export const UserDataRenderer: React.FC = () => {
                 type="User"
                 elementPlaceholder="Username"
                 createFunc={createUser}
+                passUpData={passUpData}
               />
               <DashboardUserData
                 returnEditPage={returnUserEdit}
@@ -199,6 +204,10 @@ export const StockDataRenderer: React.FC = () => {
     setStockCreation(false);
   }
 
+  function passUpData(data: any) {
+    setStockData(data);
+  }
+
   function pageEdit() {
     if (stockCreation === true) {
       return (
@@ -230,6 +239,7 @@ export const StockDataRenderer: React.FC = () => {
                 type="Stock"
                 elementPlaceholder="Title"
                 createFunc={createStock}
+                passUpData={passUpData}
               />
               <DashboardStockData
                 returnEditPage={returnStockEdit}
@@ -316,6 +326,10 @@ export const CommentDataRenderer: React.FC = () => {
     setCommentCreation(false);
   }
 
+  function passUpData(data: any) {
+    setCommentData(data);
+  }
+
   function pageEdit() {
     if (commentCreation === true) {
       return (
@@ -348,6 +362,7 @@ export const CommentDataRenderer: React.FC = () => {
                   type="Comment"
                   elementPlaceholder="ID"
                   createFunc={createComment}
+                  passUpData={passUpData}
                 />
                 <DashboardCommentData
                   returnEditPage={returnCommentEdit}
@@ -363,6 +378,7 @@ export const CommentDataRenderer: React.FC = () => {
                   type="Comment"
                   elementPlaceholder="ID"
                   createFunc={createComment}
+                  passUpData={passUpData}
                 />
               </div>
             );

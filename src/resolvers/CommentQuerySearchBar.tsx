@@ -5,21 +5,23 @@ import { searchCommentQuery } from "../queries/queries.js";
 
 interface Props {
   commentId: string;
+  passUpData: (data: object[]) => void;
 }
 
 const QueryCommentSearchBar: React.FC<Props> = (props) => {
+  const parsedCommentID = parseInt(props.commentId);
   const [passQuery, { loading, data }] = useLazyQuery(searchCommentQuery, {
-    variables: { commentId: props.commentId },
+    variables: { commentId: parsedCommentID },
   });
 
   useEffect(() => {
     if (data) {
       console.log(data);
+      props.passUpData(data.searchComments);
     }
   }, [data]);
 
   function search() {
-    let parsedCommentID = parseInt(props.commentId);
     passQuery();
   }
 

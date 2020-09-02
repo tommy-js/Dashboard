@@ -7,14 +7,17 @@ import CommentQuerySearchBar from "../resolvers/CommentQuerySearchBar";
 
 interface Stock {
   placeholder: string;
+  passUpData: (data: object[]) => void;
 }
 
 interface User {
   placeholder: string;
+  passUpData: (data: object[]) => void;
 }
 
 interface Comment {
   placeholder: string;
+  passUpData: (data: object[]) => void;
 }
 
 export const SearchBarStock: React.FC<Stock> = (props) => {
@@ -33,7 +36,7 @@ export const SearchBarStock: React.FC<Stock> = (props) => {
         passUp={searchParams}
         placeholder={props.placeholder}
       />
-      <StockQuerySearchBar ticker={params} />
+      <StockQuerySearchBar ticker={params} passUpData={props.passUpData} />
     </div>
   );
 };
@@ -55,7 +58,7 @@ export const SearchBarUser: React.FC<User> = (props) => {
         passUp={searchParams}
         placeholder={props.placeholder}
       />
-      <UserQuerySearchBar username={params} />
+      <UserQuerySearchBar username={params} passUpData={props.passUpData} />
     </div>
   );
 };
@@ -76,7 +79,7 @@ export const SearchBarComment: React.FC<Comment> = (props) => {
         passUp={searchParams}
         placeholder={props.placeholder}
       />
-      <CommentQuerySearchBar commentId={params} />
+      <CommentQuerySearchBar commentId={params} passUpData={props.passUpData} />
     </div>
   );
 };

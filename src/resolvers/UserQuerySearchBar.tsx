@@ -5,6 +5,7 @@ import { searchUserQuery } from "../queries/queries.js";
 
 interface Props {
   username: string;
+  passUpData: (data: object[]) => void;
 }
 
 const QueryUserSearchBar: React.FC<Props> = (props) => {
@@ -15,6 +16,7 @@ const QueryUserSearchBar: React.FC<Props> = (props) => {
   useEffect(() => {
     if (data) {
       console.log(data);
+      props.passUpData(data.searchUsers);
     }
   }, [data]);
 

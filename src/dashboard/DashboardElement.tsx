@@ -181,7 +181,11 @@ export const DashboardCommentElement: React.FC<Comment> = (props) => {
         return (
           <div>
             <ElementTitle text={props.text} />
-            <CommentInformation likes={props.likes} dislikes={props.dislikes} />
+            <CommentInformation
+              likes={props.likes}
+              dislikes={props.dislikes}
+              commentId={props.commentId}
+            />
             <ButtonField
               text="Edit"
               id={props.commentId}
