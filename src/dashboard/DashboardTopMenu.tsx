@@ -1,5 +1,10 @@
 import React from "react";
-import { SearchBarStock, SearchBarUser, SearchBarComment } from "./SearchBar";
+import {
+  SearchBarStock,
+  SearchBarUser,
+  SearchBarComment,
+  SearchBarEmployee,
+} from "./SearchBar";
 import NewElement from "./NewElement";
 
 interface Stock {
@@ -19,6 +24,14 @@ interface User {
 }
 
 interface Comment {
+  searchbarPlaceholder: string;
+  elementPlaceholder: string;
+  type: string;
+  createFunc: (val: string) => void;
+  passUpData: (data: object[]) => void;
+}
+
+interface Employee {
   searchbarPlaceholder: string;
   elementPlaceholder: string;
   type: string;
@@ -74,6 +87,26 @@ export const DashboardCommentTopMenu: React.FC<Comment> = (props) => {
   return (
     <div id="dashboard_top_menu">
       <SearchBarComment
+        placeholder={props.searchbarPlaceholder}
+        passUpData={passUpData}
+      />
+      <NewElement
+        type={props.type}
+        placeholder={props.elementPlaceholder}
+        createFunc={props.createFunc}
+      />
+    </div>
+  );
+};
+
+export const DashboardEmployeeTopMenu: React.FC<Employee> = (props) => {
+  function passUpData(data: object[]) {
+    props.passUpData(data);
+  }
+
+  return (
+    <div id="dashboard_top_menu">
+      <SearchBarEmployee
         placeholder={props.searchbarPlaceholder}
         passUpData={passUpData}
       />

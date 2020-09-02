@@ -53,26 +53,27 @@ const LoginFields: React.FC = () => {
   }
 
   return (
-    <div>
-      <InputField
-        display="block"
-        type="text"
-        label="username"
-        passUp={passUpUsername}
-      />
-      <InputField
-        display="block"
-        type="text"
-        label="password"
-        passUp={passUpPassword}
-      />
-      <InputField
-        display="block"
-        type="text"
-        label="employee id"
-        passUp={passUpEmployeeId}
-      />
-      <ButtonField id={0} text="Sign In" submitForm={tryLogin} />
+    <div id="login_block">
+      <div id="centered_login">
+        <InputField
+          type="text"
+          passUp={passUpUsername}
+          placeholder="Username"
+        />
+        <InputField
+          type="text"
+          passUp={passUpPassword}
+          placeholder="Password"
+        />
+        <InputField
+          type="text"
+          passUp={passUpEmployeeId}
+          placeholder="Employee Id"
+        />
+        <div id="centered_button">
+          <ButtonField id={0} text="Sign In" submitForm={tryLogin} />
+        </div>
+      </div>
     </div>
   );
 };

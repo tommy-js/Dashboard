@@ -9,6 +9,7 @@ import {
   ValidateUserEdit,
   ValidStockEdit,
   ValidateCommentEdit,
+  ValidateEmployeeEdit,
 } from "./ValidateEdit";
 
 interface Stock {
@@ -45,6 +46,15 @@ interface Comment {
     text: string;
     likes: number;
     dislikes: number;
+  };
+  exitForm: () => void;
+}
+
+interface Employee {
+  id: number;
+  editData: {
+    employeeId: number;
+    permissions: string;
   };
   exitForm: () => void;
 }
@@ -169,6 +179,32 @@ export const CommentDashboardEdit: React.FC<Comment> = (props) => {
         text={text}
         likes={likes}
         dislikes={dislikes}
+        successfulResolve={props.exitForm}
+      />
+    </div>
+  );
+};
+
+export const EmployeeDashboardEdit: React.FC<Employee> = (props) => {
+  const [permissions, setPermissions] = useState(props.editData.permissions);
+
+  function modPermissions(input: string) {
+    setPermissions(input);
+  }
+
+  return (
+    <div>
+      <ButtonField id={props.id} text="Exit" submitForm={props.exitForm} />
+      <TextareaBlock
+        passInWidth="200px"
+        passInHeight="350px"
+        description={permissions}
+        returnString={modPermissions}
+      />
+
+      <ValidateEmployeeEdit
+        employeeId={props.editData.employeeId}
+        permissions={permissions}
         successfulResolve={props.exitForm}
       />
     </div>

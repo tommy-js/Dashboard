@@ -3,6 +3,7 @@ import SubmitNotification from "../resolvers/SubmitNotification";
 import UpdateUserData from "../resolvers/UpdateUserData";
 import UpdateCommentData from "../resolvers/UpdateCommentData";
 import UpdateStockData from "../resolvers/UpdateStockData";
+import UpdateEmployeeData from "../resolvers/UpdateEmployeeData";
 
 interface User {
   userId: number;
@@ -24,6 +25,12 @@ interface Comment {
 interface Stock {
   stockId: number;
   about: string;
+  successfulResolve: () => void;
+}
+
+interface Employee {
+  employeeId: number;
+  permissions: string;
   successfulResolve: () => void;
 }
 
@@ -62,6 +69,18 @@ export const ValidateCommentEdit: React.FC<Comment> = (props) => {
         text={props.text}
         likes={props.likes}
         dislikes={props.dislikes}
+        successfulResolve={props.successfulResolve}
+      />
+    </div>
+  );
+};
+
+export const ValidateEmployeeEdit: React.FC<Employee> = (props) => {
+  return (
+    <div>
+      <UpdateEmployeeData
+        employeeId={props.employeeId}
+        permissions={props.permissions}
         successfulResolve={props.successfulResolve}
       />
     </div>

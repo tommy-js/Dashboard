@@ -3,24 +3,33 @@ import {
   UserDashboardEdit,
   StockDashboardEdit,
   CommentDashboardEdit,
+  EmployeeDashboardEdit,
 } from "./DashboardEdit";
 import {
   UserCreationPage,
   StockCreationPage,
   CommentCreationPage,
+  EmployeeCreationPage,
 } from "./CreationPage";
 import {
   DashboardStockTopMenu,
   DashboardUserTopMenu,
   DashboardCommentTopMenu,
+  DashboardEmployeeTopMenu,
 } from "./DashboardTopMenu";
 import {
   DashboardStockData,
   DashboardUserData,
   DashboardCommentData,
+  DashboardEmployeeData,
 } from "./DashboardData";
 import { loginContext } from "../appmain/App";
-import { usersQuery, stockQuery, commentQuery } from "../queries/queries.js";
+import {
+  usersQuery,
+  stockQuery,
+  commentQuery,
+  employeeQuery,
+} from "../queries/queries.js";
 import { useQuery } from "react-apollo";
 
 export const UserDataRenderer: React.FC = () => {
@@ -393,5 +402,138 @@ export const CommentDataRenderer: React.FC = () => {
       }
     }
   }
+  return <div>{pageEdit()}</div>;
+};
+
+export const ReportDataRenderer: React.FC = () => {
+  return (
+    <div>
+      <h2>Reports go here...</h2>
+    </div>
+  );
+};
+
+export const EmployeeDataRenderer: React.FC = () => {
+  const [creationParam, setCreationParam] = useState("");
+  const { loading, data } = useQuery(employeeQuery);
+  const [employeeEdit, setEmployeeEdit] = useState(false);
+  const [employeeCreation, setEmployeeCreation] = useState(false);
+  const [employeeData, setEmployeeData] = useState([
+    {
+      username: "",
+      employeeId: 0,
+      permissions: "",
+    },
+  ]);
+
+  const [editEmployeeData, setEditEmployeeData] = useState({
+    username: "",
+    employeeId: 0,
+    permissions: "",
+  });
+  const [id, setId] = useState(0);
+
+  function returnEmployeeEdit(id: number) {
+    let val = employeeData.find((el) => el.employeeId === id);
+    if (val) {
+      let index = employeeData.indexOf(val);
+      let obj = employeeData[index];
+      setEditEmployeeData({
+        username: obj.username,
+        permissions: obj.permissions,
+        employeeId: obj.employeeId,
+      });
+    }
+    setId(id);
+    setEmployeeEdit(true);
+  }
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    }
+  }, [data]);
+
+  function exitFormEmployee() {
+    setEmployeeEdit(false);
+  }
+
+  function createEmployee(val: string) {
+    setEmployeeCreation(true);
+    setCreationParam(val);
+  }
+
+  function exitEmployeeCreation() {
+    setEmployeeCreation(false);
+  }
+
+  function passUpData(data: any) {
+    setEmployeeData(data);
+  }
+
+  function pageEdit() {
+    if (employeeCreation === true) {
+      return (
+        <div>
+          <EmployeeCreationPage
+            username={creationParam}
+            exitEmployeeCreation={exitEmployeeCreation}
+          />
+        </div>
+      );
+    } else if (employeeCreation === false) {
+      if (employeeEdit === true) {
+        console.log("user edit");
+        return (
+          <div>
+            <EmployeeDashboardEdit
+              editData={editEmployeeData}
+              id={id}
+              exitForm={exitFormEmployee}
+            />
+          </div>
+        );
+      } else {
+        if (data) {
+          if (employeeData) {
+            return (
+              <div>
+                <DashboardEmployeeTopMenu
+                  searchbarPlaceholder="User ID"
+                  type="Comment"
+                  elementPlaceholder="ID"
+                  createFunc={createEmployee}
+                  passUpData={passUpData}
+                />
+                <DashboardEmployeeData
+                  returnEditPage={returnEmployeeEdit}
+                  data={employeeData}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <DashboardCommentTopMenu
+                  searchbarPlaceholder="User ID"
+                  type="Comment"
+                  elementPlaceholder="ID"
+                  createFunc={createEmployee}
+                  passUpData={passUpData}
+                />
+              </div>
+            );
+          }
+        } else {
+          return (
+            <div>
+              <h2>Loading...</h2>
+            </div>
+          );
+        }
+      }
+    }
+  }
+
   return <div>{pageEdit()}</div>;
 };

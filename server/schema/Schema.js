@@ -21,6 +21,7 @@ const Reference = require("../models/referencetrade");
 const Settings = require("../models/settings");
 const Watchlist = require("../models/watchlist");
 const Notifications = require("../models/notification");
+const Employee = require("../models/employee");
 
 const UserQuery = new GraphQLObjectType({
   name: "User",
@@ -150,6 +151,15 @@ const ShareQuery = new GraphQLObjectType({
   }),
 });
 
+const EmployeeQuery = new GraphQLObjectType({
+  name: "Employee",
+  fields: () => ({
+    employeeId: { type: GraphQLID },
+    username: { type: GraphQLString },
+    permissions: { type: GraphQLString },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
   fields: {
@@ -169,6 +179,12 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(CommentQuery),
       resolve(parent) {
         return Comment.find({});
+      },
+    },
+    employees: {
+      type: new GraphQLList(EmployeeQuery),
+      resolve(parent) {
+        return Employee.find({});
       },
     },
     user: {
@@ -214,6 +230,15 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         return User.find({ username: args.username });
+      },
+    },
+    searchEmployees: {
+      type: new GraphQLList(EmployeeQuery),
+      args: {
+        employeeId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return Employee.find({ employeeId: args.employeeId });
       },
     },
   },
@@ -306,6 +331,22 @@ const Mutation = new GraphQLObjectType({
           dislikes: args.dislikes,
         });
         return comment.save();
+      },
+    },
+    createEmployee: {
+      type: EmployeeQuery,
+      args: {
+        username: { type: GraphQLString },
+        employeeId: { type: GraphQLID },
+        permissions: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        let employee = new Employee({
+          username: args.username,
+          employeeId: args.employeeId,
+          permissions: args.permissions,
+        });
+        return employee.save();
       },
     },
     updateComment: {
@@ -447,6 +488,17 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         return User.findOneAndDelete({
           userId: args.userId,
+        });
+      },
+    },
+    deleteEmployee: {
+      type: EmployeeQuery,
+      args: {
+        employeeId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return Employee.findOneAndDelete({
+          employeeId: args.employeeId,
         });
       },
     },

@@ -12,6 +12,8 @@ const Sidebar: React.FC = () => {
     { text: "Stocks", path: "/home/stocks", id: 0 },
     { text: "Users", path: "/home/users", id: 1 },
     { text: "Comments", path: "/home/comments", id: 2 },
+    { text: "Reports", path: "/home/reports", id: 3 },
+    { text: "Employees", path: "/home/employees", id: 4 },
   ];
   return (
     <div id="sidebar">

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 
 interface Props {
   type: string;
+  label: string;
   passUp: (input: string) => void;
-  placeholder: string;
+  display: string;
+  placeholder?: string;
 }
 
 const InputField: React.FC<Props> = (props) => {
@@ -14,9 +16,10 @@ const InputField: React.FC<Props> = (props) => {
   }
 
   return (
-    <div id="input_field_loging">
+    <div id="input_field" style={{ display: props.display }}>
+      <label id="input_field_label">{props.label}</label>
       <input
-        id="input_field_input_login"
+        id="input_field_input"
         placeholder={props.placeholder}
         type={props.type}
         onChange={(e) => returnString(e.target.value)}

@@ -4,6 +4,7 @@ import ButtonField from "../login/ButtonField";
 import CreateUser from "../resolvers/CreateUser";
 import CreateStock from "../resolvers/CreateStock";
 import CreateComment from "../resolvers/CreateComment";
+import CreateEmployee from "../resolvers/CreateEmployee";
 import TextareaBlock from "../dashboard/TextareaBlock";
 import ElementCheckbox from "../dashboard/ElementCheckbox";
 import MoneyInput from "./MoneyInput";
@@ -22,6 +23,11 @@ interface Stock {
 interface Comment {
   username: string;
   exitCommentCreation: () => void;
+}
+
+interface Employee {
+  username: string;
+  exitEmployeeCreation: () => void;
 }
 
 export const UserCreationPage: React.FC<User> = (props) => {
@@ -231,6 +237,69 @@ export const CommentCreationPage: React.FC<Comment> = (props) => {
         username={username}
         userId={userId}
         text={text}
+        successfulReturn={successfulReturn}
+      />
+    </div>
+  );
+};
+
+export const EmployeeCreationPage: React.FC<Employee> = (props) => {
+  const [username, setUsername] = useState(props.username);
+  const [checkedAccessLevel, setCheckedAccessLevel] = useState(false);
+  const [permissions, setPermissions] = useState("General");
+  const [employeeId, setEmployeeId] = useState(0);
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    if (checkedAccessLevel === true) {
+      setPermissions("Premium");
+    } else if (checkedAccessLevel === false) {
+      setPermissions("General");
+    }
+  }, [checkedAccessLevel]);
+
+  function modUsername(input: string) {
+    setUsername(input);
+  }
+
+  function modID(input: string) {
+    let intVal = parseInt(input);
+    setEmployeeId(intVal);
+  }
+
+  function returnString(input: string) {
+    setText(input);
+  }
+
+  function successfulReturn() {
+    props.exitEmployeeCreation();
+  }
+
+  return (
+    <div>
+      <ButtonField text="Exit" id={0} submitForm={props.exitEmployeeCreation} />
+      <input
+        type="number"
+        placeholder="User ID"
+        min={0}
+        value={employeeId}
+        onChange={(e) => modID(e.target.value)}
+      />
+      <label>{permissions}</label>
+      <input
+        type="checkbox"
+        checked={checkedAccessLevel}
+        onChange={() => setCheckedAccessLevel(!checkedAccessLevel)}
+      />
+      <HeadLineInput
+        text="Username "
+        inputVal={username}
+        modInput={modUsername}
+      />
+      <CreateEmployee
+        username={username}
+        employeeId={employeeId}
+        permissions={permissions}
         successfulReturn={successfulReturn}
       />
     </div>

@@ -49,6 +49,16 @@ const stockQuery = gql`
   }
 `;
 
+const employeeQuery = gql`
+  {
+    employees {
+      employeeId
+      username
+      permissions
+    }
+  }
+`;
+
 const searchStockQuery = gql`
   query($ticker: String!) {
     searchStocks(ticker: $ticker) {
@@ -97,6 +107,16 @@ const searchUserQuery = gql`
   }
 `;
 
+const searchEmployeeQuery = gql`
+  query($employeeId: ID!) {
+    searchEmployees(employeeId: $employeeId) {
+      employeeId
+      username
+      permissions
+    }
+  }
+`;
+
 const createUserMutation = gql`
   mutation(
     $userId: ID!
@@ -132,6 +152,20 @@ const createUserMutation = gql`
       username
       password
       money
+    }
+  }
+`;
+
+const createEmployeeMutation = gql`
+  mutation($employeeId: ID!, $username: String!, $permissions: String!) {
+    createEmployee(
+      employeeId: $employeeId
+      username: $username
+      permissions: $permissions
+    ) {
+      username
+      permissions
+      employeeId
     }
   }
 `;
@@ -178,6 +212,15 @@ const updateCommentMutation = gql`
       text
       likes
       dislikes
+    }
+  }
+`;
+
+const updateEmployeeMutation = gql`
+  mutation($employeeId: ID!, $permissions: String!) {
+    updateEmployee(employeeId: $employeeId, permissions: $permissions) {
+      employeeId
+      permissions
     }
   }
 `;
@@ -275,21 +318,34 @@ const deleteUserMutation = gql`
   }
 `;
 
+const deleteEmployeeMutation = gql`
+  mutation($employeeId: ID!) {
+    deleteEmployee(employeeId: $employeeId) {
+      employeeId
+    }
+  }
+`;
+
 export {
   usersQuery,
   stockQuery,
   commentQuery,
+  employeeQuery,
   searchStockQuery,
   searchCommentQuery,
   searchUserQuery,
+  searchEmployeeQuery,
   createUserMutation,
   createStockMutation,
   createCommentMutation,
+  createEmployeeMutation,
   updateUserMutation,
   updateUserNotificationMutation,
   updateCommentMutation,
+  updateEmployeeMutation,
   updateStockMutation,
   deleteStockMutation,
   deleteCommentMutation,
   deleteUserMutation,
+  deleteEmployeeMutation,
 };

@@ -4,6 +4,8 @@ import {
   UserDataRenderer,
   StockDataRenderer,
   CommentDataRenderer,
+  ReportDataRenderer,
+  EmployeeDataRenderer,
 } from "./DataRenderer";
 
 const DashboardContainer: React.FC = () => {
@@ -17,6 +19,12 @@ const DashboardContainer: React.FC = () => {
       </Route>
       <Route path="/home/comments">
         <CommentDataRenderer />
+      </Route>
+      <Route path="/home/reports">
+        <ReportDataRenderer />
+      </Route>
+      <Route path="/home/employees">
+        <EmployeeDataRenderer />
       </Route>
     </div>
   );

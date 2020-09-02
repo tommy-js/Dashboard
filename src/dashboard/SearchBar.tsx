@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import InputField from "../login/InputField";
+import InputField from "./InputField";
 import ButtonField from "../login/ButtonField";
 import StockQuerySearchBar from "../resolvers/StockQuerySearchBar";
 import UserQuerySearchBar from "../resolvers/UserQuerySearchBar";
 import CommentQuerySearchBar from "../resolvers/CommentQuerySearchBar";
+import EmployeeQuerySearchBar from "../resolvers/EmployeeQuerySearchBar";
 
 interface Stock {
   placeholder: string;
@@ -16,6 +17,11 @@ interface User {
 }
 
 interface Comment {
+  placeholder: string;
+  passUpData: (data: object[]) => void;
+}
+
+interface Employee {
   placeholder: string;
   passUpData: (data: object[]) => void;
 }
@@ -80,6 +86,30 @@ export const SearchBarComment: React.FC<Comment> = (props) => {
         placeholder={props.placeholder}
       />
       <CommentQuerySearchBar commentId={params} passUpData={props.passUpData} />
+    </div>
+  );
+};
+
+export const SearchBarEmployee: React.FC<Employee> = (props) => {
+  const [params, setParams] = useState("");
+
+  function searchParams(input: string) {
+    setParams(input);
+  }
+
+  return (
+    <div id="search_bar">
+      <InputField
+        display="inline-block"
+        type="text"
+        label="query"
+        passUp={searchParams}
+        placeholder={props.placeholder}
+      />
+      <EmployeeQuerySearchBar
+        employeeId={params}
+        passUpData={props.passUpData}
+      />
     </div>
   );
 };

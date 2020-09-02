@@ -4,10 +4,10 @@ import { flowRight as compose } from "lodash";
 import { updateStockMutation } from "../queries/queries.js";
 
 interface Props {
-  updateStockMutation: (variables: object) => void;
   stockId: number;
   about: string;
   successfulResolve: () => void;
+  updateStockMutation: (variables: object) => void;
 }
 
 const UpdateStockData: React.FC<Props> = (props) => {
