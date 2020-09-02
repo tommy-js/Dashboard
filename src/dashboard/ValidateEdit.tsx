@@ -31,6 +31,7 @@ interface Stock {
 interface Employee {
   employeeId: number;
   permissions: string;
+  password: string;
   successfulResolve: () => void;
 }
 
@@ -81,6 +82,7 @@ export const ValidateEmployeeEdit: React.FC<Employee> = (props) => {
       <UpdateEmployeeData
         employeeId={props.employeeId}
         permissions={props.permissions}
+        password={props.password}
         successfulResolve={props.successfulResolve}
       />
     </div>

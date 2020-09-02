@@ -7,6 +7,7 @@ interface Props {
   username: string;
   employeeId: number;
   permissions: string;
+  password: string;
   createEmployeeMutation: (variables: object) => void;
   successfulReturn: () => void;
 }
@@ -18,6 +19,7 @@ const CreateEmployee: React.FC<Props> = (props) => {
         username: props.username,
         employeeId: props.employeeId,
         permissions: props.permissions,
+        password: props.password,
       },
     });
     props.successfulReturn();

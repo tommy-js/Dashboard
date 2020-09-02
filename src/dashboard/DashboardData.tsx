@@ -71,6 +71,7 @@ export const DashboardEmployeeData: React.FC<Props> = (props) => {
           employeeId={el.employeeId}
           username={el.username}
           permissions={el.permissions}
+          password={el.password}
           returnEditPage={props.returnEditPage}
         />
       ))}

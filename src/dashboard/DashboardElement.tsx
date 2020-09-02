@@ -41,6 +41,7 @@ interface Employee {
   employeeId: number;
   username: string;
   permissions: string;
+  password: string;
   returnEditPage: (id: number) => void;
 }
 

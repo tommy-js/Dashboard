@@ -56,6 +56,7 @@ interface Employee {
   editData: {
     employeeId: number;
     permissions: string;
+    password: string;
   };
   exitForm: () => void;
 }
@@ -188,6 +189,7 @@ export const CommentDashboardEdit: React.FC<Comment> = (props) => {
 
 export const EmployeeDashboardEdit: React.FC<Employee> = (props) => {
   const [permissions, setPermissions] = useState(props.editData.permissions);
+  const [password, setPassword] = useState(props.editData.password);
 
   function modPermissions(input: string) {
     setPermissions(input);
@@ -197,9 +199,15 @@ export const EmployeeDashboardEdit: React.FC<Employee> = (props) => {
     <div>
       <ButtonField id={props.id} text="Exit" submitForm={props.exitForm} />
       <AuthEmployeePermissions modPermissions={modPermissions} />
+      <input
+        type="text"
+        placeholder="New password..."
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <ValidateEmployeeEdit
         employeeId={props.editData.employeeId}
         permissions={permissions}
+        password={password}
         successfulResolve={props.exitForm}
       />
     </div>

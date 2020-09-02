@@ -157,6 +157,7 @@ const EmployeeQuery = new GraphQLObjectType({
     employeeId: { type: GraphQLID },
     username: { type: GraphQLString },
     permissions: { type: GraphQLString },
+    password: { type: GraphQLString },
   }),
 });
 
@@ -339,12 +340,14 @@ const Mutation = new GraphQLObjectType({
         username: { type: GraphQLString },
         employeeId: { type: GraphQLID },
         permissions: { type: GraphQLString },
+        password: { type: GraphQLString },
       },
       resolve(parent, args) {
         let employee = new Employee({
           username: args.username,
           employeeId: args.employeeId,
           permissions: args.permissions,
+          password: args.password,
         });
         return employee.save();
       },
@@ -413,6 +416,7 @@ const Mutation = new GraphQLObjectType({
       args: {
         employeeId: { type: GraphQLID },
         permissions: { type: GraphQLString },
+        password: { type: GraphQLString },
       },
       resolve(parent, args) {
         return Employee.update(
@@ -421,6 +425,7 @@ const Mutation = new GraphQLObjectType({
             $set: {
               employeeId: args.employeeId,
               permissions: args.permissions,
+              password: args.password,
             },
           }
         );

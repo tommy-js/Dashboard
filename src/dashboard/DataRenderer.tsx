@@ -423,6 +423,7 @@ export const EmployeeDataRenderer: React.FC = () => {
       username: "",
       employeeId: 0,
       permissions: "",
+      password: "",
     },
   ]);
 
@@ -430,6 +431,7 @@ export const EmployeeDataRenderer: React.FC = () => {
     username: "",
     employeeId: 0,
     permissions: "",
+    password: "",
   });
   const [id, setId] = useState(0);
 
@@ -442,6 +444,7 @@ export const EmployeeDataRenderer: React.FC = () => {
         username: obj.username,
         permissions: obj.permissions,
         employeeId: obj.employeeId,
+        password: obj.password,
       });
     }
     setId(id);

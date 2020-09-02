@@ -246,6 +246,7 @@ export const CommentCreationPage: React.FC<Comment> = (props) => {
 
 export const EmployeeCreationPage: React.FC<Employee> = (props) => {
   const empId = parseInt(props.employeeId);
+  const [password, setPassword] = useState("");
   const [permissions, setPermissions] = useState("General");
   const [username, setUsername] = useState("");
   const [employeeId, setEmployeeId] = useState(empId);
@@ -281,6 +282,12 @@ export const EmployeeCreationPage: React.FC<Employee> = (props) => {
         value={employeeId}
         onChange={(e) => modID(e.target.value)}
       />
+      <input
+        type="text"
+        placeholder="Employee Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <ButtonField text="Exit" id={0} submitForm={props.exitEmployeeCreation} />
       <AuthEmployeePermissions modPermissions={modPermissions} />
       <HeadLineInput
@@ -292,6 +299,7 @@ export const EmployeeCreationPage: React.FC<Employee> = (props) => {
         username={username}
         employeeId={employeeId}
         permissions={permissions}
+        password={password}
         successfulReturn={successfulReturn}
       />
     </div>

@@ -6,6 +6,7 @@ import { updateEmployeeMutation } from "../queries/queries";
 interface Props {
   employeeId: number;
   permissions: string;
+  password: string;
   successfulResolve: () => void;
   updateEmployeeMutation: (variables: object) => void;
 }
@@ -16,6 +17,7 @@ const UpdateEmployeeData: React.FC<Props> = (props) => {
       variables: {
         employeeId: props.employeeId,
         permissions: props.permissions,
+        password: props.password,
       },
     });
     props.successfulResolve();

@@ -157,15 +157,22 @@ const createUserMutation = gql`
 `;
 
 const createEmployeeMutation = gql`
-  mutation($employeeId: ID!, $username: String!, $permissions: String!) {
+  mutation(
+    $employeeId: ID!
+    $username: String!
+    $permissions: String!
+    $password: String!
+  ) {
     createEmployee(
       employeeId: $employeeId
       username: $username
       permissions: $permissions
+      password: $password
     ) {
       username
       permissions
       employeeId
+      password
     }
   }
 `;
@@ -217,10 +224,15 @@ const updateCommentMutation = gql`
 `;
 
 const updateEmployeeMutation = gql`
-  mutation($employeeId: ID!, $permissions: String!) {
-    updateEmployee(employeeId: $employeeId, permissions: $permissions) {
+  mutation($employeeId: ID!, $permissions: String!, $password: String!) {
+    updateEmployee(
+      employeeId: $employeeId
+      permissions: $permissions
+      password: $password
+    ) {
       employeeId
       permissions
+      password
     }
   }
 `;
