@@ -1,18 +1,32 @@
 import React from "react";
-import SearchBar from "./SearchBar";
+import { SearchBarStock, SearchBarUser, SearchBarComment } from "./SearchBar";
 import NewElement from "./NewElement";
 
-interface Props {
+interface Stock {
   searchbarPlaceholder: string;
   elementPlaceholder: string;
   type: string;
   createFunc: (val: string) => void;
 }
 
-const DashboardTopMenu: React.FC<Props> = (props) => {
+interface User {
+  searchbarPlaceholder: string;
+  elementPlaceholder: string;
+  type: string;
+  createFunc: (val: string) => void;
+}
+
+interface Comment {
+  searchbarPlaceholder: string;
+  elementPlaceholder: string;
+  type: string;
+  createFunc: (val: string) => void;
+}
+
+export const DashboardStockTopMenu: React.FC<Stock> = (props) => {
   return (
     <div id="dashboard_top_menu">
-      <SearchBar placeholder={props.searchbarPlaceholder} />
+      <SearchBarStock placeholder={props.searchbarPlaceholder} />
       <NewElement
         type={props.type}
         placeholder={props.elementPlaceholder}
@@ -22,4 +36,28 @@ const DashboardTopMenu: React.FC<Props> = (props) => {
   );
 };
 
-export default DashboardTopMenu;
+export const DashboardUserTopMenu: React.FC<User> = (props) => {
+  return (
+    <div id="dashboard_top_menu">
+      <SearchBarUser placeholder={props.searchbarPlaceholder} />
+      <NewElement
+        type={props.type}
+        placeholder={props.elementPlaceholder}
+        createFunc={props.createFunc}
+      />
+    </div>
+  );
+};
+
+export const DashboardCommentTopMenu: React.FC<Comment> = (props) => {
+  return (
+    <div id="dashboard_top_menu">
+      <SearchBarComment placeholder={props.searchbarPlaceholder} />
+      <NewElement
+        type={props.type}
+        placeholder={props.elementPlaceholder}
+        createFunc={props.createFunc}
+      />
+    </div>
+  );
+};

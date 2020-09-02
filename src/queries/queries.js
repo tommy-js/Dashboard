@@ -49,6 +49,54 @@ const stockQuery = gql`
   }
 `;
 
+const searchStockQuery = gql`
+  query($ticker: String!) {
+    searchStocks(ticker: $ticker) {
+      stockId
+      ticker
+      name
+      about
+      creation
+      prediction
+      comments {
+        userId
+        username
+        timestamp
+        text
+        likes
+        dislikes
+      }
+    }
+  }
+`;
+
+const searchCommentQuery = gql`
+  query($commentId: ID!) {
+    searchComments(commentId: $commentId) {
+      userId
+      commentId
+      username
+      timestamp
+      text
+      likes
+      dislikes
+    }
+  }
+`;
+
+const searchUserQuery = gql`
+  query($username: String!) {
+    searchUsers(username: $username) {
+      username
+      password
+      money
+      membership
+      accountStatus
+      userId
+    }
+  }
+`;
+
 const createUserMutation = gql`
   mutation(
     $userId: ID!
@@ -231,6 +279,9 @@ export {
   usersQuery,
   stockQuery,
   commentQuery,
+  searchStockQuery,
+  searchCommentQuery,
+  searchUserQuery,
   createUserMutation,
   createStockMutation,
   createCommentMutation,

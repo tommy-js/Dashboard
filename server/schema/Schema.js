@@ -189,6 +189,33 @@ const RootQuery = new GraphQLObjectType({
         return Stock.find({ stockId: args.stockId });
       },
     },
+    searchStocks: {
+      type: new GraphQLList(StockQuery),
+      args: {
+        ticker: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Stock.find({ ticker: args.ticker });
+      },
+    },
+    searchComments: {
+      type: new GraphQLList(CommentQuery),
+      args: {
+        commentId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return Comment.find({ commentId: args.commentId });
+      },
+    },
+    searchUsers: {
+      type: new GraphQLList(UserQuery),
+      args: {
+        username: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return User.find({ username: args.username });
+      },
+    },
   },
 });
 

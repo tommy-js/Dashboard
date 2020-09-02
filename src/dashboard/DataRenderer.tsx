@@ -9,7 +9,11 @@ import {
   StockCreationPage,
   CommentCreationPage,
 } from "./CreationPage";
-import DashboardTopMenu from "./DashboardTopMenu";
+import {
+  DashboardStockTopMenu,
+  DashboardUserTopMenu,
+  DashboardCommentTopMenu,
+} from "./DashboardTopMenu";
 import {
   DashboardStockData,
   DashboardUserData,
@@ -113,7 +117,7 @@ export const UserDataRenderer: React.FC = () => {
         if (data) {
           return (
             <div>
-              <DashboardTopMenu
+              <DashboardUserTopMenu
                 searchbarPlaceholder="User"
                 type="User"
                 elementPlaceholder="Username"
@@ -221,7 +225,7 @@ export const StockDataRenderer: React.FC = () => {
         if (data) {
           return (
             <div>
-              <DashboardTopMenu
+              <DashboardStockTopMenu
                 searchbarPlaceholder="Stock Title"
                 type="Stock"
                 elementPlaceholder="Title"
@@ -339,7 +343,7 @@ export const CommentDataRenderer: React.FC = () => {
           if (commentData) {
             return (
               <div>
-                <DashboardTopMenu
+                <DashboardCommentTopMenu
                   searchbarPlaceholder="User ID"
                   type="Comment"
                   elementPlaceholder="ID"
@@ -354,7 +358,7 @@ export const CommentDataRenderer: React.FC = () => {
           } else {
             return (
               <div>
-                <DashboardTopMenu
+                <DashboardCommentTopMenu
                   searchbarPlaceholder="User ID"
                   type="Comment"
                   elementPlaceholder="ID"
