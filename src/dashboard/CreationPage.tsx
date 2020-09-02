@@ -9,6 +9,7 @@ import TextareaBlock from "../dashboard/TextareaBlock";
 import ElementCheckbox from "../dashboard/ElementCheckbox";
 import MoneyInput from "./MoneyInput";
 import StringInput from "./StringInput";
+import AuthEmployeePermissions from "./AuthEmployeePermissions";
 
 interface User {
   username: string;
@@ -26,7 +27,7 @@ interface Comment {
 }
 
 interface Employee {
-  username: string;
+  employeeId: string;
   exitEmployeeCreation: () => void;
 }
 
@@ -244,19 +245,11 @@ export const CommentCreationPage: React.FC<Comment> = (props) => {
 };
 
 export const EmployeeCreationPage: React.FC<Employee> = (props) => {
-  const [username, setUsername] = useState(props.username);
-  const [checkedAccessLevel, setCheckedAccessLevel] = useState(false);
+  const empId = parseInt(props.employeeId);
   const [permissions, setPermissions] = useState("General");
-  const [employeeId, setEmployeeId] = useState(0);
+  const [username, setUsername] = useState("");
+  const [employeeId, setEmployeeId] = useState(empId);
   const [text, setText] = useState("");
-
-  useEffect(() => {
-    if (checkedAccessLevel === true) {
-      setPermissions("Premium");
-    } else if (checkedAccessLevel === false) {
-      setPermissions("General");
-    }
-  }, [checkedAccessLevel]);
 
   function modUsername(input: string) {
     setUsername(input);
@@ -275,9 +268,12 @@ export const EmployeeCreationPage: React.FC<Employee> = (props) => {
     props.exitEmployeeCreation();
   }
 
+  function modPermissions(input: string) {
+    setPermissions(input);
+  }
+
   return (
     <div>
-      <ButtonField text="Exit" id={0} submitForm={props.exitEmployeeCreation} />
       <input
         type="number"
         placeholder="User ID"
@@ -285,12 +281,8 @@ export const EmployeeCreationPage: React.FC<Employee> = (props) => {
         value={employeeId}
         onChange={(e) => modID(e.target.value)}
       />
-      <label>{permissions}</label>
-      <input
-        type="checkbox"
-        checked={checkedAccessLevel}
-        onChange={() => setCheckedAccessLevel(!checkedAccessLevel)}
-      />
+      <ButtonField text="Exit" id={0} submitForm={props.exitEmployeeCreation} />
+      <AuthEmployeePermissions modPermissions={modPermissions} />
       <HeadLineInput
         text="Username "
         inputVal={username}

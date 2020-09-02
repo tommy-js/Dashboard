@@ -11,6 +11,7 @@ import DeleteComment from "../resolvers/DeleteComment";
 import DeleteUser from "../resolvers/DeleteUser";
 import DeleteEmployee from "../resolvers/DeleteEmployee";
 import CommentInformation from "./CommentInformation";
+import PermissionsLink from "./PermissionsLink";
 
 interface User {
   username: string;
@@ -256,6 +257,7 @@ export const DashboardEmployeeElement: React.FC<Employee> = (props) => {
         return (
           <div>
             <ElementTitle text={props.username} />
+            <PermissionsLink permissions={props.permissions} />
             <ButtonField
               text="Edit"
               id={props.employeeId}

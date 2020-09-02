@@ -451,6 +451,7 @@ export const EmployeeDataRenderer: React.FC = () => {
   useEffect(() => {
     if (data) {
       console.log(data);
+      setEmployeeData(data.employees);
     }
   }, [data]);
 
@@ -476,7 +477,7 @@ export const EmployeeDataRenderer: React.FC = () => {
       return (
         <div>
           <EmployeeCreationPage
-            username={creationParam}
+            employeeId={creationParam}
             exitEmployeeCreation={exitEmployeeCreation}
           />
         </div>
@@ -499,9 +500,9 @@ export const EmployeeDataRenderer: React.FC = () => {
             return (
               <div>
                 <DashboardEmployeeTopMenu
-                  searchbarPlaceholder="User ID"
-                  type="Comment"
-                  elementPlaceholder="ID"
+                  searchbarPlaceholder="Employee ID"
+                  type="Employee"
+                  elementPlaceholder="Employee ID"
                   createFunc={createEmployee}
                   passUpData={passUpData}
                 />

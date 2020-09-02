@@ -408,6 +408,24 @@ const Mutation = new GraphQLObjectType({
         );
       },
     },
+    updateEmployee: {
+      type: EmployeeQuery,
+      args: {
+        employeeId: { type: GraphQLID },
+        permissions: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Employee.update(
+          { employeeId: args.employeeId },
+          {
+            $set: {
+              employeeId: args.employeeId,
+              permissions: args.permissions,
+            },
+          }
+        );
+      },
+    },
     updateUserNotification: {
       type: UserQuery,
       args: {

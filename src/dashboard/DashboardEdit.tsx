@@ -11,6 +11,7 @@ import {
   ValidateCommentEdit,
   ValidateEmployeeEdit,
 } from "./ValidateEdit";
+import AuthEmployeePermissions from "./AuthEmployeePermissions";
 
 interface Stock {
   id: number;
@@ -195,13 +196,7 @@ export const EmployeeDashboardEdit: React.FC<Employee> = (props) => {
   return (
     <div>
       <ButtonField id={props.id} text="Exit" submitForm={props.exitForm} />
-      <TextareaBlock
-        passInWidth="200px"
-        passInHeight="350px"
-        description={permissions}
-        returnString={modPermissions}
-      />
-
+      <AuthEmployeePermissions modPermissions={modPermissions} />
       <ValidateEmployeeEdit
         employeeId={props.editData.employeeId}
         permissions={permissions}

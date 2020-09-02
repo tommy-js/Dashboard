@@ -8,6 +8,7 @@ interface Props {
   employeeId: number;
   permissions: string;
   createEmployeeMutation: (variables: object) => void;
+  successfulReturn: () => void;
 }
 
 const CreateEmployee: React.FC<Props> = (props) => {
@@ -19,6 +20,7 @@ const CreateEmployee: React.FC<Props> = (props) => {
         permissions: props.permissions,
       },
     });
+    props.successfulReturn();
   }
 
   return <button onClick={() => createEmployee()}>Create</button>;
