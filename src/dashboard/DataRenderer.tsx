@@ -35,29 +35,13 @@ import { useQuery } from "react-apollo";
 export const UserDataRenderer: React.FC = () => {
   const { loading, data } = useQuery(usersQuery);
   const [loadedImage, setLoadedImage] = useState(false);
-  const [renderData, setRenderData] = useState([
-    {
-      username: "",
-      userId: 0,
-      accountStatus: "",
-      membership: "",
-      money: 0,
-      time: 0,
-    },
-  ]);
+  const [renderData, setRenderData] = useState([] as any);
   const { loginState, setLoginState } = useContext(loginContext);
   const [userCreation, setUserCreation] = useState(false);
   const [creationParam, setCreationParam] = useState("");
   const [id, setId] = useState(0);
   const [userEdit, setUserEdit] = useState(false);
-  const [editData, setEditData] = useState({
-    username: "",
-    userId: 0,
-    accountStatus: "",
-    membership: "",
-    money: 0,
-    time: 0,
-  });
+  const [editData, setEditData] = useState({} as any);
 
   useEffect(() => {
     if (data) {
@@ -73,7 +57,7 @@ export const UserDataRenderer: React.FC = () => {
 
   function returnUserEdit(id: number) {
     if (data) {
-      let val = renderData.find((el) => el.userId === id);
+      let val = renderData.find((el: any) => el.userId === id);
       if (val) {
         let index = renderData.indexOf(val);
         let obj = renderData[index];
@@ -160,20 +144,8 @@ export const StockDataRenderer: React.FC = () => {
   const { loading, data } = useQuery(stockQuery);
   const [stockCreation, setStockCreation] = useState(false);
   const [creationParam, setCreationParam] = useState("");
-  const [stockData, setStockData] = useState([
-    {
-      name: "",
-      ticker: "",
-      about: "",
-      stockId: 0,
-    },
-  ]);
-  const [editStockData, setEditStockData] = useState({
-    name: "",
-    ticker: "",
-    about: "",
-    stockId: 0,
-  });
+  const [stockData, setStockData] = useState([] as any);
+  const [editStockData, setEditStockData] = useState({} as any);
   const [stockEdit, setStockEdit] = useState(false);
   const [id, setId] = useState(0);
 
@@ -185,7 +157,7 @@ export const StockDataRenderer: React.FC = () => {
   }, [data]);
 
   function returnStockEdit(id: number) {
-    let val = stockData.find((el) => el.stockId === id);
+    let val = stockData.find((el: any) => el.stockId === id);
     if (val) {
       let index = stockData.indexOf(val);
       let obj = stockData[index];
@@ -273,26 +245,8 @@ export const CommentDataRenderer: React.FC = () => {
   const { loading, data } = useQuery(commentQuery);
   const [commentCreation, setCommentCreation] = useState(false);
   const [creationParam, setCreationParam] = useState("");
-  const [commentData, setCommentData] = useState([
-    {
-      userId: 0,
-      commentId: 0,
-      username: "",
-      timestamp: 0,
-      text: "",
-      likes: 0,
-      dislikes: 0,
-    },
-  ]);
-  const [editCommentData, setEditCommentData] = useState({
-    userId: 0,
-    commentId: 0,
-    username: "",
-    timestamp: 0,
-    text: "",
-    likes: 0,
-    dislikes: 0,
-  });
+  const [commentData, setCommentData] = useState([] as any);
+  const [editCommentData, setEditCommentData] = useState({} as any);
   const [commentEdit, setCommentEdit] = useState(false);
   const [id, setId] = useState(0);
 
@@ -304,7 +258,7 @@ export const CommentDataRenderer: React.FC = () => {
   }, [data]);
 
   function returnCommentEdit(id: number) {
-    let val = commentData.find((el) => el.commentId === id);
+    let val = commentData.find((el: any) => el.commentId === id);
     if (val) {
       let index = commentData.indexOf(val);
       let obj = commentData[index];
@@ -418,25 +372,13 @@ export const EmployeeDataRenderer: React.FC = () => {
   const { loading, data } = useQuery(employeeQuery);
   const [employeeEdit, setEmployeeEdit] = useState(false);
   const [employeeCreation, setEmployeeCreation] = useState(false);
-  const [employeeData, setEmployeeData] = useState([
-    {
-      username: "",
-      employeeId: 0,
-      permissions: "",
-      password: "",
-    },
-  ]);
+  const [employeeData, setEmployeeData] = useState([] as any);
 
-  const [editEmployeeData, setEditEmployeeData] = useState({
-    username: "",
-    employeeId: 0,
-    permissions: "",
-    password: "",
-  });
+  const [editEmployeeData, setEditEmployeeData] = useState({} as any);
   const [id, setId] = useState(0);
 
   function returnEmployeeEdit(id: number) {
-    let val = employeeData.find((el) => el.employeeId === id);
+    let val = employeeData.find((el: any) => el.employeeId === id);
     if (val) {
       let index = employeeData.indexOf(val);
       let obj = employeeData[index];
@@ -516,17 +458,7 @@ export const EmployeeDataRenderer: React.FC = () => {
               </div>
             );
           } else {
-            return (
-              <div>
-                <DashboardCommentTopMenu
-                  searchbarPlaceholder="User ID"
-                  type="Comment"
-                  elementPlaceholder="ID"
-                  createFunc={createEmployee}
-                  passUpData={passUpData}
-                />
-              </div>
-            );
+            return null;
           }
         } else {
           return (
@@ -540,4 +472,8 @@ export const EmployeeDataRenderer: React.FC = () => {
   }
 
   return <div>{pageEdit()}</div>;
+};
+
+export const PostsDataRenderer: React.FC = () => {
+  return <div></div>;
 };

@@ -148,10 +148,6 @@ a {
 
 #privileges_page {
   position: relative;
-  width: 550px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 25px;
   margin-bottom: 25px;
   @include testing;
 }
@@ -207,4 +203,13 @@ a {
   width: 70px;
   margin-left: auto;
   margin-right: auto;
+}
+
+#inner_settings_page {
+  position: relative;
+  margin-top: 50px;
+  width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  @include testing;
 }

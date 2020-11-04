@@ -1,32 +1,17 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
-import ButtonField from "../login/ButtonField";
 import StockQuerySearchBar from "../resolvers/StockQuerySearchBar";
 import UserQuerySearchBar from "../resolvers/UserQuerySearchBar";
 import CommentQuerySearchBar from "../resolvers/CommentQuerySearchBar";
 import EmployeeQuerySearchBar from "../resolvers/EmployeeQuerySearchBar";
+import PostQuerySearchBar from "../resolvers/PostQuerySearchBar";
 
-interface Stock {
+interface Props {
   placeholder: string;
   passUpData: (data: object[]) => void;
 }
 
-interface User {
-  placeholder: string;
-  passUpData: (data: object[]) => void;
-}
-
-interface Comment {
-  placeholder: string;
-  passUpData: (data: object[]) => void;
-}
-
-interface Employee {
-  placeholder: string;
-  passUpData: (data: object[]) => void;
-}
-
-export const SearchBarStock: React.FC<Stock> = (props) => {
+export const SearchBarStock: React.FC<Props> = (props) => {
   const [params, setParams] = useState("");
 
   function searchParams(input: string) {
@@ -47,7 +32,7 @@ export const SearchBarStock: React.FC<Stock> = (props) => {
   );
 };
 
-export const SearchBarUser: React.FC<User> = (props) => {
+export const SearchBarUser: React.FC<Props> = (props) => {
   const [params, setParams] = useState("");
 
   function searchParams(input: string) {
@@ -69,7 +54,7 @@ export const SearchBarUser: React.FC<User> = (props) => {
   );
 };
 
-export const SearchBarComment: React.FC<Comment> = (props) => {
+export const SearchBarComment: React.FC<Props> = (props) => {
   const [params, setParams] = useState("");
 
   function searchParams(input: string) {
@@ -90,7 +75,7 @@ export const SearchBarComment: React.FC<Comment> = (props) => {
   );
 };
 
-export const SearchBarEmployee: React.FC<Employee> = (props) => {
+export const SearchBarEmployee: React.FC<Props> = (props) => {
   const [params, setParams] = useState("");
 
   function searchParams(input: string) {
@@ -110,6 +95,27 @@ export const SearchBarEmployee: React.FC<Employee> = (props) => {
         employeeId={params}
         passUpData={props.passUpData}
       />
+    </div>
+  );
+};
+
+export const SearchBarPost: React.FC<Props> = (props) => {
+  const [params, setParams] = useState("");
+
+  function searchParams(input: string) {
+    setParams(input);
+  }
+
+  return (
+    <div id="search_bar">
+      <InputField
+        display="inline-block"
+        type="text"
+        label="query"
+        passUp={searchParams}
+        placeholder={props.placeholder}
+      />
+      <PostQuerySearchBar postId={params} passUpData={props.passUpData} />
     </div>
   );
 };

@@ -18,13 +18,20 @@ const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
 });
 
+interface UserState {
+  username: string;
+  password: string;
+  employeeId: number;
+  permissions: string;
+}
+
 function App() {
   const [loginState, setLoginState] = useState<any>(false);
-  const [userState, setUserState] = useState<any>({
+  const [userState, setUserState] = useState<UserState>({
     username: "",
     password: "",
-    employeeId: "",
-    privileges: "",
+    employeeId: 0,
+    permissions: "",
   });
 
   function checkLoginStatus() {
@@ -45,7 +52,7 @@ function App() {
               <Login />
             </Route>
             <Route exact path="/settings">
-              <SettingsPage userState={userState} />
+              <SettingsPage />
             </Route>
             <Route exact path="/privileges">
               <PrivilegesPage />

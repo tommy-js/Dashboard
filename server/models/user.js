@@ -7,7 +7,7 @@ const userSchema = new Schema({
   password: String,
   money: Number,
   accountStatus: String,
-  membership: String,
+  membership: Boolean,
   time: Number,
   darkmode: Boolean,
   invisible: Boolean,

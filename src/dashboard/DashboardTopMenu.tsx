@@ -4,10 +4,11 @@ import {
   SearchBarUser,
   SearchBarComment,
   SearchBarEmployee,
+  SearchBarPost,
 } from "./SearchBar";
 import NewElement from "./NewElement";
 
-interface Stock {
+interface Props {
   searchbarPlaceholder: string;
   elementPlaceholder: string;
   type: string;
@@ -15,31 +16,7 @@ interface Stock {
   passUpData: (data: object[]) => void;
 }
 
-interface User {
-  searchbarPlaceholder: string;
-  elementPlaceholder: string;
-  type: string;
-  createFunc: (val: string) => void;
-  passUpData: (data: object[]) => void;
-}
-
-interface Comment {
-  searchbarPlaceholder: string;
-  elementPlaceholder: string;
-  type: string;
-  createFunc: (val: string) => void;
-  passUpData: (data: object[]) => void;
-}
-
-interface Employee {
-  searchbarPlaceholder: string;
-  elementPlaceholder: string;
-  type: string;
-  createFunc: (val: string) => void;
-  passUpData: (data: object[]) => void;
-}
-
-export const DashboardStockTopMenu: React.FC<Stock> = (props) => {
+export const DashboardStockTopMenu: React.FC<Props> = (props) => {
   function passUpData(data: object[]) {
     props.passUpData(data);
   }
@@ -59,7 +36,7 @@ export const DashboardStockTopMenu: React.FC<Stock> = (props) => {
   );
 };
 
-export const DashboardUserTopMenu: React.FC<User> = (props) => {
+export const DashboardUserTopMenu: React.FC<Props> = (props) => {
   function passUpData(data: object[]) {
     props.passUpData(data);
   }
@@ -79,7 +56,7 @@ export const DashboardUserTopMenu: React.FC<User> = (props) => {
   );
 };
 
-export const DashboardCommentTopMenu: React.FC<Comment> = (props) => {
+export const DashboardCommentTopMenu: React.FC<Props> = (props) => {
   function passUpData(data: object[]) {
     props.passUpData(data);
   }
@@ -99,7 +76,7 @@ export const DashboardCommentTopMenu: React.FC<Comment> = (props) => {
   );
 };
 
-export const DashboardEmployeeTopMenu: React.FC<Employee> = (props) => {
+export const DashboardEmployeeTopMenu: React.FC<Props> = (props) => {
   function passUpData(data: object[]) {
     props.passUpData(data);
   }
@@ -107,6 +84,26 @@ export const DashboardEmployeeTopMenu: React.FC<Employee> = (props) => {
   return (
     <div id="dashboard_top_menu">
       <SearchBarEmployee
+        placeholder={props.searchbarPlaceholder}
+        passUpData={passUpData}
+      />
+      <NewElement
+        type={props.type}
+        placeholder={props.elementPlaceholder}
+        createFunc={props.createFunc}
+      />
+    </div>
+  );
+};
+
+export const DashboardPostTopMenu: React.FC<Props> = (props) => {
+  function passUpData(data: object[]) {
+    props.passUpData(data);
+  }
+
+  return (
+    <div id="dashboard_top_menu">
+      <SearchBarPost
         placeholder={props.searchbarPlaceholder}
         passUpData={passUpData}
       />

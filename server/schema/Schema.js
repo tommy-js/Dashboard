@@ -30,7 +30,7 @@ const UserQuery = new GraphQLObjectType({
     username: { type: GraphQLString },
     password: { type: GraphQLString },
     profileImage: { type: GraphQLInt },
-    membership: { type: GraphQLString },
+    membership: { type: GraphQLBoolean },
     time: { type: GraphQLInt },
     accountStatus: { type: GraphQLString },
     money: { type: GraphQLFloat },
@@ -423,6 +423,28 @@ const Mutation = new GraphQLObjectType({
           { employeeId: args.employeeId },
           {
             $set: {
+              employeeId: args.employeeId,
+              permissions: args.permissions,
+              password: args.password,
+            },
+          }
+        );
+      },
+    },
+    updateSettingsEmployee: {
+      type: EmployeeQuery,
+      args: {
+        username: { type: GraphQLString },
+        employeeId: { type: GraphQLID },
+        permissions: { type: GraphQLString },
+        password: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Employee.update(
+          { employeeId: args.employeeId },
+          {
+            $set: {
+              username: args.username,
               employeeId: args.employeeId,
               permissions: args.permissions,
               password: args.password,

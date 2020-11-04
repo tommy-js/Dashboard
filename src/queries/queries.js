@@ -117,6 +117,29 @@ const searchEmployeeQuery = gql`
   }
 `;
 
+const searchPostQuery = gql`
+  query($postId: ID!) {
+    searchPost(postId: $postId) {
+      userId
+      timestamp
+      likes
+      dislikes
+      title
+      text
+      accompaniedURL
+      comments {
+        userId
+        username
+        commentId
+        timestamp
+        text
+        likes
+        dislikes
+      }
+    }
+  }
+`;
+
 const createUserMutation = gql`
   mutation(
     $userId: ID!
@@ -237,6 +260,27 @@ const updateEmployeeMutation = gql`
   }
 `;
 
+const updateSettingsEmployeeMutation = gql`
+  mutation(
+    $username: String!
+    $employeeId: ID!
+    $permissions: String!
+    $password: String!
+  ) {
+    updateEmployee(
+      username: $username
+      employeeId: $employeeId
+      permissions: $permissions
+      password: $password
+    ) {
+      username
+      employeeId
+      permissions
+      password
+    }
+  }
+`;
+
 const updateUserNotificationMutation = gql`
   mutation($userId: ID!, $content: String!, $timestamp: ID!, $id: ID!) {
     updateUserNotification(
@@ -347,6 +391,7 @@ export {
   searchCommentQuery,
   searchUserQuery,
   searchEmployeeQuery,
+  searchPostQuery,
   createUserMutation,
   createStockMutation,
   createCommentMutation,
@@ -355,6 +400,7 @@ export {
   updateUserNotificationMutation,
   updateCommentMutation,
   updateEmployeeMutation,
+  updateSettingsEmployeeMutation,
   updateStockMutation,
   deleteStockMutation,
   deleteCommentMutation,
