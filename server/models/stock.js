@@ -6,22 +6,15 @@ const stockSchema = new Schema({
   ticker: String,
   name: String,
   about: String,
-  creation: String,
-  prediction: Number,
+  timestamp: String,
   comments: [
     {
       userId: String,
       username: String,
-      timestamp: Number,
+      timestamp: String,
       text: String,
       likes: Number,
       dislikes: Number,
-    },
-  ],
-  news: [
-    {
-      text: String,
-      timestamp: String,
     },
   ],
 });

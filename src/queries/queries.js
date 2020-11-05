@@ -35,8 +35,7 @@ const stockQuery = gql`
       ticker
       name
       about
-      creation
-      prediction
+      timestamp
       comments {
         userId
         username
@@ -312,23 +311,8 @@ const updateUserNotificationMutation = gql`
 `;
 
 const createStockMutation = gql`
-  mutation(
-    $stockId: ID!
-    $name: String!
-    $ticker: String!
-    $about: String!
-    $creation: Int!
-    $prediction: Float!
-  ) {
-    createStock(
-      stockId: $stockId
-      name: $name
-      ticker: $ticker
-      about: $about
-      creation: $creation
-      prediction: $prediction
-    ) {
-      stockId
+  mutation($name: String!, $ticker: String!, $about: String!) {
+    createStock(name: $name, ticker: $ticker, about: $about) {
       name
       ticker
     }
