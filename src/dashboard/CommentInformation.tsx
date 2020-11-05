@@ -3,7 +3,7 @@ import React from "react";
 interface Props {
   likes: number;
   dislikes: number;
-  commentId: number;
+  commentId: string;
 }
 
 const CommentInformation: React.FC<Props> = (props) => {

@@ -44,7 +44,7 @@ export const UserDataRenderer: React.FC = () => {
   const { loginState, setLoginState } = useContext(loginContext);
   const [userCreation, setUserCreation] = useState(false);
   const [creationParam, setCreationParam] = useState("");
-  const [id, setId] = useState(0);
+  const [id, setId] = useState("0");
   const [userEdit, setUserEdit] = useState(false);
   const [editData, setEditData] = useState({} as any);
 
@@ -60,7 +60,7 @@ export const UserDataRenderer: React.FC = () => {
     setRenderData(data);
   }
 
-  function returnUserEdit(id: number) {
+  function returnUserEdit(id: string) {
     if (data) {
       let val = renderData.find((el: any) => el.userId === id);
       if (val) {
@@ -152,7 +152,7 @@ export const StockDataRenderer: React.FC = () => {
   const [stockData, setStockData] = useState([] as any);
   const [editStockData, setEditStockData] = useState({} as any);
   const [stockEdit, setStockEdit] = useState(false);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState("0");
 
   useEffect(() => {
     if (data) {
@@ -161,7 +161,7 @@ export const StockDataRenderer: React.FC = () => {
     }
   }, [data]);
 
-  function returnStockEdit(id: number) {
+  function returnStockEdit(id: string) {
     let val = stockData.find((el: any) => el.stockId === id);
     if (val) {
       let index = stockData.indexOf(val);
@@ -253,7 +253,7 @@ export const CommentDataRenderer: React.FC = () => {
   const [commentData, setCommentData] = useState([] as any);
   const [editCommentData, setEditCommentData] = useState({} as any);
   const [commentEdit, setCommentEdit] = useState(false);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState("0");
 
   useEffect(() => {
     if (data) {
@@ -262,7 +262,7 @@ export const CommentDataRenderer: React.FC = () => {
     }
   }, [data]);
 
-  function returnCommentEdit(id: number) {
+  function returnCommentEdit(id: string) {
     let val = commentData.find((el: any) => el.commentId === id);
     if (val) {
       let index = commentData.indexOf(val);
@@ -380,9 +380,9 @@ export const EmployeeDataRenderer: React.FC = () => {
   const [employeeData, setEmployeeData] = useState([] as any);
 
   const [editEmployeeData, setEditEmployeeData] = useState({} as any);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState("0");
 
-  function returnEmployeeEdit(id: number) {
+  function returnEmployeeEdit(id: string) {
     let val = employeeData.find((el: any) => el.employeeId === id);
     if (val) {
       let index = employeeData.indexOf(val);
@@ -487,9 +487,9 @@ export const PostsDataRenderer: React.FC = () => {
   const [postData, setPostData] = useState([] as any);
 
   const [editPostData, setEditPostData] = useState({} as any);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState("0");
 
-  function returnPostEdit(id: number) {
+  function returnPostEdit(id: string) {
     let val = postData.find((el: any) => el.postId === id);
     if (val) {
       let index = postData.indexOf(val);

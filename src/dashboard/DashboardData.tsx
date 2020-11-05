@@ -9,7 +9,7 @@ import {
 
 interface Props {
   data: any;
-  returnEditPage: (id: number) => void;
+  returnEditPage: (id: string) => void;
 }
 
 export const DashboardUserData: React.FC<Props> = (props) => {
@@ -90,6 +90,7 @@ export const DashboardPostData: React.FC<Props> = (props) => {
           text={el.text}
           likes={el.likes}
           dislikes={el.dislikes}
+          returnEditPage={props.returnEditPage}
         />
       ))}
     </div>

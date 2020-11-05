@@ -71,7 +71,7 @@ const LoginFields: React.FC = () => {
           placeholder="Employee Id"
         />
         <div id="centered_button">
-          <ButtonField id={0} text="Sign In" submitForm={tryLogin} />
+          <ButtonField id={"0"} text="Sign In" submitForm={tryLogin} />
         </div>
       </div>
     </div>

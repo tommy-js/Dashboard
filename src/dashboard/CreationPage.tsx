@@ -94,7 +94,7 @@ export const UserCreationPage: React.FC<User> = (props) => {
 
   return (
     <div>
-      <ButtonField text="Exit" id={0} submitForm={props.exitUserCreation} />
+      <ButtonField text="Exit" id={"0"} submitForm={props.exitUserCreation} />
       <HeadLineInput
         text="Create User "
         inputVal={username}
@@ -167,7 +167,7 @@ export const StockCreationPage: React.FC<Stock> = (props) => {
 
   return (
     <div>
-      <ButtonField text="Exit" id={0} submitForm={props.exitStockCreation} />
+      <ButtonField text="Exit" id={"0"} submitForm={props.exitStockCreation} />
       <HeadLineInput
         text="Create Stock "
         inputVal={stockTitle}
@@ -219,7 +219,11 @@ export const CommentCreationPage: React.FC<Comment> = (props) => {
 
   return (
     <div>
-      <ButtonField text="Exit" id={0} submitForm={props.exitCommentCreation} />
+      <ButtonField
+        text="Exit"
+        id={"0"}
+        submitForm={props.exitCommentCreation}
+      />
       <input
         type="number"
         placeholder="User ID"
@@ -292,7 +296,11 @@ export const EmployeeCreationPage: React.FC<Employee> = (props) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <ButtonField text="Exit" id={0} submitForm={props.exitEmployeeCreation} />
+      <ButtonField
+        text="Exit"
+        id={"0"}
+        submitForm={props.exitEmployeeCreation}
+      />
       <AuthEmployeePermissions modPermissions={modPermissions} />
       <HeadLineInput
         text="Username "

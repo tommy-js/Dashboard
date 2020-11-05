@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 interface Props {
   text: string;
-  id: number;
-  submitForm: (id: number) => void;
+  id: string;
+  submitForm: (id: string) => void;
 }
 
 const ButtonField: React.FC<Props> = (props) => {

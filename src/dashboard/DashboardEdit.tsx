@@ -14,34 +14,34 @@ import {
 import AuthEmployeePermissions from "./AuthEmployeePermissions";
 
 interface Stock {
-  id: number;
+  id: string;
   editData: {
     name: string;
     ticker: string;
     about: string;
-    stockId: number;
+    stockId: string;
   };
   exitForm: () => void;
 }
 
 interface User {
-  id: number;
+  id: string;
   editData: {
     username: string;
     accountStatus: string;
     membership: string;
     money: number;
     time: number;
-    userId: number;
+    userId: string;
   };
   exitForm: () => void;
 }
 
 interface Comment {
-  id: number;
+  id: string;
   editData: {
-    userId: number;
-    commentId: number;
+    userId: string;
+    commentId: string;
     username: string;
     timestamp: number;
     text: string;
@@ -52,9 +52,9 @@ interface Comment {
 }
 
 interface Employee {
-  id: number;
+  id: string;
   editData: {
-    employeeId: number;
+    employeeId: string;
     permissions: string;
     password: string;
   };
@@ -62,7 +62,7 @@ interface Employee {
 }
 
 interface Post {
-  id: number;
+  id: string;
   editData: any;
   exitForm: () => void;
 }

@@ -6,7 +6,7 @@ import UpdateStockData from "../resolvers/UpdateStockData";
 import UpdateEmployeeData from "../resolvers/UpdateEmployeeData";
 
 interface User {
-  userId: number;
+  userId: string;
   content: string;
   money: number;
   accountStatus: string;
@@ -15,7 +15,7 @@ interface User {
 }
 
 interface Comment {
-  commentId: number;
+  commentId: string;
   text: string;
   likes: number;
   dislikes: number;
@@ -23,13 +23,13 @@ interface Comment {
 }
 
 interface Stock {
-  stockId: number;
+  stockId: string;
   about: string;
   successfulResolve: () => void;
 }
 
 interface Employee {
-  employeeId: number;
+  employeeId: string;
   permissions: string;
   password: string;
   successfulResolve: () => void;

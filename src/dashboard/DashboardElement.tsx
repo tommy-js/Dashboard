@@ -10,21 +10,22 @@ import DeleteComment from "../resolvers/DeleteComment";
 import DeleteUser from "../resolvers/DeleteUser";
 import DeleteEmployee from "../resolvers/DeleteEmployee";
 import CommentInformation from "./CommentInformation";
+import PostInformation from "./PostInformation";
 import PermissionsLink from "./PermissionsLink";
 
 interface User {
   username: string;
-  userId: number;
+  userId: string;
   money: number;
-  returnEditPage: (id: number) => void;
+  returnEditPage: (id: string) => void;
 }
 
 interface Stock {
   name: string;
   ticker: string;
-  stockId: number;
+  stockId: string;
   about: string;
-  returnEditPage: (id: number) => void;
+  returnEditPage: (id: string) => void;
 }
 
 interface Comment {
@@ -32,16 +33,16 @@ interface Comment {
   text: string;
   likes: number;
   dislikes: number;
-  commentId: number;
-  returnEditPage: (id: number) => void;
+  commentId: string;
+  returnEditPage: (id: string) => void;
 }
 
 interface Employee {
-  employeeId: number;
+  employeeId: string;
   username: string;
   permissions: string;
   password: string;
-  returnEditPage: (id: number) => void;
+  returnEditPage: (id: string) => void;
 }
 
 interface Props {
@@ -50,6 +51,7 @@ interface Props {
   title: string;
   likes: number;
   dislikes: number;
+  returnEditPage: (id: string) => void;
 }
 
 export const DashboardUserElement: React.FC<User> = (props) => {
@@ -66,7 +68,7 @@ export const DashboardUserElement: React.FC<User> = (props) => {
     console.log("action");
   }
 
-  function modMark(id: number) {
+  function modMark(id: string) {
     setMarkedForDeletion(!markedForDeletion);
   }
 
@@ -124,7 +126,7 @@ export const DashboardStockElement: React.FC<Stock> = (props) => {
   const [markedForDeletion, setMarkedForDeletion] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
-  function modMark(id: number) {
+  function modMark(id: string) {
     setMarkedForDeletion(!markedForDeletion);
   }
 
@@ -184,7 +186,7 @@ export const DashboardCommentElement: React.FC<Comment> = (props) => {
   const [markedForDeletion, setMarkedForDeletion] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
-  function modMark(id: number) {
+  function modMark(id: string) {
     setMarkedForDeletion(!markedForDeletion);
   }
 
@@ -251,7 +253,7 @@ export const DashboardEmployeeElement: React.FC<Employee> = (props) => {
   const [markedForDeletion, setMarkedForDeletion] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
-  function modMark(id: number) {
+  function modMark(id: string) {
     setMarkedForDeletion(!markedForDeletion);
   }
 
@@ -311,9 +313,61 @@ export const DashboardEmployeeElement: React.FC<Employee> = (props) => {
 };
 
 export const DashboardPostElement: React.FC<Props> = (props) => {
+  const [markedForDeletion, setMarkedForDeletion] = useState(false);
+  const [deleted, setDeleted] = useState(false);
+
+  function modMark(id: string) {
+    setMarkedForDeletion(!markedForDeletion);
+  }
+
+  function deleteState() {
+    setDeleted(true);
+  }
+
+  function changeOnMark() {
+    if (deleted === false) {
+      if (markedForDeletion === false) {
+        return (
+          <div>
+            <ElementTitle text={props.text} />
+            <PostInformation
+              likes={props.likes}
+              dislikes={props.dislikes}
+              postId={props.postId}
+            />
+            <ButtonField
+              text="Edit"
+              id={props.postId}
+              submitForm={props.returnEditPage}
+            />
+            <ButtonField
+              text="Mark for deletion"
+              id={props.postId}
+              submitForm={modMark}
+            />
+          </div>
+        );
+      } else if (markedForDeletion === true) {
+        return (
+          <div>
+            <ElementTitle text={props.text} />
+            <ButtonField text="Unmark" id={props.postId} submitForm={modMark} />
+            <DeleteComment commentId={props.postId} deleteState={deleteState} />
+          </div>
+        );
+      }
+    } else {
+      return (
+        <div>
+          <h3>Deleted</h3>
+        </div>
+      );
+    }
+  }
+
   return (
-    <div>
-      <p>{props.text}</p>
+    <div className="dashboard_element" key={props.postId}>
+      {changeOnMark()}
     </div>
   );
 };
