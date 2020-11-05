@@ -45,6 +45,8 @@ interface Employee {
   returnEditPage: (id: number) => void;
 }
 
+interface Props {}
+
 export const DashboardUserElement: React.FC<User> = (props) => {
   const [check, setCheck] = useState(false);
   const [markedForDeletion, setMarkedForDeletion] = useState(false);
@@ -301,4 +303,8 @@ export const DashboardEmployeeElement: React.FC<Employee> = (props) => {
       {changeOnMark()}
     </div>
   );
+};
+
+export const DashboardPostElement: React.FC<Props> = (props) => {
+  return <div></div>;
 };

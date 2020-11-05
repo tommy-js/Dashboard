@@ -4,6 +4,7 @@ import {
   DashboardStockElement,
   DashboardCommentElement,
   DashboardEmployeeElement,
+  DashboardPostElement,
 } from "./DashboardElement";
 
 interface Props {
@@ -74,6 +75,16 @@ export const DashboardEmployeeData: React.FC<Props> = (props) => {
           password={el.password}
           returnEditPage={props.returnEditPage}
         />
+      ))}
+    </div>
+  );
+};
+
+export const DashboardPostData: React.FC<Props> = (props) => {
+  return (
+    <div className="dashboard_data">
+      {props.data.map((el: any) => (
+        <DashboardPostElement />
       ))}
     </div>
   );

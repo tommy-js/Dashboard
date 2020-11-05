@@ -4,24 +4,28 @@ import {
   StockDashboardEdit,
   CommentDashboardEdit,
   EmployeeDashboardEdit,
+  PostDashboardEdit,
 } from "./DashboardEdit";
 import {
   UserCreationPage,
   StockCreationPage,
   CommentCreationPage,
   EmployeeCreationPage,
+  PostCreationPage,
 } from "./CreationPage";
 import {
   DashboardStockTopMenu,
   DashboardUserTopMenu,
   DashboardCommentTopMenu,
   DashboardEmployeeTopMenu,
+  DashboardPostTopMenu,
 } from "./DashboardTopMenu";
 import {
   DashboardStockData,
   DashboardUserData,
   DashboardCommentData,
   DashboardEmployeeData,
+  DashboardPostData,
 } from "./DashboardData";
 import { loginContext } from "../appmain/App";
 import {
@@ -475,5 +479,104 @@ export const EmployeeDataRenderer: React.FC = () => {
 };
 
 export const PostsDataRenderer: React.FC = () => {
-  return <div></div>;
+  const [creationParam, setCreationParam] = useState("");
+  const { loading, data } = useQuery(employeeQuery);
+  const [postEdit, setPostEdit] = useState(false);
+  const [postCreation, setPostCreation] = useState(false);
+  const [postData, setPostData] = useState([] as any);
+
+  const [editPostData, setEditPostData] = useState({} as any);
+  const [id, setId] = useState(0);
+
+  function returnPostEdit(id: number) {
+    let val = postData.find((el: any) => el.employeeId === id);
+    if (val) {
+      let index = postData.indexOf(val);
+      let obj = postData[index];
+      setEditPostData({
+        username: obj.username,
+        permissions: obj.permissions,
+        employeeId: obj.employeeId,
+        password: obj.password,
+      });
+    }
+    setId(id);
+    setPostEdit(true);
+  }
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      setPostData(data.employees);
+    }
+  }, [data]);
+
+  function exitFormPost() {
+    setPostEdit(false);
+  }
+
+  function createPost(val: string) {
+    setPostCreation(true);
+    setCreationParam(val);
+  }
+
+  function exitPostCreation() {
+    setPostCreation(false);
+  }
+
+  function passUpData(data: any) {
+    setPostData(data);
+  }
+
+  function pageEdit() {
+    if (postCreation === true) {
+      return (
+        <div>
+          <PostCreationPage exitPostCreation={exitPostCreation} />
+        </div>
+      );
+    } else if (postCreation === false) {
+      if (postEdit === true) {
+        console.log("user edit");
+        return (
+          <div>
+            <PostDashboardEdit
+              editData={editPostData}
+              id={id}
+              exitForm={exitFormPost}
+            />
+          </div>
+        );
+      } else {
+        if (data) {
+          if (postData) {
+            return (
+              <div>
+                <DashboardPostTopMenu
+                  searchbarPlaceholder="Employee ID"
+                  type="Employee"
+                  elementPlaceholder="Employee ID"
+                  createFunc={createPost}
+                  passUpData={passUpData}
+                />
+                <DashboardPostData
+                  returnEditPage={returnPostEdit}
+                  data={postData}
+                />
+              </div>
+            );
+          } else {
+            return null;
+          }
+        } else {
+          return (
+            <div>
+              <h2>Loading...</h2>
+            </div>
+          );
+        }
+      }
+    }
+  }
+  return <div>{pageEdit()}</div>;
 };

@@ -61,6 +61,12 @@ interface Employee {
   exitForm: () => void;
 }
 
+interface Post {
+  id: number;
+  editData: any;
+  exitForm: () => void;
+}
+
 export const UserDashboardEdit: React.FC<User> = (props) => {
   const [money, setMoney] = useState(props.editData.money);
   const [notificationVal, setNotificationVal] = useState("");
@@ -210,6 +216,14 @@ export const EmployeeDashboardEdit: React.FC<Employee> = (props) => {
         password={password}
         successfulResolve={props.exitForm}
       />
+    </div>
+  );
+};
+
+export const PostDashboardEdit: React.FC<Post> = (props) => {
+  return (
+    <div>
+      <p>Text</p>
     </div>
   );
 };

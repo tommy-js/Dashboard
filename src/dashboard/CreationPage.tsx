@@ -31,6 +31,10 @@ interface Employee {
   exitEmployeeCreation: () => void;
 }
 
+interface Post {
+  exitPostCreation: () => void;
+}
+
 export const UserCreationPage: React.FC<User> = (props) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState(props.username);
@@ -302,6 +306,14 @@ export const EmployeeCreationPage: React.FC<Employee> = (props) => {
         password={password}
         successfulReturn={successfulReturn}
       />
+    </div>
+  );
+};
+
+export const PostCreationPage: React.FC<Post> = (props) => {
+  return (
+    <div>
+      <p>Testing</p>
     </div>
   );
 };
