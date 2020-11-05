@@ -33,6 +33,7 @@ import {
   stockQuery,
   commentQuery,
   employeeQuery,
+  postQuery,
 } from "../queries/queries.js";
 import { useQuery } from "react-apollo";
 
@@ -480,7 +481,7 @@ export const EmployeeDataRenderer: React.FC = () => {
 
 export const PostsDataRenderer: React.FC = () => {
   const [creationParam, setCreationParam] = useState("");
-  const { loading, data } = useQuery(employeeQuery);
+  const { loading, data } = useQuery(postQuery);
   const [postEdit, setPostEdit] = useState(false);
   const [postCreation, setPostCreation] = useState(false);
   const [postData, setPostData] = useState([] as any);
@@ -489,15 +490,16 @@ export const PostsDataRenderer: React.FC = () => {
   const [id, setId] = useState(0);
 
   function returnPostEdit(id: number) {
-    let val = postData.find((el: any) => el.employeeId === id);
+    let val = postData.find((el: any) => el.postId === id);
     if (val) {
       let index = postData.indexOf(val);
       let obj = postData[index];
       setEditPostData({
-        username: obj.username,
-        permissions: obj.permissions,
-        employeeId: obj.employeeId,
-        password: obj.password,
+        postId: obj.postId,
+        text: obj.text,
+        title: obj.title,
+        likes: obj.likes,
+        dislikes: obj.dislikes,
       });
     }
     setId(id);
@@ -507,7 +509,7 @@ export const PostsDataRenderer: React.FC = () => {
   useEffect(() => {
     if (data) {
       console.log(data);
-      setPostData(data.employees);
+      setPostData(data.posts);
     }
   }, [data]);
 
@@ -553,9 +555,9 @@ export const PostsDataRenderer: React.FC = () => {
             return (
               <div>
                 <DashboardPostTopMenu
-                  searchbarPlaceholder="Employee ID"
-                  type="Employee"
-                  elementPlaceholder="Employee ID"
+                  searchbarPlaceholder="Post ID"
+                  type="Post"
+                  elementPlaceholder="Post ID"
                   createFunc={createPost}
                   passUpData={passUpData}
                 />

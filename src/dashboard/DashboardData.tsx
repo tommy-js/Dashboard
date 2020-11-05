@@ -84,7 +84,13 @@ export const DashboardPostData: React.FC<Props> = (props) => {
   return (
     <div className="dashboard_data">
       {props.data.map((el: any) => (
-        <DashboardPostElement />
+        <DashboardPostElement
+          postId={el.postId}
+          title={el.title}
+          text={el.text}
+          likes={el.likes}
+          dislikes={el.dislikes}
+        />
       ))}
     </div>
   );

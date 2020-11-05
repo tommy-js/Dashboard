@@ -59,6 +59,18 @@ const employeeQuery = gql`
   }
 `;
 
+const postQuery = gql`
+  {
+    posts {
+      postId
+      title
+      text
+      likes
+      dislikes
+    }
+  }
+`;
+
 const searchStockQuery = gql`
   query($ticker: String!) {
     searchStocks(ticker: $ticker) {
@@ -387,6 +399,7 @@ export {
   stockQuery,
   commentQuery,
   employeeQuery,
+  postQuery,
   searchStockQuery,
   searchCommentQuery,
   searchUserQuery,

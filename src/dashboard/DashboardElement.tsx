@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ElementTitle from "./ElementTitle";
-import DeleteElement from "./DeleteElement";
 import ElementOptions from "./ElementOptions";
 import ElementCheckbox from "./ElementCheckbox";
 import ButtonField from "../login/ButtonField";
@@ -45,7 +44,13 @@ interface Employee {
   returnEditPage: (id: number) => void;
 }
 
-interface Props {}
+interface Props {
+  postId: string;
+  text: string;
+  title: string;
+  likes: number;
+  dislikes: number;
+}
 
 export const DashboardUserElement: React.FC<User> = (props) => {
   const [check, setCheck] = useState(false);
@@ -306,5 +311,9 @@ export const DashboardEmployeeElement: React.FC<Employee> = (props) => {
 };
 
 export const DashboardPostElement: React.FC<Props> = (props) => {
-  return <div></div>;
+  return (
+    <div>
+      <p>{props.text}</p>
+    </div>
+  );
 };
