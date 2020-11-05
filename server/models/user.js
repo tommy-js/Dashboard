@@ -2,33 +2,38 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  userId: Number,
+  userId: String,
   username: String,
-  password: String,
+  bio: String,
+  token: String,
+  hash: String,
+  salt: String,
   money: Number,
-  accountStatus: String,
-  membership: Boolean,
-  time: Number,
   darkmode: Boolean,
   invisible: Boolean,
+  membership: Boolean,
+  newaccount: Boolean,
+  experience: Number,
+  education: Number,
+  motivations: Number,
+  commentary: Number,
   allowCommentsOnTrades: Boolean,
-  profileImage: Number,
-  followed: [{ userId: Number, username: String }],
-  followers: [
-    { followerId: Number, followerName: String, blocked: Boolean, id: Number },
-  ],
-  stocks: [
+  profileImage: String,
+  posts: [
     {
-      stockId: Number,
-      ticker: String,
-      name: String,
-      about: String,
-      creation: String,
-      prediction: Number,
+      userId: String,
+      postId: String,
+      timestamp: Number,
+      likes: Number,
+      dislikes: Number,
+      title: String,
+      text: String,
+      accompaniedURL: String,
       comments: [
         {
           userId: String,
           username: String,
+          commentId: String,
           timestamp: Number,
           text: String,
           likes: Number,
@@ -37,7 +42,17 @@ const userSchema = new Schema({
       ],
     },
   ],
-  shares: [{ stockId: Number, shares: Number }],
+  following: [{ userId: String, username: String, bio: String }],
+  followers: [{ followerId: String, followerName: String, blocked: Boolean }],
+  stocks: [
+    {
+      stockId: String,
+      stockTitle: String,
+      shares: Number,
+      color: String,
+      ticker: String,
+    },
+  ],
   trades: [
     {
       tradeId: Number,
@@ -51,6 +66,7 @@ const userSchema = new Schema({
           userId: String,
           username: String,
           timestamp: Number,
+          commentId: String,
           text: String,
           likes: Number,
           dislikes: Number,
@@ -58,20 +74,9 @@ const userSchema = new Schema({
       ],
     },
   ],
-  referenceTrades: [
-    {
-      tradeAuthorUsername: String,
-      tradeAuthorID: Number,
-      ticker: String,
-      title: String,
-      timestamp: Number,
-      shares: Number,
-      gain: Number,
-    },
-  ],
   watchlist: [
     {
-      stockId: Number,
+      stockId: String,
       title: String,
       ticker: String,
       timestamp: Number,
@@ -82,6 +87,7 @@ const userSchema = new Schema({
       userId: String,
       username: String,
       timestamp: Number,
+      commentId: String,
       text: String,
       likes: Number,
       dislikes: Number,
@@ -91,7 +97,21 @@ const userSchema = new Schema({
     {
       content: String,
       timestamp: Number,
-      id: Number,
+      id: String,
+      viewed: Boolean,
+    },
+  ],
+  progress: [
+    {
+      title: String,
+      percent: Number,
+      id: String,
+      progressElements: [
+        {
+          id: String,
+          passed: Boolean,
+        },
+      ],
     },
   ],
 });

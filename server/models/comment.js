@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-  userId: Number,
-  commentId: Number,
+  userId: String,
+  commentId: String,
   username: String,
   timestamp: Number,
   text: String,

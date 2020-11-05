@@ -2,9 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const shareSchema = new Schema({
-  stockId: Number,
-  shareId: Number,
+  stockId: String,
+  stockTitle: String,
   shares: Number,
+  color: String,
+  ticker: String,
 });
 
 module.exports = mongoose.model("Share", shareSchema);
